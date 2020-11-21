@@ -10,8 +10,8 @@ import { Wrap, Main, NavBar } from "./styles";
 
 const Dashboard = lazy(() => import("./Dashboard"));
 const Buttons = lazy(() => import("./Buttons"));
-const Cards = lazy(() => import("./Cards"));
-const Forms = lazy(() => import("./Forms"));
+const Cards = lazy(() => import("./New_admin"));
+const Forms = lazy(() => import("./Edit_Contact"));
 const Alerts = lazy(() => import("./Alerts"));
 const Modals = lazy(() => import("./Modals"));
 

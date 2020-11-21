@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Label_Input from "../../../../components/Label_Input.js";
+import Label_Input from "../Label_Input.js";
 
 // Icons
 import { FiFile } from "react-icons/fi";

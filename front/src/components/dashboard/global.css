@@ -1,46 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  outline: 0;
-}
-
-[class^="col-"]:not(:last-child) {
-  margin-right: 0 !important;
-}
-
-[class^="col-"] {
-  float: none !important;
-}
-@media screen and (max-width: 960px) {
-  Button {
-    display: inline !important;
-  }
-  td:last-child {
-    display: flex !important;
-  }
-}
-html,
-body {
-  font-size: 13px;
-  font-family: "Poppins", "PS Regular", sans-serif !important;
-  height: 100%;
-  padding: 0;
-  /* overflow-y: scroll; */
-  /* -webkit-font-smoothing: antialiased; */
-}
-
-html,
-body {
-  font-size: 13px;
-  font-family: "Poppins", "PS Regular", sans-serif !important;
-  height: 100%;
-  /* overflow-y: scroll; */
-  /* -webkit-font-smoothing: antialiased; */
-}
-
 button {
   font-family: "Poppins", "PS Regular", sans-serif !important;
 }

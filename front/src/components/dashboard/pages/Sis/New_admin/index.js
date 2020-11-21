@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 
 import { Card } from "../../../components/Card";
 import { Button } from "../../../components/Button";
-import Label_Input from "../../../../components/Label_Input.js";
+import Label_Input from "../Label_Input.js";
 import { Form } from "../../../components/Form";
 
 // This styled only show buttons in row format

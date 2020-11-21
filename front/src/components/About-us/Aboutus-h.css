@@ -52,7 +52,9 @@ body {
   font-size: 16px;
   line-height: 1.7;
   color: #777;
-  padding: 3rem;
+  /* i moved this :
+     padding: 3rem; 
+   to App.css */
   box-sizing: boarder-box;
 }
 .header {
