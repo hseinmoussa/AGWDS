@@ -14,7 +14,13 @@ exports.New_Admin_Controller = async function (req, res) {
   try {
     //console.log(test_input("hh<htm   l>  ////0 &  "));
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
+    if (req.body.password != req.body.verifypassword) {
+      console.log(1);
+      return res.json({
+        status: 401,
+        message: "Pass and Verify Pass must be the same",
+      });
+    }
     var newAdmin = {
       _id: test_input(req.body.email),
       email: test_input(req.body.email),
