@@ -1,0 +1,67 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.App {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+hr {
+  width: 75%;
+}
+
+.App-footer {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+}
+
+.footer-section1 {
+  background: linear-gradient(
+    90deg,
+    rgba(252, 194, 1, 0.8) 0%,
+    rgba(198, 147, 32, 0.8) 100%
+  );
+  height: 30vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+  border-radius: 0.8rem;
+}
+.footer-section2 {
+  border-radius: 0.8rem;
+  background: linear-gradient(
+    90deg,
+    rgba(251, 194, 0, 1) 10%,
+    rgba(0, 0, 0, 1) 50%,
+    rgba(198, 146, 31, 1) 90%
+  );
+  text-align: center;
+  display: block;
+  height: 10vh;
+  width: 100%;
+}
+.footer-text {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  text-align: center;
+  margin: 2 auto;
+}
+.footer-section {
+  margin-top: 2%;
+  min-width: 100%;
+}
+.click:hover {
+  opacity: 0.3;
+}
