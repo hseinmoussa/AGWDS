@@ -3,14 +3,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
 import Routes from "./dashboard/routes";
 
-//const App = () => <Routes />;
-
+const Dashboard = () => <Routes />;
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Dashboard />
   </React.StrictMode>,
   document.getElementById("root")
 );

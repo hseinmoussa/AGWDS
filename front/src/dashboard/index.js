@@ -7,9 +7,9 @@ import "react-notifications-component/dist/theme.css";
 const App = () => <Routes />;
 
 ReactDOM.render(
-    <>
-        <ReactNotification />
-        <App />
-    </>,
-    document.getElementById("root")
+  <>
+    <ReactNotification />
+    <App />
+  </>,
+  document.getElementById("root")
 );

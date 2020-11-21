@@ -1,6 +1,5 @@
 import "./App.css";
 import React from "react";
-import { SocialIcon } from "react-social-icons";
 import Navbar from "./components/Navbar/nav";
 import Aboutus from "./About-us/Aboutus-h.js";
 import AS1 from "./About-us/section1.js";
