@@ -33,7 +33,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 export default function Routes() {
   return (
-    <Router>
+    <Router className="dash">
       {
         //suspense lal loading
         //y3ne mnontor l lazy funct la y5also ,

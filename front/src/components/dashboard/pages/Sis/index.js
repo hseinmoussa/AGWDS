@@ -18,7 +18,7 @@ const Modals = lazy(() => import("./Modals"));
 export default function Sis() {
   const [drag, setDrag] = useState(false);
   return (
-    <Wrap>
+    <Wrap className="dash">
       <Main>
         <NavBar>
           {/* <FiMenu className="toggle" style={{ marginLeft: drag ? 145 : 0}} onClick={(e) => drag ? setDrag(false) : setDrag(true)} /> */}

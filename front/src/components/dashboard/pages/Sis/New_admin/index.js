@@ -102,7 +102,7 @@ class CardsPage extends React.Component {
       return (
         <>
           <div className="col-12 title">
-            <h1>Cards</h1>
+            <h1>New Admin</h1>
           </div>
 
           <Form onSubmit={this.handleSubmit} className="col-12 px-auto">

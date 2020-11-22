@@ -3,7 +3,7 @@ import "./Aboutus-h.css";
 
 function Aboutus() {
   return (
-    <div class="header">
+    <div class="header-about">
       <div class="header__logo-box"></div>
       <div class="header__text-box">
         <h1 class="heading-primary">

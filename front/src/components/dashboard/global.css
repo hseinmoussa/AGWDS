@@ -1,27 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
-button {
+.dash button {
   font-family: "Poppins", "PS Regular", sans-serif !important;
 }
 
-h1.fw-400 {
+.dash h1.fw-400 {
   font-weight: 400;
 }
 
-.shadow {
+.dash .shadow {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
 /* For mobile phones: */
-[class*="col-"] {
+.dash [class*="col-"] {
   margin: inherit 15px;
   padding: 0 1rem !important;
 }
-.px-auto {
+.dash .px-auto {
   padding: 0 5% !important;
 }
 
-.col-1 {
+.dash .col-1 {
   width: 8.33%;
 }
 
@@ -29,96 +29,96 @@ h1.fw-400 {
   width: 16.66%;
 }
 
-.col-3 {
+.dash .col-3 {
   width: 25%;
 }
 
-.col-4 {
+.dash .col-4 {
   width: 33.33%;
 }
 
-.col-5 {
+.dash .col-5 {
   width: 41.66%;
 }
 
-.col-6 {
+.dash .col-6 {
   width: 50%;
 }
 
-.col-7 {
+.dash .col-7 {
   width: 58.33%;
 }
-.col-8 {
+.dash .col-8 {
   width: 66.66%;
 }
 
-.col-9 {
+.dash .col-9 {
   width: 75%;
 }
 
-.col-10 {
+.dash .col-10 {
   width: 83.33%;
 }
 
-.col-11 {
+.dash .col-11 {
   width: 91.66%;
 }
 
-.col-12 {
+.dash .col-12 {
   width: 100%;
 }
 
 @media only screen and (max-width: 920px) {
   /* For mobile phones: */
-  [class*="col-"] {
+  .dash [class*="col-"] {
     margin-top: 15px;
     width: 100%;
   }
 
-  .px-0 {
+  .dash .px-0 {
     padding: 0 0.5rem !important;
   }
 
-  .visible-xs {
+  .dash .visible-xs {
     display: block !important;
   }
 
-  .hidden-xs {
+  .dash .hidden-xs {
     display: none !important;
   }
 }
 
-.hidden-xs {
+.dash .hidden-xs {
   display: block;
 }
 
-.visible-xs,
-.d-none {
+.dash .visible-xs,
+.dash .d-none {
   display: none;
 }
 
-.row {
+.dash .row {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 
-.img-fluid {
+.dash .img-fluid {
   width: 100%;
   height: auto;
 }
 
-.text-center {
+.dash .text-center {
   text-align: center;
 }
 
-a {
+.dash a {
   color: inherit;
   text-decoration: none;
 }
 
-.loader {
+.dash .loader {
   z-index: 9999;
   position: fixed;
   top: calc(50% - 4em);
@@ -132,7 +132,7 @@ a {
   transition: opacity 0.3s;
 }
 
-.loader-admin {
+.dash .loader-admin {
   position: absolute;
   height: calc(100vh - 70px);
   width: 100%;
@@ -143,7 +143,7 @@ a {
   display: flex;
 }
 
-.loader-admin > div {
+.dash .loader-admin > div {
   width: 8em;
   height: 8em;
   border: 0.7em solid rgba(0, 0, 0, 0.2);
@@ -153,7 +153,7 @@ a {
   transition: opacity 0.3s;
 }
 
-.loader-more {
+.dash .loader-more {
   width: 3em;
   height: 3em;
   border: 0.4em solid rgba(0, 0, 0, 0.2);
@@ -164,7 +164,7 @@ a {
   margin: 0 auto;
 }
 
-.loader--hide {
+.dash .loader--hide {
   opacity: 0;
 }
 

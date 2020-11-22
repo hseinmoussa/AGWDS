@@ -28,7 +28,7 @@ const INITIAL_STATE = {
       path: "/buttons",
     },
     {
-      name: "Cards",
+      name: "New Admin",
       icon: <FiBookmark />,
       path: "/cards",
     },

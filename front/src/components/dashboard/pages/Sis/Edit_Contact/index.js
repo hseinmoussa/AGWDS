@@ -103,7 +103,7 @@ class FormsPage extends React.Component {
       return (
         <>
           <div className="col-12 title px-auto">
-            <h1>Forms</h1>
+            <h1>Edit Contact</h1>
           </div>
           <Form onSubmit={this.handleSubmit} className="col-12 px-auto">
             <Card>

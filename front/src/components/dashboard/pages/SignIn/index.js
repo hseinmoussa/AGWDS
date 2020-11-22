@@ -43,7 +43,7 @@ const SignIn = () => {
         // });
 
         // If your using API, erase this line and show 'Connect to API' & 'Set JWT in localstorage'
-        if (!email == "luis@gmail.com" || !password == "12345678") return 0;
+        if (email !== "luis@gmail.com" || !password == "12345678") return 0;
 
         // Set JWT in localstorage
         // login(true);
@@ -85,7 +85,6 @@ const SignIn = () => {
           />
           <button type="submit">Entrar</button>
           <hr />
-          <Link to="/signup">Não tem uma Conta ? Cadastre-se !</Link>
         </Form>
       </Container>
     </>
