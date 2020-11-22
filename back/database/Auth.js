@@ -13,7 +13,7 @@ const auth = (req, res, next) => {
   var token = req.cookies.token;
   if (!token)
     return res.status(401).send({
-      status: 200,
+      status: 401,
       message: "Access denied , you should be logged in",
     });
   try {
