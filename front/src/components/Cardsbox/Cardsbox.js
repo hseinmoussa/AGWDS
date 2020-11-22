@@ -102,7 +102,7 @@ function Testing() {
                     rootClose="true"
                     overlay={
                       <Popover className="popover" id="popover-positioned-bottom" >
-                        <Popover.Title as="h3">popover</Popover.Title>
+                        <Popover.Title as="h3">Description</Popover.Title>
                         <Popover.Content>
                           {item.description}
                         </Popover.Content>
