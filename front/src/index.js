@@ -3,17 +3,17 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Routes from "./components/dashboard/routes";
+// import Routes from "./components/dashboard/routes";
 
-const Dashboard = () => <Routes />;
+// const Dashboard = () => <Routes />;
 ReactDOM.render(
   <React.StrictMode>
     <div className="about">
       <App />
     </div>
-    <div className="dashboard">
+    {/* <div className="dashboard">
       <Dashboard />
-    </div>
+    </div> */}
   </React.StrictMode>,
   document.getElementById("root")
 );
