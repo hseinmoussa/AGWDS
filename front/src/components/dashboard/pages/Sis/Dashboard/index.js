@@ -11,8 +11,11 @@ export default function Dashboard() {
     document.title = "Dashboard";
   }, []);
   const [array, setArray] = useState([]);
+  const [arr, setArray2] = useState(0);
+
   useEffect(() => {
     try {
+      console.log(arr);
       fetch("http://localhost:3001/Cards", {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -23,7 +26,7 @@ export default function Dashboard() {
     } catch (err) {
       console.log(err);
     }
-  }, [array]);
+  }, [arr]);
 
   const del = (_id) => {
     try {
@@ -35,7 +38,10 @@ export default function Dashboard() {
         }),
       })
         .then((res) => res.json())
-        .then((json) => console.log("ok"));
+        .then((json) => {
+          setArray2(arr + 1);
+          console.log(arr);
+        });
     } catch (err) {
       console.log(err);
     }

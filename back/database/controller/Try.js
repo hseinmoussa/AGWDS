@@ -22,9 +22,10 @@ exports.Try = async function (req, res) {
     Schema.cards
       .find(function (err, data) {
         if (err) console.log("Somthing went wrong!");
+        else console.log("a");
       })
-      .then((cards) => {
-        console.log(cards);
+      .then((data) => {
+        res.json({ message: data });
       });
   } catch (err) {
     console.log(err);
