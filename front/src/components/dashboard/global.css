@@ -167,7 +167,9 @@
 .dash .loader--hide {
   opacity: 0;
 }
-
+.dash th {
+  text-align: center;
+}
 @keyframes load8 {
   0% {
     transform: rotate(0deg);

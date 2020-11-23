@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from "react";
+import React, { useState, Suspense, lazy, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 
 // Icons
@@ -17,6 +17,22 @@ const Modals = lazy(() => import("./Modals"));
 
 export default function Sis() {
   const [drag, setDrag] = useState(false);
+  const [admin, setAdmin] = useState("");
+  useEffect(() => {
+    try {
+      fetch("http://localhost:3001/Contact", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      })
+        .then((res) => res.json())
+        .then((json) =>
+          setAdmin(json.message.FirstName + " " + json.message.LastName)
+        );
+    } catch (err) {
+      console.log(err);
+    }
+  });
   return (
     <Wrap className="dash">
       <Main>
@@ -31,7 +47,7 @@ export default function Sis() {
           />
 
           <span>
-            Olá, <span className="name">{"Luis Otávio"}</span>
+            Hello , <span className="name">{admin}</span>
           </span>
         </NavBar>
         <div className="content">

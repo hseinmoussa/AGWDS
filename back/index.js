@@ -11,6 +11,10 @@ const Forgot_Pass_Controller = require("./database/controller/Forgot_Pass_Contro
 const Change_Pass_By_Email = require("./database/controller/Change_Pass_By_Email");
 
 const Update_Contact = require("./database/controller/Update_Contact");
+const Fetch_Contact = require("./database/controller/Fetch_Contact_Info");
+const Fetch_Cards = require("./database/controller/Fetch_Cards.js");
+const Add_Cards = require("./database/controller/Add_Cards.js");
+const Delete_Cards = require("./database/controller/Delete_Card.js");
 
 var cors = require("cors");
 app.use(cors());
@@ -33,6 +37,11 @@ app.put("/Update_Contact", [Update_Contact.Update_Contact]);
 app.get("/checking/:id", [Change_Pass_By_Email.checking]);
 app.post("/ForgotPass", [Forgot_Pass_Controller.Forgot_Pass]);
 app.post("/NewPass", [auth, Change_Pass_Controller.Change_Pass]);
+
+app.post("/Contact", Fetch_Contact.Fetch_Contact);
+app.post("/Cards", Fetch_Cards.Fetch_Cards);
+app.post("/AddCard", Add_Cards.Add_Cards);
+app.post("/DeleteCard", Delete_Cards.Delete_Cards);
 
 app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`);

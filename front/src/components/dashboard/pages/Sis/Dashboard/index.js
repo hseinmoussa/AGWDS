@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // Icons
 import { FiCalendar, FiMessageCircle, FiLogOut, FiUsers } from "react-icons/fi";
@@ -14,34 +14,45 @@ const config = {
   },
 };
 
-let array = [
-  {
-    id: 1,
-    name: "Luis Otávio",
-  },
-  {
-    id: 2,
-    name: "Fernando Moreira",
-  },
-  {
-    id: 3,
-    name: "José Augusto",
-  },
-  {
-    id: 2,
-    name: "Jonathan Moreira",
-  },
-];
-
 export default function Dashboard() {
   useEffect(() => {
     document.title = "Dashboard";
   }, []);
+  const [array, setArray] = useState([]);
+  useEffect(() => {
+    try {
+      fetch("http://localhost:3001/Cards", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      })
+        .then((res) => res.json())
+        .then((json) => setArray(json.message));
+    } catch (err) {
+      console.log(err);
+    }
+  }, [array]);
+
+  const del = (_id) => {
+    try {
+      fetch("http://localhost:3001/DeleteCard", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          _id: _id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((json) => console.log("ok"));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
       <div className="col-12 title">
-        <h1>Olá, Bem vindo à Dashboard</h1>
+        <h1>Hello , Welcom to the dashboard page</h1>
       </div>
       <div className="col-3 px-0">
         <CardDashboard className="red">
@@ -113,19 +124,28 @@ export default function Dashboard() {
               <thead>
                 <tr>
                   <th className="col-1">#</th>
-                  <th className="col-8">Name</th>
-                  <th>Actions</th>
+                  <th className="col-3">Title</th>
+                  <th className="col-3">Description</th>
+                  <th className="col-3">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {array.map((item) => (
                   <tr>
-                    <td style={{ textAlign: "center" }}>{item.id}</td>
-                    <td style={{ textAlign: "center" }}>{item.name}</td>
+                    <td style={{ textAlign: "center" }}>{item._id}</td>
+                    <td style={{ textAlign: "center" }}>{item.Title}</td>
+                    <td style={{ textAlign: "center" }}>{item.description}</td>
                     <td style={{ textAlign: "center" }}>
                       <button className="edit">Edit</button>
                       <button className="info">Info</button>
-                      <button className="eraser">Trash</button>
+                      <button
+                        className="eraser"
+                        onClick={() => {
+                          del(item._id);
+                        }}
+                      >
+                        Trash
+                      </button>
                     </td>
                   </tr>
                 ))}
