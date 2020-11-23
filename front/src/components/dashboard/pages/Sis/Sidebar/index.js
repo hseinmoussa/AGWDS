@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Side } from "./styles";
 
 // Logout function
-import { logout } from "../../../services/auth";
+//import { logout } from "../../../services/auth";
 
 // Logo
 import Logo from "../../../assets/img/kadoo.png";
@@ -42,7 +42,12 @@ function Sidebar({ drag, activeMenu, itensMenu, dispatch }) {
           </li>
         ))}
         <li>
-          <Link onClick={() => logout()} to={`/sis/login`}>
+          <Link
+            onClick={() => {
+              /*logout()*/
+            }}
+            to={`/sis/login`}
+          >
             <span className="icon">
               <FiLogOut />
             </span>
