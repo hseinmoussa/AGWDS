@@ -6,14 +6,6 @@ import { FiCalendar, FiMessageCircle, FiLogOut, FiUsers } from "react-icons/fi";
 import { CardDashboard, Card } from "../../../components/Card";
 import { Table } from "../../../components/Table";
 
-import { getToken } from "../../../services/auth";
-
-const config = {
-  headers: {
-    Authorization: `Bearer ${getToken}`,
-  },
-};
-
 export default function Dashboard() {
   useEffect(() => {
     document.title = "Dashboard";
@@ -137,7 +129,6 @@ export default function Dashboard() {
                     <td style={{ textAlign: "center" }}>{item.description}</td>
                     <td style={{ textAlign: "center" }}>
                       <button className="edit">Edit</button>
-                      <button className="info">Info</button>
                       <button
                         className="eraser"
                         onClick={() => {

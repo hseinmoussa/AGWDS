@@ -9,11 +9,8 @@ import Sidebar from "./Sidebar";
 import { Wrap, Main, NavBar } from "./styles";
 
 const Dashboard = lazy(() => import("./Dashboard"));
-const Buttons = lazy(() => import("./Buttons"));
 const Cards = lazy(() => import("./New_admin"));
 const Forms = lazy(() => import("./Edit_Contact"));
-const Alerts = lazy(() => import("./Alerts"));
-const Modals = lazy(() => import("./Modals"));
 
 export default function Sis() {
   const [drag, setDrag] = useState(false);
@@ -69,11 +66,8 @@ export default function Sis() {
               {/* Your pages */}
               <Switch>
                 <Route exact path="/" component={Dashboard} />
-                <Route path="/buttons" component={Buttons} />
                 <Route path="/cards" component={Cards} />
                 <Route path="/forms" component={Forms} />
-                <Route path="/alerts" component={Alerts} />
-                <Route path="/modals" component={Modals} />
               </Switch>
             </Suspense>
           </div>

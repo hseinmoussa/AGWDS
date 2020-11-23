@@ -1,13 +1,6 @@
 // Icons
 import React from "react";
-import {
-  FiHome,
-  FiBookmark,
-  FiAperture,
-  FiPhoneForwarded,
-  FiBookOpen,
-  FiInfo,
-} from "react-icons/fi";
+import { FiHome, FiBookmark, FiPhoneForwarded } from "react-icons/fi";
 
 const INITIAL_STATE = {
   activeMenu: {
@@ -23,11 +16,6 @@ const INITIAL_STATE = {
     },
 
     {
-      name: "Buttons",
-      icon: <FiAperture />,
-      path: "/buttons",
-    },
-    {
       name: "New Admin",
       icon: <FiBookmark />,
       path: "/cards",
@@ -36,16 +24,6 @@ const INITIAL_STATE = {
       name: "Forms",
       icon: <FiPhoneForwarded />,
       path: "/forms",
-    },
-    {
-      name: "Alerts",
-      icon: <FiInfo />,
-      path: "/alerts",
-    },
-    {
-      name: "Modals",
-      icon: <FiBookOpen />,
-      path: "/modals",
     },
   ],
 };

@@ -10,25 +10,11 @@ import {
 } from "react-router-dom";
 
 import "./global.css";
-import { isAuthenticated } from "./services/auth.js";
-
-const SignIn = lazy(() => import("./pages/SignIn"));
 
 const Sis = lazy(() => import("./pages/Sis"));
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={(props) =>
-      isAuthenticated() ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{ pathname: "/login", state: { from: props.location } }}
-        />
-      )
-    }
-  />
+  <Route {...rest} render={(props) => <Component {...props} />} />
 );
 
 export default function Routes() {
@@ -54,7 +40,6 @@ export default function Routes() {
         }
       >
         <Switch>
-          <Route path="/login" component={SignIn} />
           <Provider store={store}>
             <PrivateRoute path="/" component={Sis} />
           </Provider>
