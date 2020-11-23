@@ -1,0 +1,26 @@
+.bateekh {
+    width: 76%;
+    margin: auto;
+    margin-bottom: 3%;
+}
+
+
+.signin .modal-content {
+
+
+    width: 50%;
+    padding: 0;
+    margin: auto;
+    border: 1px solid goldenrod;
+}
+
+#forgotlink {
+    margin-top: 5%;
+}
+#forgotlink > a {
+    color: rgb(68, 68, 173)
+}
+
+.bateekh > p {
+    text-align: center;
+}
