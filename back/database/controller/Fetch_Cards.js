@@ -5,7 +5,7 @@ exports.Fetch_Cards = async function (req, res) {
     Schema.cards
       .find(function (err, data) {
         if (err) console.log("Somthing went wrong!");
-        else console.log(data);
+        else console.log("a");
       })
       .then((data) => {
         res.json({ message: data });
