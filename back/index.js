@@ -15,6 +15,7 @@ const Fetch_Contact = require("./database/controller/Fetch_Contact_Info");
 const Fetch_Cards = require("./database/controller/Fetch_Cards.js");
 const Add_Cards = require("./database/controller/Add_Cards.js");
 const Delete_Cards = require("./database/controller/Delete_Card.js");
+const Try = require("./database/controller/Try.js");
 
 var cors = require("cors");
 app.use(cors());
@@ -42,6 +43,8 @@ app.post("/Contact", Fetch_Contact.Fetch_Contact);
 app.post("/Cards", Fetch_Cards.Fetch_Cards);
 app.post("/AddCard", Add_Cards.Add_Cards);
 app.post("/DeleteCard", Delete_Cards.Delete_Cards);
+//Try
+app.get("/Try", Try.Try);
 
 app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`);
