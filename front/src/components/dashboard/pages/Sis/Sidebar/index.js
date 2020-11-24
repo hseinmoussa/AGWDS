@@ -12,11 +12,21 @@ import Logo from "../../../assets/img/kadoo.png";
 
 // Icons
 import { FiLogOut } from "react-icons/fi";
+import { useState, useEffect } from "react";
 
 // Connection Redux
 import { connect } from "react-redux";
 
-function Sidebar({ drag, activeMenu, itensMenu, dispatch }) {
+function Sidebar({ drag, handleChange, activeMenu, itensMenu, dispatch }) {
+  const [newDrag, setnewDrag] = useState(drag);
+
+  function handlechange(event) {
+    handleChange(!newDrag);
+  }
+
+  useEffect(() => {
+    setnewDrag(drag);
+  }, [drag]);
   function toggleMenu(menu) {
     return {
       type: "SET_MENU_ACTIVE",
@@ -25,9 +35,9 @@ function Sidebar({ drag, activeMenu, itensMenu, dispatch }) {
   }
 
   return (
-    <Side drag={drag}>
+    <Side drag={newDrag}>
       <div className="logo">
-        <img src={Logo} alt="" />
+        <b>Karim</b>
       </div>
       <ul>
         {itensMenu.map((item) => (
@@ -35,7 +45,14 @@ function Sidebar({ drag, activeMenu, itensMenu, dispatch }) {
             key={item.name}
             className={item.name === activeMenu.name ? "active" : ""}
           >
-            <Link to={item.path} onClick={() => dispatch(toggleMenu(item))}>
+            <Link
+              to={item.path}
+              onClick={() => {
+                dispatch(toggleMenu(item));
+                setnewDrag(!newDrag);
+                handlechange();
+              }}
+            >
               <span className="icon">{item.icon}</span>
               <span className="item">{item.name}</span>
             </Link>

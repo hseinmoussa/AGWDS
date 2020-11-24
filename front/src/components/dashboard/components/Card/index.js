@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Card = styled.div`
   margin-top: 30px;
   border-radius: 10px;
   border: none;
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -19,7 +19,7 @@ export const Card = styled.div`
     padding: 1rem 1.25rem 0rem;
 
     @media screen and (max-width: 790px) {
-      padding: 1rem .5rem 0;
+      padding: 1rem 0.5rem 0;
     }
 
     margin-bottom: 0;
@@ -41,7 +41,8 @@ export const Card = styled.div`
           display: none;
         }
       }
-      button, a {
+      button,
+      a {
         margin: 0 3px;
         cursor: pointer;
         font-size: 12px;
@@ -56,7 +57,7 @@ export const Card = styled.div`
         transition: all 0.2s;
 
         &:hover {
-            filter: brightness(90%);
+          filter: brightness(90%);
           /* opacity: 0.95; */
           /* box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; */
         }
@@ -69,15 +70,17 @@ export const Card = styled.div`
     flex: 1 1 auto;
     min-height: 1px;
     padding: 1.5rem 1.25rem;
-
+    box-shadow: none !important;
+    border: none !important;
+    text-align: left !important;
     @media screen and (max-width: 790px) {
-      padding: 1.5rem .5rem;
+      padding: 1.5rem 0.5rem;
     }
 
     &.light-text {
-        p {
-            color: #777;
-        }
+      p {
+        color: #777;
+      }
     }
   }
 
@@ -86,15 +89,15 @@ export const Card = styled.div`
     display: flex;
 
     &.flex-end {
-        justify-content: flex-end;
+      justify-content: flex-end;
     }
 
     &.center {
-        justify-content: center;
+      justify-content: center;
     }
 
     &.flex-start {
-        justify-content: flex-start;
+      justify-content: flex-start;
     }
   }
 `;
@@ -103,7 +106,7 @@ export const CardDashboard = styled.div`
   margin-top: 30px;
   border-radius: 10px;
   border: none;
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -139,8 +142,11 @@ export const CardDashboard = styled.div`
     flex: 1 1 auto;
     min-height: 1px;
     padding: 1.5rem 1.25rem;
+    box-shadow: none !important;
+    border: none !important;
+    text-align: left !important;
     @media screen and (max-width: 790px) {
-      padding: 1.5rem .5rem;
+      padding: 1.5rem 0.5rem;
     }
 
     .row {
@@ -155,14 +161,14 @@ export const CardDashboard = styled.div`
 
       .title {
         color: #5a5c69 !important;
-        font-size: .7rem;
-        text-transform: uppercase!important;
-        margin-bottom: .25rem!important;
+        font-size: 0.7rem;
+        text-transform: uppercase !important;
+        margin-bottom: 0.25rem !important;
       }
 
       .number {
         font-size: 1.125rem;
-        font-weight: 700!important;
+        font-weight: 700 !important;
       }
     }
 

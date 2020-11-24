@@ -12,7 +12,7 @@ const INITIAL_STATE = {
     {
       name: "Dashboard",
       icon: <FiHome />,
-      path: "/",
+      path: "/dashboard",
     },
 
     {

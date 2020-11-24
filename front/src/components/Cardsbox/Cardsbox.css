@@ -1,15 +1,9 @@
-
-
 .modal-header {
-  padding:0px;
+  padding: 0px;
 
   background-color: goldenrod;
   border-bottom: goldenrod;
-  
-
-
 }
-
 
 .modal-header .close {
   padding: 0;
@@ -26,15 +20,12 @@
 
 .sr-only {
   background-color: goldenrod;
-  
 }
 
-
-.modal-content{
-  background-color:goldenrod;
+.modal-content {
+  background-color: goldenrod;
 
   border: 1px goldenrod solid;
-
 }
 
 #titlee {
@@ -45,14 +36,9 @@
 
 .popover > h3 {
   background-color: rgb(255, 226, 153);
-  
 }
 
-
-
 .item {
-
-
   width: auto;
   margin: auto;
   margin-top: 0%;
@@ -64,10 +50,8 @@
   border: 1px solid goldenrod;
   border-bottom: none;
   box-shadow: 2px 2px 10px goldenrod;
-
 }
 .card-body {
-
   height: 100%;
   height: 100%;
   border-top: none;
@@ -76,24 +60,20 @@
 }
 
 #card--btn {
-  padding: .200rem .40rem;
+  padding: 0.2rem 0.4rem;
 
   font-size: 0.8rem;
   line-height: 1.5;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   border-color: goldenrod;
   background: rgb(255, 242, 209);
 }
 
-
-
 #img:hover {
-
   opacity: 0.7;
 }
 
 .body {
-  
   height: 100%;
   margin-top: 1%;
   margin-bottom: 1%;
@@ -101,33 +81,26 @@
   grid-template-columns: auto;
 }
 
-
 .main {
-
-
   display: grid;
   width: 60%;
-  margin: auto ;
+  margin: auto;
   grid-template-columns: auto auto;
   gap: 30px;
-  height: auto;   
+  height: auto;
   padding-bottom: 1%;
   padding-top: 1%;
   border: goldenrod solid 1px;
-
-
-
 }
 
 .pagination {
-
   justify-self: center;
 }
 
 .pagination > li {
   font-size: 0.9rem;
   margin: 0.5rem;
- 
+
   cursor: pointer;
 }
 .pagination > li > a:active {
@@ -139,55 +112,47 @@
   text-decoration: underline;
 }
 
-
 @media screen and (max-width: 1150px) {
-
-  
   .main {
-      margin-top: 1%;
-      display: grid;
-      grid-template-columns: auto auto;
-      width: 90%;
-      
-    }
-  .modal-header .close {
-      padding: 0;
-      width: 20px;
-      height: 20px;
-      margin-left: auto;
-      margin-right: 0;
-      margin-top: 0;
-      padding-right: 0;
-      padding-top: 0;
-      margin-bottom: 0;
-      padding-bottom: 0;
-      display: block;
-
+    margin-top: 1%;
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 90%;
   }
-
+  .modal-header .close {
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    margin-right: 0;
+    margin-top: 0;
+    padding-right: 0;
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    display: block;
+  }
 }
 
 @media screen and (max-width: 700px) {
-
   .main {
-      margin-top: 5%;
-      display: grid;
-      grid-template-columns: auto;
-      width: 90%;
-      margin-bottom: 10%;
-    }
+    margin-top: 5%;
+    display: grid;
+    grid-template-columns: auto;
+    width: 90%;
+    margin-bottom: 10%;
+  }
   .modal-header .close {
-      padding: 0;
-      width: 20px;
-      height: 20px;
-      margin-left: auto;
-      margin-right: 0;
-      margin-top: 0;
-      padding-right: 0;
-      padding-top: 0;
-      margin-bottom: 0;
-      padding-bottom: 0;
-      display: block;
-
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    margin-right: 0;
+    margin-top: 0;
+    padding-right: 0;
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    display: block;
   }
 }

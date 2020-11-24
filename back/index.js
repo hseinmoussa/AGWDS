@@ -15,6 +15,9 @@ const Fetch_Contact = require("./database/controller/Fetch_Contact_Info");
 const Fetch_Cards = require("./database/controller/Fetch_Cards.js");
 const Add_Cards = require("./database/controller/Add_Cards.js");
 const Delete_Cards = require("./database/controller/Delete_Card.js");
+const Edit_Card = require("./database/controller/Edit_Card.js");
+const Search_Card = require("./database/controller/Search_Card.js");
+
 const Try = require("./database/controller/Try.js");
 
 var cors = require("cors");
@@ -43,6 +46,9 @@ app.post("/Contact", Fetch_Contact.Fetch_Contact);
 app.post("/Cards", Fetch_Cards.Fetch_Cards);
 app.post("/AddCard", Add_Cards.Add_Cards);
 app.post("/DeleteCard", Delete_Cards.Delete_Cards);
+app.post("/EditCard", Edit_Card.Edit_Card);
+app.post("/SearchCard", Search_Card.Search_Card);
+
 //Try
 app.get("/Try", Try.Try);
 

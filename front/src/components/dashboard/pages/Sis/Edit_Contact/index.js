@@ -199,8 +199,21 @@ class FormsPage extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className="card-actions flex-end">
-                <Button className="success btn-circle">Submit</Button>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+
+                  margin: "auto",
+                }}
+                className="card-actions  "
+              >
+                <Button
+                  style={{ minWidth: "250px" }}
+                  className="success btn-circle"
+                >
+                  Submit
+                </Button>
               </div>
             </Card>
           </Form>

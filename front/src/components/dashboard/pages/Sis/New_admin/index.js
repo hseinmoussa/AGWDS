@@ -148,8 +148,9 @@ class CardsPage extends React.Component {
               <div
                 style={{
                   display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
+                  justifyContent: "center",
+
+                  margin: "auto",
                 }}
                 className="card-actions flex-end"
               >
@@ -161,7 +162,12 @@ class CardsPage extends React.Component {
                   ""
                 )}
 
-                <Button className="success btn-circle">Submit</Button>
+                <Button
+                  style={{ minWidth: "250px" }}
+                  className="success btn-circle"
+                >
+                  Submit
+                </Button>
               </div>
             </Card>
           </Form>

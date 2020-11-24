@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy, useEffect } from "react";
+import React, { useState, Suspense, lazy, useEffect, useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 
 // Icons
@@ -30,6 +30,9 @@ export default function Sis() {
       console.log(err);
     }
   });
+  function handleChange(newValue) {
+    setDrag(newValue);
+  }
   return (
     <Wrap className="dash">
       <Main>
@@ -65,7 +68,7 @@ export default function Sis() {
             >
               {/* Your pages */}
               <Switch>
-                <Route exact path="/" component={Dashboard} />
+                <Route path="/dashboard" component={Dashboard} />
                 <Route path="/cards" component={Cards} />
                 <Route path="/forms" component={Forms} />
               </Switch>
@@ -73,7 +76,7 @@ export default function Sis() {
           </div>
         </div>
       </Main>
-      <Sidebar drag={drag} />
+      <Sidebar drag={drag} handleChange={handleChange} />
     </Wrap>
   );
 }
