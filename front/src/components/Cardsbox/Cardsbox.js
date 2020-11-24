@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import { Card, Button, Accordion } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -90,6 +90,7 @@ function Testing() {
                   id="img"
                   variant="top"
                   src={item.img}
+                  alr=""
                   onClick={() => {
                     setShow(true);
                     setimglink(item.bigimg);
@@ -131,7 +132,7 @@ function Testing() {
       >
         <Modal.Header closeButton></Modal.Header>
         <p id="titlee">{cardtitle}</p>
-        <img src={imglink} className="img-fluid" />
+        <img alt="" src={imglink} className="img-fluid" />
       </Modal>
       <ReactPaginate
         previousLabel={" ← Previous"}

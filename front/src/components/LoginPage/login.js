@@ -26,13 +26,13 @@ const LoginPage = () => {
     useEffect(() => {
         console.log(Storage.check)
         
-        if(Storage.check != false && Storage.email != "" && Storage.email !== undefined){
+        if(Storage.check !== false && Storage.email !== "" && Storage.email !== undefined){
                 rememberemail.current.value = Storage.email
                 rememberpass.current.value = Storage.password
                 remembercheck.current.checked = Storage.check
         }
         console.log(rememberemail.current.value)
-    }, []);
+    }, [Storage.check,Storage.email, Storage.password]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -43,6 +43,7 @@ const LoginPage = () => {
             Storage.check = check
         }else {
             Storage.clear();
+
         }
         //console.log(rememberemail.current.value)
         console.log(rememberemail.current.value, rememberpass.current.value, remembercheck.current.checked)
@@ -89,7 +90,7 @@ const LoginPage = () => {
                     <Button type="submit">Sign in</Button>
                     </Col>
                     <Col id="forgotlink" sm={{ span: 10, offset: 4 }}>
-                        <a href="#">Forget Password</a>
+                        <a href="/login">Forget Password</a>
                     </Col>
                 </Form.Group>
             </Form>

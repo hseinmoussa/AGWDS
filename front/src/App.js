@@ -12,15 +12,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 const Dashboard = () => <Routes />;
 
 class App extends React.Component {
-  constructor() {
-    super();
-  }
 
   render() {
-    {
-      /* <Aboutus />
-          <AS1 /> */
-    }
+
     return (
       <Router>
         <Link to="/">home </Link>
