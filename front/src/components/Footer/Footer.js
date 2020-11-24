@@ -13,25 +13,25 @@ class Footer extends React.Component {
       github: "",
     };
   }
-  componentDidMount() {
-    fetch("http://localhost:3001/Fetch_Social", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        //facebook: this.state.input,
-      }),
-    })
-      .then((res) => res.json())
-      .then((json) =>
-        this.setState({
-          facebook: json.message.facebook,
-          twitter: json.message.twitter,
-          gmail: json.message.gmail,
-          linkedin: json.message.linkedin,
-          github: json.message.github,
-        })
-      );
-  }
+  // componentDidMount() {
+  //   fetch("http://localhost:3001/Fetch_Social", {
+  //     method: "post",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       //facebook: this.state.input,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((json) =>
+  //       this.setState({
+  //         facebook: json.message.facebook,
+  //         twitter: json.message.twitter,
+  //         gmail: json.message.gmail,
+  //         linkedin: json.message.linkedin,
+  //         github: json.message.github,
+  //       })
+  //     );
+  // }
   render() {
     return (
       <div className="App">

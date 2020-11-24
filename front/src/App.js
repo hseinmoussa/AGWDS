@@ -26,7 +26,7 @@ class App extends React.Component {
         <Link to="/">home </Link>
         <Link to="/about">about </Link>
         <Link to="/dashboard">dashboard </Link>
-        <Link to="/login">login </Link>
+        <a href="/login">login </a>
         <Switch>
           <div className="App">
             <Navbar />

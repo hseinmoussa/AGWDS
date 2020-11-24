@@ -4,9 +4,9 @@
   padding: 0;
   box-sizing: inherit;
 }
-html {
+/* html { Causing a conflict
   font-size: 62.5%;
-}
+} */
 @keyframes moveInleft {
   0% {
     opacity: 0;
@@ -46,17 +46,14 @@ html {
   }
 }
 
-body {
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.7;
-  color: #777;
-  /* i moved this :
-     padding: 3rem; 
-   to App.css */
-  box-sizing: boarder-box;
-}
+  /* body {  Causing conflict
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #777;
+    box-sizing: boarder-box;
+  } */
 .header-about {
   height: 95vh;
 
