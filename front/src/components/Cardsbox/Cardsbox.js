@@ -44,7 +44,7 @@ const tee = [
   },
 ];
 
-function Testing() {
+function Cardsbox() {
   const [Show, setShow] = useState(false);
   const [imglink, setimglink] = useState("");
   const [cardtitle, setcardtitle] = useState("");
@@ -106,17 +106,15 @@ function Testing() {
                   <OverlayTrigger
                     trigger="click"
                     placement="bottom"
-                    rootClose="true"
+                    rootClose={true}
                     overlay={
                       <Popover
                         className="popover"
-                        id="popover-positioned-bottom"
-                      >
+                        id="popover-positioned-bottom">
                         <Popover.Title as="h3">Description</Popover.Title>
                         <Popover.Content>{item.description}</Popover.Content>
-                      </Popover>
-                    }
-                  >
+                      </Popover> }>
+
                     <Button id="card--btn" variant="warning">
                       Read more
                     </Button>
@@ -149,4 +147,4 @@ function Testing() {
     </div>
   );
 }
-export default Testing;
+export default Cardsbox;

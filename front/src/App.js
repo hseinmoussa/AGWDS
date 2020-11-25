@@ -19,10 +19,10 @@ class App extends React.Component {
         <Link to="/about">about </Link>
         <Link to="/dashboard">dashboard </Link>
         <a href="/login">login </a>
-        <Switch>
-          <>
-            <div className="App">
-              <Navbar />
+        
+          <div className="App">
+            <Navbar />
+            <Switch>
               <Route exact path="/">
                 <Cardsbox />
               </Route>
@@ -37,10 +37,9 @@ class App extends React.Component {
                 <LoginPage />
                 <Cardsbox />
               </Route>
-            </div>
-          </>
-        </Switch>
-
+            </Switch>
+          </div>
+       
         <Footer />
       </Router>
     );
