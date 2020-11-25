@@ -108,10 +108,10 @@ class CardsPage extends React.Component {
           <Form onSubmit={this.handleSubmit} className="col-12 px-auto">
             <Card>
               <div className="card-title">
-                <h3>Card With Action</h3>
+                <h3>New Admin</h3>
               </div>
               <div className="card-body light-text">
-                <p>To Add New users</p>
+                <p> Add New users</p>
                 <div>
                   <div className="input-block">
                     <Label_Input

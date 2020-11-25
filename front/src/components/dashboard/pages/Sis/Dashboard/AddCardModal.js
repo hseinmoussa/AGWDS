@@ -109,13 +109,13 @@ const StyledModal = Modal.styled`
     }
 `;
 
-function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
+function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
   const [error, setError] = useState(false);
   const reference = useRef(null);
   const [sub, setSub] = useState(0);
 
   const [data, setData] = useState({
-    Title: "qq",
+    Title: "",
     Description: "",
     Categories: "",
     Image: "",
@@ -131,44 +131,24 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
   }
 
   function handleSubmit(e) {
-    e.preventDefault();
     // alert(JSON.stringify(data))
 
+    add();
+    e.preventDefault();
     submit();
   }
-  useEffect(() => {
-    try {
-      console.log("ok");
-      fetch("http://localhost:3001/SearchCard", {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ _id: _id }),
-      })
-        .then((res) => res.json())
-        .then((json) =>
-          setData({
-            Title: json.message[0].Title,
-            Description: json.message[0].description,
-            Categories: json.message[0].categories,
-            Image: json.message[0].Img,
-          })
-        );
-    } catch (err) {
-      console.log(err);
-    }
-  }, [sub]);
 
-  const update = () => {
+  const add = () => {
     try {
-      fetch("http://localhost:3001/EditCard", {
+      fetch("http://localhost:3001/AddCard", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          _id: _id,
           Title: data.Title,
           description: data.Description,
           categories: data.Categories,
           Img: data.Image,
+          Views: 0,
         }),
       })
         .then((res) => res.json())
@@ -189,7 +169,7 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
     >
       <div className="modal-header">
         <h5 className="modal-title" id="exampleModalLabel">
-          Edit card
+          Add new card
         </h5>
         <button type="button" className="close" onClick={toggleModal}>
           <span aria-hidden="true">&times;</span>
@@ -197,24 +177,6 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
       </div>
       <Form onSubmit={handleSubmit}>
         <div className="modal-body" ref={reference}>
-          {error === 1 && (
-            <Alert
-              className="danger"
-              text="Por favor, preencha todos os campos obrigatórios"
-            />
-          )}
-          {error === 2 && (
-            <Alert
-              className="danger"
-              text="Por favor, preencha todos os campos obrigatórios"
-            />
-          )}
-          {error === 3 && (
-            <Alert
-              className="danger"
-              text="Por favor, selecione uma data válida"
-            />
-          )}
           <div className="input-block">
             <label className="required" style={{ textAlign: "left " }}>
               Title <sup>*</sup>
@@ -222,8 +184,9 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
             <input
               name="Title"
               type="text"
-              placeholder="Ex: Gerente de vendas..."
               value={data.Title}
+              required="required"
+              placeholder="Card Title"
               onChange={handleInputChange}
             />
           </div>
@@ -235,7 +198,8 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
               name="Description"
               type="text"
               value={data.Description}
-              placeholder="Ex: Microsoft..."
+              required="required"
+              placeholder="Card description"
               onChange={handleInputChange}
             />
           </div>
@@ -245,8 +209,9 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
             <input
               name="Categories"
               type="text"
-              placeholder="Ex: Rio de Janeiro..."
+              placeholder="Enter all categories , separate them using comma"
               value={data.Categories}
+              required="required"
               onChange={handleInputChange}
             />
           </div>
@@ -256,6 +221,7 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
               name="Image"
               rows="5"
               value={data.Image}
+              required="required"
               onChange={handleInputChange}
             ></textarea>
           </div>
@@ -264,7 +230,7 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
           <button type="button" className="close" onClick={toggleModal}>
             <FiX /> Close
           </button>
-          <button type="submit" className="submit" onClick={update}>
+          <button type="submit" className="submit">
             <FiCheckCircle /> Submit
           </button>
         </div>
@@ -273,4 +239,4 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
   );
 }
 
-export default memo(ModalExperience);
+export default memo(ModalExperience2);
