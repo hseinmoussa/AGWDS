@@ -8,7 +8,7 @@ import "./Cardsbox.css";
 
 const tee = [
   {
-    img: "https://picsum.photos/id/1/100/60.webp",
+    img: "https://picsum.photos/id/1/150/100.webp",
     title: "Some quick1",
     description:
       " 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
@@ -88,6 +88,8 @@ function Testing() {
               <Card id="Card" style={{ width: "18rem" }}>
                 <Card.Img
                   id="img"
+                  width="100"
+                  height="150"
                   variant="top"
                   src={item.img}
                   alr=""
