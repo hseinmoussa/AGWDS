@@ -12,9 +12,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 const Dashboard = () => <Routes />;
 
 class App extends React.Component {
-
   render() {
-
     return (
       <Router>
         <Link to="/">home </Link>
@@ -22,23 +20,25 @@ class App extends React.Component {
         <Link to="/dashboard">dashboard </Link>
         <a href="/login">login </a>
         <Switch>
-          <div className="App">
-            <Navbar />
-            <Route exact path="/">
-              <Cardsbox />
-            </Route>
-            <Route path="/about">
-              <Aboutus />
-              <AS1 />
-            </Route>
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route path="/login">
-              <LoginPage />
-              <Cardsbox/>
-            </Route>
-          </div>
+          <>
+            <div className="App">
+              <Navbar />
+              <Route exact path="/">
+                <Cardsbox />
+              </Route>
+              <Route path="/about">
+                <Aboutus />
+                <AS1 />
+              </Route>
+              <Route path="/dashboard">
+                <Dashboard />
+              </Route>
+              <Route path="/login">
+                <LoginPage />
+                <Cardsbox />
+              </Route>
+            </div>
+          </>
         </Switch>
 
         <Footer />

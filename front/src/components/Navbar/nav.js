@@ -31,13 +31,13 @@ class Navbar extends Component {
             );
           })}
         </ul>
-        <form class="SF" method="GET">
+        <form className="SF" method="GET">
           <Button>
             <i className="fas fa-search"></i>
           </Button>
 
           <input
-            class="SB"
+            className="SB"
             label="Search Gallery"
             type="text"
             placeholder="Search Art..."

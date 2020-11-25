@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Suspense, lazy } from "react";
 
 import { ModalProvider } from "styled-react-modal";
+import ReactPaginate from "react-paginate";
 
 // Icons
 import { FiCalendar, FiMessageCircle, FiLogOut, FiUsers } from "react-icons/fi";
@@ -42,6 +43,7 @@ export default function Dashboard() {
 
     setOpenForm2(!OpenForm2);
   }
+  const [pagination, setPagination] = useState("");
 
   useEffect(() => {
     if (sort == "") var url = "http://localhost:3001/Cards";
@@ -79,6 +81,42 @@ export default function Dashboard() {
     }
   };
 
+  /* Start pagination*/
+  useEffect(() => {
+    setPagination({
+      data: array.map((value, index) => ({
+        _id: value._id,
+        Title: value.Title,
+        description: value.description,
+        Img: value.Img,
+        Views: value.Views,
+      })),
+      offset: 0,
+      numberPerPage: 5,
+      pageCount: 0,
+      currentData: [],
+    });
+  }, [array]);
+
+  useEffect(() => {
+    setPagination((prevState) => ({
+      ...prevState,
+      pageCount: prevState.data.length / prevState.numberPerPage,
+      currentData: prevState.data.slice(
+        pagination.offset,
+        pagination.offset + pagination.numberPerPage
+      ),
+    }));
+  }, [pagination.numberPerPage, pagination.offset, array]);
+
+  const handlePageClick = (event) => {
+    const selected = event.selected;
+    const offset = selected * pagination.numberPerPage;
+    setPagination({ ...pagination, offset });
+  };
+
+  /*End pagination"*/
+
   return (
     <>
       <div
@@ -90,15 +128,21 @@ export default function Dashboard() {
           Hello , Welcom to the dashboard page
         </h1>
         <Table>
-          <button
-            className="info"
-            onClick={() => {
-              console.log(11);
-              toggleModalForm2();
-            }}
-          >
-            Add
-          </button>
+          <tbody>
+            <tr>
+              <td>
+                <button
+                  className="info"
+                  onClick={() => {
+                    console.log(11);
+                    toggleModalForm2();
+                  }}
+                >
+                  Add
+                </button>
+              </td>
+            </tr>
+          </tbody>
         </Table>
       </div>
 
@@ -135,39 +179,54 @@ export default function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                {array.map((item) => (
-                  <tr>
-                    <td style={{ textAlign: "center", display: "none" }}>
-                      {item._id}
-                    </td>
-                    <td style={{ textAlign: "center" }}>{item.Views}</td>
-                    <td style={{ textAlign: "center" }}>{item.Title}</td>
-                    <td style={{ textAlign: "center" }}>{item.description}</td>
-                    <td style={{ textAlign: "center" }}>
-                      <button
-                        className="edit"
-                        onClick={() => {
-                          toggleModalForm();
-                          setId(item._id);
-                        }}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="eraser"
-                        onClick={() => {
-                          del(item._id);
-                        }}
-                      >
-                        Trash
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {pagination.currentData &&
+                  pagination.currentData.map((item) => (
+                    <tr key={item._id}>
+                      <td style={{ textAlign: "center", display: "none" }}>
+                        {item._id}
+                      </td>
+                      <td style={{ textAlign: "center" }}>{item.Views}</td>
+                      <td style={{ textAlign: "center" }}>{item.Title}</td>
+                      <td style={{ textAlign: "center" }}>
+                        {item.description}
+                      </td>
+                      <td style={{ textAlign: "center" }}>
+                        <button
+                          className="edit"
+                          onClick={() => {
+                            toggleModalForm();
+                            setId(item._id);
+                          }}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="eraser"
+                          onClick={() => {
+                            del(item._id);
+                          }}
+                        >
+                          Trash
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </Table>
           </div>
         </Card>
+        <div style={{ display: "flex" }}>
+          <ReactPaginate
+            previousLabel={" ← Previous"}
+            nextLabel={"Next → "}
+            pageCount={pagination.pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination"}
+            activeClassName={"active"}
+          />
+        </div>
       </div>
       <Suspense fallback={null}>
         <ModalProvider>
