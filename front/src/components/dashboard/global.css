@@ -170,6 +170,10 @@
 .dash th {
   text-align: center;
 }
+.dash {
+  padding: -3em !important;
+}
+
 @keyframes load8 {
   0% {
     transform: rotate(0deg);

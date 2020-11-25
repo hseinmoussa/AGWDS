@@ -44,6 +44,8 @@ app.post("/NewPass", [auth, Change_Pass_Controller.Change_Pass]);
 
 app.post("/Contact", Fetch_Contact.Fetch_Contact);
 app.post("/Cards", Fetch_Cards.Fetch_Cards);
+app.post("/CardsByViews", Fetch_Cards.Fetch_Cards_By_Views);
+
 app.post("/AddCard", Add_Cards.Add_Cards);
 app.post("/DeleteCard", Delete_Cards.Delete_Cards);
 app.post("/EditCard", Edit_Card.Edit_Card);

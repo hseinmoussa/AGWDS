@@ -150,7 +150,7 @@
     color: #fff;
     transition: 250ms;
   }
-  Button {
+  .NavbarItems Button {
     display: none;
   }
   .SB {
