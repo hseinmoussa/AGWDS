@@ -115,7 +115,7 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
   const [sub, setSub] = useState(0);
 
   const [data, setData] = useState({
-    Title: "qq",
+    Title: "",
     Description: "",
     Categories: "",
     Image: "",
@@ -139,7 +139,6 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
   function handleSubmit(e) {
     update();
     e.preventDefault();
-    // alert(JSON.stringify(data))
 
     submit();
   }
@@ -181,8 +180,11 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
       })
         .then((res) => res.json())
         .then((json) => {
-          setSub(sub + 1);
-          setArray2(arr + 1);
+          if (json.status == 400) alert(json.message);
+          else {
+            setSub(sub + 1);
+            setArray2(arr + 1);
+          }
         });
     } catch (err) {
       console.log(err);

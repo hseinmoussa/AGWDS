@@ -161,8 +161,11 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
       })
         .then((res) => res.json())
         .then((json) => {
-          setSub(sub + 1);
-          setArray2(arr + 1);
+          if (json.status == 400) alert(json.message);
+          else {
+            setSub(sub + 1);
+            setArray2(arr + 1);
+          }
         });
     } catch (err) {
       console.log(err);
@@ -187,7 +190,7 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
         <div className="modal-body" ref={reference}>
           <div className="input-block">
             <label className="required" style={{ textAlign: "left " }}>
-              Title <sup>*</sup>
+              Title <sup style={{ color: "red" }}>*</sup>
             </label>
             <input
               name="Title"
@@ -200,7 +203,7 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
           </div>
           <div className="input-block">
             <label className="required" style={{ textAlign: "left " }}>
-              Description <sup>*</sup>
+              Description <sup style={{ color: "red" }}>*</sup>
             </label>
             <input
               name="Description"
@@ -213,7 +216,9 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
           </div>
 
           <div className="input-block">
-            <label style={{ textAlign: "left " }}>Categories</label>
+            <label style={{ textAlign: "left " }}>
+              Categories <sup style={{ color: "red" }}>*</sup>
+            </label>
             <input
               name="Categories"
               type="text"
@@ -224,7 +229,9 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
             />
           </div>
           <div className="input-block">
-            <label style={{ textAlign: "left " }}>Image</label>
+            <label style={{ textAlign: "left " }}>
+              Image <sup style={{ color: "red" }}>*</sup>
+            </label>
             <input
               name="Image"
               rows="5"
