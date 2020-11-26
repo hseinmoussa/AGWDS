@@ -6,7 +6,7 @@ exports.Edit_Card = async function (req, res) {
     description: req.body.description,
     categories: req.body.categories,
     Views: req.body.Views,
-    Img: "",
+    Image: "",
   };
 
   console.log(card);
