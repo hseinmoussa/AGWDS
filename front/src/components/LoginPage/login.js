@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form'
 import { Button, Col, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal'
+import Cookies from 'universal-cookie';
+import { useHistory } from "react-router-dom";
+import CookieConsent from "react-cookie-consent";
 import './login.css'
 
 
@@ -14,14 +17,44 @@ const LoginPage = () => {
             password: "",
 
     });
+    const cookieEnabled = navigator.cookieEnabled;
+    let history = useHistory();
 
+    if (!cookieEnabled){
+      alert("ENABLE YOUR GOD DAMN COOOKIES!")
+    }
     useEffect(() => {
         
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(form)
+        try {
+      fetch("http://localhost:3001/login", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: form.email,
+          password: form.password
+        }),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          if (json.status === 400) alert(json.message);
+          else {
+            const cookies = new Cookies();
+            cookies.set('token', json.token , { path: '/' });
+            console.log(cookies.get('token')); // Pacman
+            history.push('/dashboard')
+          } 
+        })
+        .catch((err) => console.log(err));
+      e.preventDefault();
+    } catch (err) {
+      console.log(err);
+    }
     }
     return (
         <div>
@@ -62,6 +95,7 @@ const LoginPage = () => {
                     </Col>
                 </Form.Group>
             </Form>
+            <CookieConsent>This website uses cookies to enhance the user experience.</CookieConsent>
           </Modal>
         </div>
     )

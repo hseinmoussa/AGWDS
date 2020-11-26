@@ -6,11 +6,13 @@ if (result.error) {
 }
 const { parsed: envs } = result;
 const auth = (req, res, next) => {
+  console.log(req.body.token)
   //With token
   //const token = req.header("token");
 
   //With cookies
-  var token = req.cookies.token;
+ // var token = req.cookies.token; before
+    var token = req.body.token;
   if (!token)
     return res.status(401).send({
       status: 401,

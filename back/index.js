@@ -46,7 +46,7 @@ app.post("/Contact", Fetch_Contact.Fetch_Contact);
 app.post("/Cards", Fetch_Cards.Fetch_Cards);
 app.post("/CardsByViews", Fetch_Cards.Fetch_Cards_By_Views);
 
-app.post("/AddCard", Add_Cards.Add_Cards);
+app.post("/AddCard", [auth, Add_Cards.Add_Cards]);
 app.post("/DeleteCard", Delete_Cards.Delete_Cards);
 app.post("/EditCard", Edit_Card.Edit_Card);
 app.post("/SearchCard", Search_Card.Search_Card);
