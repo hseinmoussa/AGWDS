@@ -4,7 +4,7 @@ import Modal from "styled-react-modal";
 import { Form } from "../../../components/Form";
 import Alert from "../../../components/Alert";
 import { FiCheckCircle, FiX } from "react-icons/fi";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 
 const StyledModal = Modal.styled`
 
@@ -157,17 +157,7 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
       console.log(data);
       fetch("http://localhost:3001/AddCard", {
         method: "post",
-
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          Title: data.Title,
-          description: data.Description,
-          categories: data.Categories,
-          Img: data.Image,
-          Views: 0,
-          token : cookies.get('token')
-        }),
-          
+        body: body,
       })
         .then((res) => res.json())
         .then((json) => {
