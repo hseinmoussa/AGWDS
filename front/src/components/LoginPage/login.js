@@ -42,18 +42,26 @@ const LoginPage = () => {
           return res.json();
         })
         .then((json) => {
-          if (json.status === 400) alert(json.message);
+          if (json.status === 400){
+            console.log(json)
+          }
+
+          if(json.errors){
+            alert(json.errors)
+            history.push('/login')
+          }
           else {
+            
             const cookies = new Cookies();
             cookies.set('token', json.token , { path: '/' });
             console.log(cookies.get('token')); // Pacman
             history.push('/dashboard')
           } 
         })
-        .catch((err) => console.log(err));
+        .catch((err) => alert("Invalid"));
       e.preventDefault();
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
     }
     return (
