@@ -6,10 +6,9 @@ exports.Edit_Card = async function (req, res) {
     description: req.body.description,
     categories: req.body.categories,
     Views: req.body.Views,
-    Img: "",
+    Image: req.file.filename,
   };
 
-  console.log(card);
   //String to StringObject
 
   Schema.cards.update({ _id: `${req.body._id}` }, card, function (err, result) {

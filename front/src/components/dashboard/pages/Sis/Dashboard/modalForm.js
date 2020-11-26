@@ -123,14 +123,21 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
 
   function handleInputChange(e) {
     const { value, name } = e.target;
-
-    setData({
-      ...data,
-      [name]: value,
-    });
+    if (name == "Image") {
+      console.log(e.target.files[0]);
+      setData({
+        ...data,
+        [name]: e.target.files[0],
+      });
+    } else
+      setData({
+        ...data,
+        [name]: value,
+      });
   }
 
   function handleSubmit(e) {
+    update();
     e.preventDefault();
     // alert(JSON.stringify(data))
 
@@ -150,7 +157,7 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
             Title: json.message[0].Title,
             Description: json.message[0].description,
             Categories: json.message[0].categories,
-            Image: json.message[0].Img,
+            Image: json.message[0].Image,
           })
         );
     } catch (err) {
@@ -160,16 +167,17 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
 
   const update = () => {
     try {
+      const body = new FormData();
+      body.append("_id", _id);
+      body.append("Title", data.Title);
+      body.append("description", data.Description);
+      body.append("categories", data.Categories);
+      body.append("Image", data.Image);
+      body.append("Views", 0);
+
       fetch("http://localhost:3001/EditCard", {
         method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          _id: _id,
-          Title: data.Title,
-          description: data.Description,
-          categories: data.Categories,
-          Img: data.Image,
-        }),
+        body: body,
       })
         .then((res) => res.json())
         .then((json) => {
@@ -252,19 +260,20 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
           </div>
           <div className="input-block">
             <label style={{ textAlign: "left " }}>Image</label>
-            <textarea
+            <input
               name="Image"
               rows="5"
-              value={data.Image}
+              type="file"
+              required="required"
               onChange={handleInputChange}
-            ></textarea>
+            ></input>
           </div>
         </div>
         <div className="modal-footer">
           <button type="button" className="close" onClick={toggleModal}>
             <FiX /> Close
           </button>
-          <button type="submit" className="submit" onClick={update}>
+          <button type="submit" className="submit">
             <FiCheckCircle /> Submit
           </button>
         </div>

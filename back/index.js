@@ -5,6 +5,8 @@ const Fetch_Social = require("./database/controller/Fetch_Social");
 const auth = require("./database/Auth.js");
 const isPasswordAndUserMatch = require("./database/login_admin");
 let bodyParser = require("body-parser");
+import multer from "multer";
+
 const cookieParser = require("cookie-parser");
 const Change_Pass_Controller = require("./database/controller/Change_Pass_Controller");
 const Forgot_Pass_Controller = require("./database/controller/Forgot_Pass_Controller");
@@ -28,7 +30,24 @@ app.use(
     extended: false,
   })
 );
+
 app.use(bodyParser.json());
+//image
+app.use(express.static("public"));
+const multerStorage = multer.diskStorage({
+  destination: "public/Image",
+  filename: (req, file, cb) => {
+    const { fieldname, originalname } = file;
+    const date = Date.now();
+    // filename will be: image-1345923023436343-filename.png
+    const filename = `${fieldname}-${date}-${originalname}`;
+    console.log(filename);
+    cb(null, filename);
+  },
+});
+
+const upload = multer({ storage: multerStorage });
+
 const port = process.env.PORT || 3001;
 
 app.post("/Fetch_Social", [Fetch_Social.Fetch_Social]);
@@ -46,9 +65,9 @@ app.post("/Contact", Fetch_Contact.Fetch_Contact);
 app.post("/Cards", Fetch_Cards.Fetch_Cards);
 app.post("/CardsByViews", Fetch_Cards.Fetch_Cards_By_Views);
 
-app.post("/AddCard", Add_Cards.Add_Cards);
+app.post("/AddCard", upload.single("Image"), Add_Cards.Add_Cards);
 app.post("/DeleteCard", Delete_Cards.Delete_Cards);
-app.post("/EditCard", Edit_Card.Edit_Card);
+app.post("/EditCard", upload.single("Image"), Edit_Card.Edit_Card);
 app.post("/SearchCard", Search_Card.Search_Card);
 
 //Try

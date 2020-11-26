@@ -12,7 +12,7 @@ var users_schema = new mongoose.Schema(
 );
 var cards_schema = new mongoose.Schema({
   Title: { type: String },
-  Img: { type: String },
+  Image: { type: String },
   description: { type: String },
   categories: { type: String },
   Views: Number,
