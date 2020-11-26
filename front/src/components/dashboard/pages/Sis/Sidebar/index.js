@@ -1,5 +1,7 @@
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
+import Cookies from 'universal-cookie';
+import { useHistory } from "react-router-dom";
 
 // Styled
 import { Side } from "./styles";
@@ -19,6 +21,8 @@ import { connect } from "react-redux";
 
 function Sidebar({ drag, handleChange, activeMenu, itensMenu, dispatch }) {
   const [newDrag, setnewDrag] = useState(drag);
+  let history = useHistory();
+  const cookies = new Cookies();
 
   function handlechange(event) {
     handleChange(!newDrag);
@@ -59,17 +63,19 @@ function Sidebar({ drag, handleChange, activeMenu, itensMenu, dispatch }) {
           </li>
         ))}
         <li>
-          <Link
+          <a
             onClick={() => {
-              /*logout()*/
+              
+              cookies.remove('token', { path: '/' });
+
             }}
-            to={`/sis/login`}
+            href={`/`}
           >
             <span className="icon">
               <FiLogOut />
             </span>
             <span className="item">Logout</span>
-          </Link>
+          </a>
         </li>
       </ul>
     </Side>
