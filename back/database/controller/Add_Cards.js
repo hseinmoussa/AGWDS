@@ -30,6 +30,6 @@ exports.Add_Cards = async function (req, res) {
         res.json({ status: 200, message: cards });
       });
   } catch (err) {
-    console.log(err);
+    console.log(err, "this");
   }
 };

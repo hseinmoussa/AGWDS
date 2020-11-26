@@ -7,6 +7,7 @@ import Cardsbox from "./components/Cardsbox/Cardsbox";
 import LoginPage from "./components/LoginPage/login";
 import Footer from "./components/Footer/Footer.js";
 import Routes from "./components/dashboard/routes";
+import Protection from './components/LoginPage/Protection';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const Dashboard = () => <Routes />;
@@ -19,10 +20,10 @@ class App extends React.Component {
         <Link to="/about">about </Link>
         <Link to="/dashboard">dashboard </Link>
         <a href="/login">login </a>
-        <Switch>
-          <>
-            <div className="App">
-              <Navbar />
+        
+          <div className="App">
+            <Navbar />
+            <Switch>
               <Route exact path="/">
                 <Cardsbox />
               </Route>
@@ -30,17 +31,16 @@ class App extends React.Component {
                 <Aboutus />
                 <AS1 />
               </Route>
-              <Route path="/dashboard">
+              <Protection path="/dashboard" >
                 <Dashboard />
-              </Route>
+              </Protection>
               <Route path="/login">
                 <LoginPage />
                 <Cardsbox />
               </Route>
-            </div>
-          </>
-        </Switch>
-
+            </Switch>
+          </div>
+       
         <Footer />
       </Router>
     );

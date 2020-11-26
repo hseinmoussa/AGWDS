@@ -1,54 +1,61 @@
 import { React } from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form'
 import { Button, Col, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal'
+import Cookies from 'universal-cookie';
+import { useHistory } from "react-router-dom";
+import CookieConsent from "react-cookie-consent";
 import './login.css'
 
 
 const LoginPage = () => {
     const [show, setShow] = useState(true);
-    const rememberemail = useRef("");
-    const rememberpass = useRef("");
-    const remembercheck = useRef("");
-
-
     const [form , setform] = useState({
 
             email: "",
             password: "",
-            check: false
 
     });
+    const cookieEnabled = navigator.cookieEnabled;
+    let history = useHistory();
 
-    const Storage = localStorage
-
+    if (!cookieEnabled){
+      alert("ENABLE YOUR GOD DAMN COOOKIES!")
+    }
     useEffect(() => {
-        console.log(Storage.check)
         
-        if(Storage.check !== false && Storage.email !== "" && Storage.email !== undefined){
-                rememberemail.current.value = Storage.email
-                rememberpass.current.value = Storage.password
-                remembercheck.current.checked = Storage.check
-        }
-        console.log(rememberemail.current.value)
-    }, [Storage.check,Storage.email, Storage.password]);
+    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { email, password, check } = form
-        if (check && email !== "") {
-            Storage.email = email
-            Storage.password = password
-            Storage.check = check
-        }else {
-            Storage.clear();
-
-        }
-        //console.log(rememberemail.current.value)
-        console.log(rememberemail.current.value, rememberpass.current.value, remembercheck.current.checked)
+        try {
+      fetch("http://localhost:3001/login", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: form.email,
+          password: form.password
+        }),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          if (json.status === 400) alert(json.message);
+          else {
+            const cookies = new Cookies();
+            cookies.set('token', json.token , { path: '/' });
+            console.log(cookies.get('token')); // Pacman
+            history.push('/dashboard')
+          } 
+        })
+        .catch((err) => console.log(err));
+      e.preventDefault();
+    } catch (err) {
+      console.log(err);
     }
-
+    }
     return (
         <div>
         <Modal
@@ -66,7 +73,7 @@ const LoginPage = () => {
                     Email
                     </Form.Label>
                     <Col sm={8}>
-                    <Form.Control type="email" placeholder="Email" onChange={(e)=> setform({...form, email: e.target.value})} ref={rememberemail} value={rememberemail.current.value}/>
+                    <Form.Control type="email" placeholder="Email" onChange={(e)=> setform({...form, email: e.target.value})}/>
                     </Col>
                 </Form.Group>
 
@@ -75,13 +82,7 @@ const LoginPage = () => {
                     Password
                     </Form.Label>
                     <Col sm={8}>
-                    <Form.Control type="password" placeholder="Password" onChange={(e)=> setform({...form, password: e.target.value})} ref={rememberpass} value={rememberpass.current.value}/>
-                    </Col>
-                </Form.Group>
-               
-                <Form.Group as={Row} controlId="remember">
-                    <Col sm={{ span: 8, offset: 2 }}>
-                    <Form.Check label="Remember me" onChange={(e)=> setform({...form, check: e.target.checked})} ref={remembercheck} value={remembercheck.current.checked} />
+                    <Form.Control type="password" placeholder="Password" onChange={(e)=> setform({...form, password: e.target.value})}/>
                     </Col>
                 </Form.Group>
 
@@ -94,6 +95,7 @@ const LoginPage = () => {
                     </Col>
                 </Form.Group>
             </Form>
+            <CookieConsent>This website uses cookies to enhance the user experience.</CookieConsent>
           </Modal>
         </div>
     )

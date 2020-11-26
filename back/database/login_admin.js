@@ -1,6 +1,7 @@
 const Schema = require("./Schema/Schema.js");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const bcrypt = require("bcrypt");
 const result = dotenv.config();
 if (result.error) {
   throw result.error;
@@ -8,7 +9,6 @@ if (result.error) {
 const { parsed: envs } = result;
 
 exports.isPasswordAndUserMatch = (req, res, next) => {
-  console.log(req.body.email);
   Schema.users.findOne({ email: req.body.email }, async (err, user) => {
     if (user == undefined) {
       return res.status(400).send("Cannot find user");
@@ -17,10 +17,8 @@ exports.isPasswordAndUserMatch = (req, res, next) => {
       if (err) {
         console.log(err);
         res.status(404).send({ message: "Something Wrong!" });
-      } else if (
-        user &&
-        (await bcrypt.compare(req.body.password, user.password))
-      ) {
+      } else if (user && (await bcrypt.compare(req.body.password, user.password))) {
+
         const token = jwt.sign({ _id: user._id }, envs.TOKEN_SECRET);
         res.header("token", token);
         //console.log(envs.TOKEN_SECRET);
