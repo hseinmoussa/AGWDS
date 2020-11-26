@@ -3,29 +3,13 @@ const test_function = require("./function/test_input_function");
 
 exports.Try = async function (req, res) {
   try {
-    var newCard = {
-      Title: "card1",
-      description: "it's first card",
-      categories: "wowww",
-      Views: 10,
-      Img: "",
-    };
-    //const admin = new Admin(newAdmin);
-    const card = new Schema.cards(newCard);
-    await card
-      .save()
-      .then((user) => {
-        console.log(user);
-      })
-      .catch((err) => console.log(err));
-
     Schema.cards
       .find(function (err, data) {
         if (err) console.log("Somthing went wrong!");
         else console.log("a");
       })
       .then((data) => {
-        res.json({ message: data });
+        console.log(1);
       });
   } catch (err) {
     console.log(err);

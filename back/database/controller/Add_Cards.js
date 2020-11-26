@@ -3,12 +3,15 @@ const test_function = require("./function/test_input_function");
 
 exports.Add_Cards = async function (req, res) {
   try {
+    const image = req.file && req.file.filename;
+    console.log(image, req.file, req.file.filename);
+
     var newCard = {
       Title: req.body.Title,
       description: req.body.description,
       categories: req.body.categories,
       Views: req.body.Views,
-      Img: req.body.Img,
+      Image: req.file.filename,
     };
     //const admin = new Admin(newAdmin);
     const card = new Schema.cards(newCard);

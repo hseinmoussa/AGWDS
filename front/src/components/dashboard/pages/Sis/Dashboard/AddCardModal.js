@@ -124,11 +124,17 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
 
   function handleInputChange(e) {
     const { value, name } = e.target;
-
-    setData({
-      ...data,
-      [name]: value,
-    });
+    if (name == "Image") {
+      console.log(e.target.files[0]);
+      setData({
+        ...data,
+        [name]: e.target.files[0],
+      });
+    } else
+      setData({
+        ...data,
+        [name]: value,
+      });
   }
 
   function handleSubmit(e) {
@@ -142,8 +148,16 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
   const add = () => {
     const cookies = new Cookies();
     try {
+      const body = new FormData();
+      body.append("Title", data.Title);
+      body.append("description", data.Description);
+      body.append("categories", data.Categories);
+      body.append("Image", data.Image);
+      body.append("Views", 0);
+      console.log(data);
       fetch("http://localhost:3001/AddCard", {
         method: "post",
+
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           Title: data.Title,
@@ -153,6 +167,7 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
           Views: 0,
           token : cookies.get('token')
         }),
+          
       })
         .then((res) => res.json())
         .then((json) => {
@@ -220,13 +235,13 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
           </div>
           <div className="input-block">
             <label style={{ textAlign: "left " }}>Image</label>
-            <textarea
+            <input
               name="Image"
               rows="5"
-              value={data.Image}
+              type="file"
               required="required"
               onChange={handleInputChange}
-            ></textarea>
+            ></input>
           </div>
         </div>
         <div className="modal-footer">
