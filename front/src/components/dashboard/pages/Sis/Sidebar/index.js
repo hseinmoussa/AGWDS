@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import Cookies from 'universal-cookie';
-import { useHistory } from "react-router-dom";
 
 // Styled
 import { Side } from "./styles";
