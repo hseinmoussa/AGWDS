@@ -20,7 +20,6 @@ import { connect } from "react-redux";
 
 function Sidebar({ drag, handleChange, activeMenu, itensMenu, dispatch }) {
   const [newDrag, setnewDrag] = useState(drag);
-  let history = useHistory();
   const cookies = new Cookies();
 
   function handlechange(event) {
