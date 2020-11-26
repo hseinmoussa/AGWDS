@@ -67,7 +67,7 @@ app.post("/CardsByViews", Fetch_Cards.Fetch_Cards_By_Views);
 
 app.post("/AddCard", upload.single("Image"), Add_Cards.Add_Cards);
 app.post("/DeleteCard", Delete_Cards.Delete_Cards);
-app.post("/EditCard", Edit_Card.Edit_Card);
+app.post("/EditCard", upload.single("Image"), Edit_Card.Edit_Card);
 app.post("/SearchCard", Search_Card.Search_Card);
 
 //Try

@@ -88,7 +88,7 @@ export default function Dashboard() {
         _id: value._id,
         Title: value.Title,
         description: value.description,
-        Img: value.Img,
+        Image: value.Image,
         Views: value.Views,
       })),
       offset: 0,
@@ -173,6 +173,7 @@ export default function Dashboard() {
               <thead>
                 <tr>
                   <th className="col-1">Views</th>
+                  <th className="col-3">Image</th>
                   <th className="col-3">Title</th>
                   <th className="col-3">Description</th>
                   <th className="col-3">Actions</th>
@@ -186,6 +187,12 @@ export default function Dashboard() {
                         {item._id}
                       </td>
                       <td style={{ textAlign: "center" }}>{item.Views}</td>
+                      <td style={{ textAlign: "center" }}>
+                        <img
+                          height="50px"
+                          src={`http://localhost:3001/Image/${item.Image}`}
+                        />
+                      </td>
                       <td style={{ textAlign: "center" }}>{item.Title}</td>
                       <td style={{ textAlign: "center" }}>
                         {item.description}
