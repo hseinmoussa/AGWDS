@@ -11,6 +11,12 @@ import './login.css'
 
 const LoginPage = () => {
     const [show, setShow] = useState(true);
+    const [forgotshow, setforgotshow] = useState(false);
+    const [forgotform , setforgotform] = useState({
+
+        email: "",
+
+});
     const [form , setform] = useState({
 
             email: "",
@@ -23,9 +29,11 @@ const LoginPage = () => {
     if (!cookieEnabled){
       alert("ENABLE YOUR GOD DAMN COOOKIES!")
     }
-    useEffect(() => {
-        
-    });
+
+    const handleForgot = (e) => {
+      e.preventDefault();
+     
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -99,11 +107,45 @@ const LoginPage = () => {
                     <Button type="submit">Sign in</Button>
                     </Col>
                     <Col id="forgotlink" sm={{ span: 10, offset: 4 }}>
-                        <a href="/login">Forget Password</a>
+                        <a onClick={() => {setforgotshow(true); setShow(false)}}>Forget Password</a>
                     </Col>
                 </Form.Group>
             </Form>
             <CookieConsent>This website uses cookies to enhance the user experience.</CookieConsent>
+          </Modal>
+
+          <Modal
+        show={forgotshow}
+        onHide={() => setforgotshow(false)}
+        size="xl"
+        aria-labelledby="example-modal-sizes-title-lg"
+        className="signin" >
+        <Modal.Header closeButton >
+        </Modal.Header>
+            <Form onSubmit={console.log(forgotform.email)} className="bateekh">
+                 <p>Reset Password</p>
+                <Form.Group as={Row} controlId="email">
+                    <Form.Label column sm={2}>
+                    Email
+                    </Form.Label>
+                    <Col sm={8}>
+                    <Form.Control type="email" placeholder="Email" onChange={(e)=> setforgotform({...forgotform, email: e.target.value})}/>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} controlId="email">
+                    <Form.Label column sm={2}>
+                    Verify Email
+                    </Form.Label>
+                    <Col sm={8}>
+                    <Form.Control type="email" placeholder="Email" onChange={(e)=> setforgotform({...forgotform, email: e.target.value})}/>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row}>
+                    <Col sm={{ span: 20, offset: 5 }}>
+                    <Button type="submit">Reset</Button>
+                    </Col>
+                </Form.Group>
+            </Form>
           </Modal>
         </div>
     )
