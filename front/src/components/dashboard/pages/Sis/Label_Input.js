@@ -8,15 +8,17 @@ class Label_Input extends React.Component {
   render() {
     return (
       <>
-        <label htmlFor={this.props.name}>{this.props.name}</label>
+        <label htmlFor={this.props.id}>{this.props.name}</label>
         <span>
           <input
             type={this.props.type}
             name={this.props.name}
             id={this.props.id}
+            autoComplete="off"
             onChange={(e) => {
               this.props.onChange(e);
             }}
+            minLength={this.props.type == "password" ? "6" : "1"}
             required={this.props.required}
           />
           {this.props.required ? (

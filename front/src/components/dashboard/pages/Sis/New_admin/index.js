@@ -8,23 +8,6 @@ import { Button } from "../../../components/Button";
 import Label_Input from "../Label_Input.js";
 import { Form } from "../../../components/Form";
 
-// This styled only show buttons in row format
-import styled from "styled-components";
-import Column from "antd/lib/table/Column";
-import { Row } from "antd";
-const Buttons = styled.div`
-  display: flex;
-
-  &.wrap {
-    flex-wrap: wrap;
-  }
-  /* justify-content: space-around; */
-
-  button {
-    margin: 5px;
-  }
-`;
-
 class CardsPage extends React.Component {
   constructor() {
     super();
@@ -69,32 +52,37 @@ class CardsPage extends React.Component {
   };
 
   handleSubmit = (event) => {
-    this.setState({ click: true });
-    event.preventDefault();
-    try {
-      fetch("http://localhost:3001/NewAdmin", {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          _id: this.state.Email,
-          email: this.state.Email,
-          password: this.state.Password,
-          verifypassword: this.state.VerifyPass,
-        }),
-      })
-        .then((res) => {
-          console.log(1);
-          return res.json();
-        })
-        .then((json) => {
-          if (json.status == 401) alert(json.message);
-          else this.setState({ Updated: true });
-        })
-        .catch((err) => console.log(err));
+    this.setState({ click: true }, () => {
       event.preventDefault();
-    } catch (err) {
-      console.log(err);
-    }
+      if (this.state.disab && this.state.click)
+        alert("Pass and verify pass must be the same !");
+      else {
+        try {
+          fetch("http://localhost:3001/NewAdmin", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              _id: this.state.Email,
+              email: this.state.Email,
+              password: this.state.Password,
+              verifypassword: this.state.VerifyPass,
+            }),
+          })
+            .then((res) => {
+              console.log(1);
+              return res.json();
+            })
+            .then((json) => {
+              if (json.status == 401) alert(json.message);
+              else this.setState({ Updated: true });
+            })
+            .catch((err) => console.log(err));
+          event.preventDefault();
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    });
   };
 
   render() {
@@ -116,6 +104,7 @@ class CardsPage extends React.Component {
                   <div className="input-block">
                     <Label_Input
                       id="email"
+                      type="email"
                       name="Your New Email Address : "
                       onChange={this.handleChange}
                       required={true}
@@ -124,6 +113,7 @@ class CardsPage extends React.Component {
                   <div className="input-block">
                     <Label_Input
                       id="pass"
+                      type="password"
                       name="Your Password : "
                       onChange={this.handleChange}
                       required={true}
@@ -132,6 +122,7 @@ class CardsPage extends React.Component {
                   <div className="input-block">
                     <Label_Input
                       id="confirm pass"
+                      type="password"
                       name="Verify Password : "
                       onChange={this.handleChange}
                       required={true}
@@ -148,6 +139,7 @@ class CardsPage extends React.Component {
               <div
                 style={{
                   display: "flex",
+                  flexDirection: "column",
                   justifyContent: "center",
 
                   margin: "auto",
@@ -161,6 +153,7 @@ class CardsPage extends React.Component {
                 ) : (
                   ""
                 )}
+                <p></p>
 
                 <Button
                   style={{ minWidth: "250px" }}
@@ -173,7 +166,12 @@ class CardsPage extends React.Component {
           </Form>
         </>
       );
-    else return <div style={{ textAlign: "center" }}>updated successfully</div>;
+    else
+      return (
+        <div style={{ textAlign: "center" }}>
+          {alert("updated successfully")}
+        </div>
+      );
   }
 }
 export default CardsPage;

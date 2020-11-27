@@ -1,5 +1,4 @@
 const Schema = require("../Schema/Schema.js");
-const test_function = require("./function/test_input_function");
 
 exports.Add_Cards = async function (req, res) {
   try {
@@ -32,7 +31,7 @@ exports.Add_Cards = async function (req, res) {
         })
         .catch((err) => console.log(err));
 
-      Schema.cards
+      await Schema.cards
         .find(function (err, data) {
           if (err) console.log("Somthing went wrong!");
         })

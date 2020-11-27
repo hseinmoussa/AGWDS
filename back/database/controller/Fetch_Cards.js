@@ -5,7 +5,7 @@ exports.Fetch_Cards = async function (req, res) {
     Schema.cards
       .find(function (err, data) {
         if (err) console.log("Somthing went wrong!");
-        else console.log("a");
+        else console.log("ok");
       })
       .then((data) => {
         res.json({ message: data });
@@ -17,7 +17,6 @@ exports.Fetch_Cards = async function (req, res) {
 
 exports.Fetch_Cards_By_Views = async function (req, res) {
   try {
-    console.log(11111111);
     Schema.cards
       .find({})
       .sort({ Views: "desc" })
@@ -34,7 +33,6 @@ exports.Fetch_Cards_By_Views = async function (req, res) {
 };
 exports.Fetch_Cards_By_Views2 = async function (req, res) {
   try {
-    console.log(11111111);
     Schema.cards
       .find({})
       .sort("Views")

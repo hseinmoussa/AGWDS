@@ -25,6 +25,7 @@ const Try = require("./database/controller/Try.js");
 var cors = require("cors");
 app.use(cors());
 app.use(cookieParser());
+
 app.use(
   bodyParser.urlencoded({
     extended: false,
@@ -52,7 +53,7 @@ const port = process.env.PORT || 3001;
 
 app.post("/Fetch_Social", [Fetch_Social.Fetch_Social]);
 
-app.post("/NewAdmin", [auth, New_Admin_Controller.New_Admin_Controller]);
+app.post("/NewAdmin", auth, New_Admin_Controller.New_Admin_Controller);
 app.post("/login", [isPasswordAndUserMatch.isPasswordAndUserMatch]);
 app.put("/Update_Contact", [Update_Contact.Update_Contact]);
 

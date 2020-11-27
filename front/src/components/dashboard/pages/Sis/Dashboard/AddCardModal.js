@@ -2,7 +2,6 @@ import React, { useState, memo, useRef, useEffect } from "react";
 import Modal from "styled-react-modal";
 
 import { Form } from "../../../components/Form";
-import Alert from "../../../components/Alert";
 import { FiCheckCircle, FiX } from "react-icons/fi";
 import Cookies from "universal-cookie";
 
@@ -111,7 +110,6 @@ const StyledModal = Modal.styled`
 `;
 
 function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
-  const [error, setError] = useState(false);
   const reference = useRef(null);
   const [sub, setSub] = useState(0);
 
@@ -139,14 +137,12 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
 
   function handleSubmit(e) {
     // alert(JSON.stringify(data))
-
     add();
     e.preventDefault();
     submit();
   }
 
   const add = () => {
-    const cookies = new Cookies();
     try {
       const body = new FormData();
       body.append("Title", data.Title);
