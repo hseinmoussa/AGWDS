@@ -24,6 +24,7 @@ const auth = (req, res, next) => {
   
   //shadi
      var token = req.headers.cookie.slice(6,);
+     console.log(req.cookies.token,req.cookies.email)
   if (!token)
     return res.status(401).send({
       status: 401,

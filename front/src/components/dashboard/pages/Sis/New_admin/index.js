@@ -35,6 +35,8 @@ class CardsPage extends React.Component {
     this.state = {
       Email: "",
       Password: "",
+      FirstName:"",
+      LastName:"",
       Updated: false,
       disab: true,
       click: false,
@@ -48,6 +50,12 @@ class CardsPage extends React.Component {
       case "email":
         this.setState({ Email: event.target.value });
         break;
+        case "FirstName":
+          this.setState({ FirstName: event.target.value });
+          break;
+          case "LastName":
+            this.setState({ LastName: event.target.value });
+            break;
       case "pass":
         this.setState({ Password: event.target.value }, () => {
           if (this.state.Password == this.state.VerifyPass) {
@@ -92,7 +100,8 @@ class CardsPage extends React.Component {
               email: this.state.Email,
               password: this.state.Password,
               verifypassword: this.state.VerifyPass,
-              
+              FirstName:this.state.FirstName,
+              LastName:this.state.LastName,
             }),
           })
             .then((res) => {
@@ -133,6 +142,24 @@ class CardsPage extends React.Component {
                       id="email"
                       type="email"
                       name="Your New Email Address : "
+                      onChange={this.handleChange}
+                      required={true}
+                    />
+                  </div>
+                  <div className="input-block">
+                    <Label_Input
+                      id="FirstName"
+                      type="text"
+                      name="Your First Name : "
+                      onChange={this.handleChange}
+                      required={true}
+                    />
+                  </div>
+                  <div className="input-block">
+                    <Label_Input
+                      id="LastName"
+                      type="text"
+                      name="Your Last Name : "
                       onChange={this.handleChange}
                       required={true}
                     />

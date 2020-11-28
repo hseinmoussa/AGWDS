@@ -18,17 +18,9 @@ exports.Update_Contact = async function (req, res) {
     if (req.body.LastName && req.body.LastName != "") {
       Update_To.LastName = req.body.LastName;
     }
-    if (req.body.DOB && req.body.DOB != "") {
-      Update_To.DOB = req.body.DOB;
-    }
-    if (req.body.address && req.body.address != "") {
-      Update_To.address = req.body.address;
-    }
-    if (req.body.tel && req.body.tel != "") {
-      Update_To.tel = req.body.tel;
-    }
     if (req.body.email && req.body.email != "") {
       Update_To.email = req.body.email;
+      Update_To._id = req.body.email;
     }
     if (req.body.facebook && req.body.facebook != "") {
       social.facebook = req.body.facebook;
@@ -46,13 +38,13 @@ exports.Update_Contact = async function (req, res) {
       social.linkedin = req.body.linkedin;
     }
 
-    //String to StringObject
 
-    Schema.contact.update(
+    Schema.users.update(
       { email: `${req.body.OldEmail}` },
       Update_To,
       function (err, result) {
         if (err) {
+          console.log(err)
           res.send(err);
         } else {
           console.log("ok");

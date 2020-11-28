@@ -39,6 +39,8 @@ exports.New_Admin_Controller = async function (req, res) {
         _id: test_input(req.body.email),
         email: test_input(req.body.email),
         password: test_input(hashedPassword),
+        FirstName:req.body.FirstName,
+        LastName:req.body.LastName,
       };
       const admin = new Schema.users(newAdmin);
       await admin

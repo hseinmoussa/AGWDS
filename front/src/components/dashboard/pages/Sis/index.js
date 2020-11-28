@@ -18,14 +18,18 @@ export default function Sis() {
   const [admin, setAdmin] = useState("");
   useEffect(() => {
     try {
+      console.log("tryyyyyyyyyyyyy")
       fetch("http://localhost:3001/Contact", {
         method: "post",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({}),
       })
         .then((res) => res.json())
         .then((json) =>
+        {console.log(json,111111111111111111)
           setAdmin(json.message.FirstName + " " + json.message.LastName)
+        }
         );
     } catch (err) {
       console.log(err);

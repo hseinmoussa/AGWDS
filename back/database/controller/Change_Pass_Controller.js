@@ -28,6 +28,7 @@ exports.Change_Pass = async function (req, res) {
     return data;
   }
     const userEmail = parseJwt(req.headers.cookie.slice(6,))._id
+    console.log(parseJwt(req.headers.cookie.slice(6,)))
     // console.log(userEmail)
   const transporter = nodemailer.createTransport({
     host: "smtp.mailspons.com",
