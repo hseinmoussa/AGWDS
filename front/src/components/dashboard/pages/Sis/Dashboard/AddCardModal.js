@@ -5,6 +5,7 @@ import { Form } from "../../../components/Form";
 import { FiCheckCircle, FiX } from "react-icons/fi";
 import Cookies from "universal-cookie";
 
+const cookies = new Cookies();
 const StyledModal = Modal.styled`
 
     max-width: 600px;
@@ -153,6 +154,10 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
       console.log(data);
       fetch("http://localhost:3001/AddCard", {
         method: "post",
+        credentials: "include",
+        headers: {
+          token: cookies.get("token"),
+        },
         body: body,
       })
         .then((res) => res.json())

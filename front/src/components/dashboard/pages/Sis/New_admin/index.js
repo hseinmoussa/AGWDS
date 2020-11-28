@@ -7,7 +7,8 @@ import { Card } from "../../../components/Card";
 import { Button } from "../../../components/Button";
 import Label_Input from "../Label_Input.js";
 import { Form } from "../../../components/Form";
-
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 class CardsPage extends React.Component {
   constructor() {
     super();
@@ -60,12 +61,17 @@ class CardsPage extends React.Component {
         try {
           fetch("http://localhost:3001/NewAdmin", {
             method: "post",
-            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+              token: cookies.get("token"),
+            },
             body: JSON.stringify({
               _id: this.state.Email,
               email: this.state.Email,
               password: this.state.Password,
               verifypassword: this.state.VerifyPass,
+              token: cookies.get("token"),
             }),
           })
             .then((res) => {
