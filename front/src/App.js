@@ -7,7 +7,6 @@ import Cardsbox from "./components/Cardsbox/Cardsbox";
 import LoginPage from "./components/LoginPage/login";
 import Footer from "./components/Footer/Footer.js";
 import Routes from "./components/dashboard/routes";
-import Protection from "./components/LoginPage/Protection";
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,6 +15,9 @@ import {
   Redirect,
 } from "react-router-dom";
 import Cookies from "universal-cookie";
+
+import Protection from './components/LoginPage/Protection';
+import NotFound from './components/Not_Found/NotFound'
 
 const Dashboard = () => <Routes />;
 const cookies = new Cookies();
@@ -29,20 +31,21 @@ class App extends React.Component {
         <Link to="/dashboard">dashboard </Link>
         <a href="/login">login </a>
 
-        <div className="App">
-          <Navbar />
-          <Switch>
-            <Route exact path="/">
-              <Cardsbox />
-            </Route>
-            <Route path="/about">
-              <Aboutus />
-              <AS1 />
-            </Route>
-            <Protection path="/dashboard">
-              <Dashboard />
-            </Protection>
-            <Route path="/login">
+        
+          <div className="App">
+            <Navbar />
+            <Switch>
+              <Route exact path="/">
+                <Cardsbox />
+              </Route>
+              <Route path="/about">
+                <Aboutus />
+                <AS1 />
+              </Route>
+              <Protection path="/dashboard" >
+                <Dashboard />
+              </Protection>
+             <Route path="/login">
               {!cookies.get("token") ? (
                 <>
                   <LoginPage />
@@ -56,9 +59,10 @@ class App extends React.Component {
                 />
               )}
             </Route>
-          </Switch>
-        </div>
-
+              <Route> <NotFound /></Route>
+            </Switch>
+          </div>
+       
         <Footer />
       </Router>
     );

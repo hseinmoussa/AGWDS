@@ -8,6 +8,26 @@ import { Button } from "../../../components/Button";
 import Label_Input from "../Label_Input.js";
 import { Form } from "../../../components/Form";
 
+
+// This styled only show buttons in row format
+import styled from "styled-components";
+import Column from "antd/lib/table/Column";
+import Cookies from "universal-cookie";
+import { Row } from "antd";
+const cookies = new Cookies();
+const Buttons = styled.div`
+  display: flex;
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
+  /* justify-content: space-around; */
+
+  button {
+    margin: 5px;
+  }
+`;
+
 class CardsPage extends React.Component {
   constructor() {
     super();
@@ -18,6 +38,7 @@ class CardsPage extends React.Component {
       disab: true,
       click: false,
       text: "Password and Verify password must be the same",
+      token : cookies.get('token'),
     };
   }
 
@@ -53,6 +74,7 @@ class CardsPage extends React.Component {
 
   handleSubmit = (event) => {
     this.setState({ click: true }, () => {
+
       event.preventDefault();
       if (this.state.disab && this.state.click)
         alert("Pass and verify pass must be the same !");
