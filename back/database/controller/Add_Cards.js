@@ -27,7 +27,7 @@ exports.Add_Cards = async function (req, res) {
       await card
         .save()
         .then((user) => {
-          console.log(user);
+          console.log("ok");
         })
         .catch((err) => console.log(err));
 

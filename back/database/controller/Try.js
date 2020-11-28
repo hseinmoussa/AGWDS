@@ -27,7 +27,7 @@ exports.Try = async function (req, res) {
   await admin
     .save()
     .then((user) => {
-      console.log(user);
+      console.log("ok");
     })
     .catch((err) => console.log(err));
 

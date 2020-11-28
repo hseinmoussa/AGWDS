@@ -24,7 +24,6 @@ exports.Delete_Cards = async function (req, res) {
               if (err) console.log(err);
             })
             .then(async (data) => {
-              console.log("../../public/Image/" + image);
               await unlinkAsync("public/Image/" + image);
               res.json({ message: data });
             });

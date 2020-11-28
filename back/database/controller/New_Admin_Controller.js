@@ -40,12 +40,11 @@ exports.New_Admin_Controller = async function (req, res) {
         email: test_input(req.body.email),
         password: test_input(hashedPassword),
       };
-      //const admin = new Admin(newAdmin);
       const admin = new Schema.users(newAdmin);
       await admin
         .save()
         .then((user) => {
-          console.log(user);
+          console.log("ok");
         })
         .catch((err) => console.log(err));
 

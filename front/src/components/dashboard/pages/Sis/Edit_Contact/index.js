@@ -31,7 +31,6 @@ class FormsPage extends React.Component {
   }
 
   handleChange = (event) => {
-    //console.log(event.target.name, event.target.value);
     switch (event.target.name) {
       case "Your old Email : ":
         this.setState({ OldEmail: event.target.value });
@@ -78,7 +77,7 @@ class FormsPage extends React.Component {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        token: cookies.get("token"),
+      
       },
       body: JSON.stringify({
         OldEmail: this.state.OldEmail,

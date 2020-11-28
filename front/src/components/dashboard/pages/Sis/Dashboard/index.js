@@ -49,7 +49,7 @@ export default function Dashboard() {
     if (sort == "") var url = "http://localhost:3001/Cards";
     else var url = "http://localhost:3001/CardsByViews";
     try {
-      console.log(arr);
+      
       fetch(url, {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -70,7 +70,7 @@ export default function Dashboard() {
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
-            token: cookies.get("token"),
+           
           },
           body: JSON.stringify({
             _id: _id,
@@ -79,7 +79,7 @@ export default function Dashboard() {
           .then((res) => res.json())
           .then((json) => {
             setArray2(arr + 1);
-            console.log(arr);
+           
           });
     } catch (err) {
       console.log(err);

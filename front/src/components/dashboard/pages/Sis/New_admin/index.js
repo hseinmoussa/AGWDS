@@ -44,7 +44,6 @@ class CardsPage extends React.Component {
   }
 
   handleChange = (event) => {
-    //console.log(event.target.name, event.target.value);
     switch (event.target.id) {
       case "email":
         this.setState({ Email: event.target.value });
@@ -86,14 +85,14 @@ class CardsPage extends React.Component {
             credentials: "include",
             headers: {
               "Content-Type": "application/json",
-              token: cookies.get("token"),
+              
             },
             body: JSON.stringify({
               _id: this.state.Email,
               email: this.state.Email,
               password: this.state.Password,
               verifypassword: this.state.VerifyPass,
-              token: cookies.get("token"),
+              
             }),
           })
             .then((res) => {

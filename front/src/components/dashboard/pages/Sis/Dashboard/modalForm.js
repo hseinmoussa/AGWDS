@@ -125,7 +125,7 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
   function handleInputChange(e) {
     const { value, name } = e.target;
     if (name == "Image") {
-      console.log(e.target.files[0]);
+      
       setData({
         ...data,
         [name]: e.target.files[0],
@@ -153,7 +153,7 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
 
         headers: {
           "Content-Type": "application/json",
-          token: cookies.get("token"),
+         
         },
         body: JSON.stringify({ _id: _id }),
       })
@@ -184,9 +184,7 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
       fetch("http://localhost:3001/EditCard", {
         method: "post",
         credentials: "include",
-        headers: {
-          token: cookies.get("token"),
-        },
+     
         body: body,
       })
         .then((res) => res.json())

@@ -53,7 +53,7 @@ const LoginPage = () => {
         })
         .then((json) => {
           if (json.status === 400) {
-            console.log(json);
+            console.log("ok");
           }
 
           if (json.errors) {

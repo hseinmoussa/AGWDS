@@ -124,7 +124,7 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
   function handleInputChange(e) {
     const { value, name } = e.target;
     if (name == "Image") {
-      console.log(e.target.files[0]);
+      
       setData({
         ...data,
         [name]: e.target.files[0],
@@ -155,11 +155,9 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
       fetch("http://localhost:3001/AddCard", {
         method: "post",
         credentials: "include",
-        headers: {
-          token: cookies.get("token"),
-        },
+       
         body: body,
-        credentials: "include"
+        
       })
         .then((res) => res.json())
         .then((json) => {

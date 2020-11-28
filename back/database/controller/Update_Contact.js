@@ -46,7 +46,6 @@ exports.Update_Contact = async function (req, res) {
       social.linkedin = req.body.linkedin;
     }
 
-    console.log(social);
     //String to StringObject
 
     Schema.contact.update(
@@ -56,7 +55,7 @@ exports.Update_Contact = async function (req, res) {
         if (err) {
           res.send(err);
         } else {
-          console.log(req.body.OldEmail);
+          console.log("ok");
         }
       }
     );
