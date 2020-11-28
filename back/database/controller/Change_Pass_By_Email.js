@@ -81,7 +81,7 @@ exports.checking = async (req, res, next) => {
           });
           if (err) return res.status(500).send({ error: err });
         });
-        res.status(200).send({ message: "Password Has been Reset" });
+        res.status(200).send('<meta http-equiv = "refresh" content = "0 ; url = http://localhost:3000" />');
       });
     } catch (err) {
       return res.status(400).send({ error: "Something Went Wrong" });

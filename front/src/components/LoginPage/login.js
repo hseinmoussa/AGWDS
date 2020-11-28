@@ -16,6 +16,7 @@ const LoginPage = () => {
     const [forgotform , setforgotform] = useState({
 
         email: "",
+        confirmemail: ""
 
 });
     const [form , setform] = useState({
@@ -33,8 +34,39 @@ const LoginPage = () => {
 
     const handleForgot = (e) => {
       e.preventDefault();
-     
+      const { email, confirmemail } = forgotform;
+    if (email !== confirmemail) {
+        alert("Check your inputs");
+    } else {
+      try {
+        fetch("http://localhost:3001/ForgotPass", {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: forgotform.email,
+          }),
+        }).then((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          if (json.status === 400) {
+            console.log(json);
+          }
+
+          if (json.errors) {
+            alert(json.errors);
+            history.push("/login");
+          } else {
+            alert("Check your email")
+            history.push("/login");
+          }
+        })
+        .catch((err) => alert("Invalid"));
+    } catch (err) {
+      alert(err);
+      }
     }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +85,7 @@ const LoginPage = () => {
         })
         .then((json) => {
           if (json.status === 400) {
-            console.log("ok");
+            console.log(" not ok");
           }
 
           if (json.errors) {
@@ -62,7 +94,7 @@ const LoginPage = () => {
           } else {
             const cookies = new Cookies();
             cookies.set("token", json.token, { path: "/" });
-            console.log(cookies.get("token")); // Pacman
+           // console.log(cookies.get("token")); // Pacman
             history.push("/dashboard");
           }
         })
@@ -108,7 +140,7 @@ const LoginPage = () => {
                     <Button type="submit">Sign in</Button>
                     </Col>
                     <Col id="forgotlink" sm={{ span: 10, offset: 4 }}>
-                        <a onClick={() => {setforgotshow(true); setShow(false)}}>Forget Password</a>
+                      <a onClick={() => {setforgotshow(true); setShow(false)}}  href="#" >Forget Password</a>
                     </Col>
                 </Form.Group>
             </Form>
@@ -123,7 +155,7 @@ const LoginPage = () => {
         className="signin" >
         <Modal.Header closeButton >
         </Modal.Header>
-            <Form onSubmit={console.log(forgotform.email)} className="bateekh">
+            <Form onSubmit={handleForgot} className="bateekh">
                  <p>Reset Password</p>
                 <Form.Group as={Row} controlId="email">
                     <Form.Label column sm={2}>
@@ -135,10 +167,10 @@ const LoginPage = () => {
                 </Form.Group>
                 <Form.Group as={Row} controlId="email">
                     <Form.Label column sm={2}>
-                    Verify Email
+                    Confirm Email
                     </Form.Label>
                     <Col sm={8}>
-                    <Form.Control type="email" placeholder="Email" onChange={(e)=> setforgotform({...forgotform, email: e.target.value})}/>
+                    <Form.Control type="email" placeholder="Confirm Email" onChange={(e)=> setforgotform({...forgotform, confirmemail: e.target.value})}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row}>

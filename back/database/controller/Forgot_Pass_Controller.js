@@ -37,7 +37,21 @@ exports.Forgot_Pass = async function (req, res) {
           transporter.sendMail({
             to: req.body.email,
             subject: "Confirm Email",
-            html: `Please click this link to change your password: <a href="${url}">${url}</a>`,
+            html: `Please click on Reset to Reset your password:
+                    <style>
+                      a {
+                        font: bold 11px Arial;
+                        text-decoration: none;
+                        background-color: #EEEEEE;
+                        color: #333333;
+                        padding: 2px 6px 2px 6px;
+                        border-top: 1px solid #CCCCCC;
+                        border-right: 1px solid #333333;
+                        border-bottom: 1px solid #333333;
+                        border-left: 1px solid #CCCCCC;
+                      }
+                    </style>
+                    <a href="${url}">Reset</a>`
           });
           if (err) return res.status(500).send({ error: err });
         }
