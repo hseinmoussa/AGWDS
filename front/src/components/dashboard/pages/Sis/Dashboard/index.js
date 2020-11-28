@@ -3,10 +3,7 @@ import React, { useEffect, useState, Suspense, lazy } from "react";
 import { ModalProvider } from "styled-react-modal";
 import ReactPaginate from "react-paginate";
 
-// Icons
-import { FiCalendar, FiMessageCircle, FiLogOut, FiUsers } from "react-icons/fi";
-
-import { CardDashboard, Card } from "../../../components/Card";
+import { Card } from "../../../components/Card";
 import { Table } from "../../../components/Table";
 import { Button } from "react-bootstrap";
 let ModalForm = () => <></>;
@@ -34,12 +31,12 @@ export default function Dashboard() {
   }
 
   function submitModalForm() {
-    alert("this form was submited");
+    // alert("this form was submited");
 
     setOpenForm(!OpenForm);
   }
   function submitModalForm2() {
-    alert("New Card Added");
+    // alert("New Card Added");
 
     setOpenForm2(!OpenForm2);
   }
@@ -134,7 +131,6 @@ export default function Dashboard() {
                 <button
                   className="info"
                   onClick={() => {
-                    console.log(11);
                     toggleModalForm2();
                   }}
                 >

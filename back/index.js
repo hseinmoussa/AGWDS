@@ -24,6 +24,7 @@ const Try = require("./database/controller/Try.js");
 
 var cors = require("cors");
 const corsOptions = {
+
   origin: 'http://localhost:3000',
   credentials: true
 }
@@ -56,9 +57,9 @@ const port = process.env.PORT || 3001;
 
 app.post("/Fetch_Social", [Fetch_Social.Fetch_Social]);
 
-app.post("/NewAdmin", [auth, New_Admin_Controller.New_Admin_Controller]);
+app.post("/NewAdmin", auth, New_Admin_Controller.New_Admin_Controller);
 app.post("/login", [isPasswordAndUserMatch.isPasswordAndUserMatch]);
-app.put("/Update_Contact", [Update_Contact.Update_Contact]);
+app.put("/Update_Contact", auth, Update_Contact.Update_Contact);
 
 //app.get("/NewAdmin", New_Admin_Controller.New_Admin_Controller);
 app.get("/checking/:id", [Change_Pass_By_Email.checking]);
@@ -69,11 +70,12 @@ app.post("/Contact", Fetch_Contact.Fetch_Contact);
 app.post("/Cards", Fetch_Cards.Fetch_Cards);
 app.post("/CardsByViews", Fetch_Cards.Fetch_Cards_By_Views);
 
+
 app.post("/AddCard", upload.single("Image"), [ auth, Add_Cards.Add_Cards]);
 
-app.post("/DeleteCard", Delete_Cards.Delete_Cards);
-app.post("/EditCard", upload.single("Image"), Edit_Card.Edit_Card);
-app.post("/SearchCard", Search_Card.Search_Card);
+app.post("/DeleteCard", auth, Delete_Cards.Delete_Cards);
+app.post("/EditCard", auth, upload.single("Image"), Edit_Card.Edit_Card);
+app.post("/SearchCard", auth, Search_Card.Search_Card);
 
 //Try
 app.get("/Try", Try.Try);

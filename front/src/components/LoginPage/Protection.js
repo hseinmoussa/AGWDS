@@ -1,20 +1,20 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 
 const ProtectedRoute = ({ children, ...rest }) => {
-    const cookies = new Cookies();
+  const cookies = new Cookies();
   return (
     <Route
       {...rest}
       render={({ location }) =>
-      cookies.get('token') ? (
+        cookies.get("token") ? (
           children
         ) : (
           <Redirect
             to={{
               pathname: "/login",
-              state: { from: location }
+              state: { from: location },
             }}
           />
         )

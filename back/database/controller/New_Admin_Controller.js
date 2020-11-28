@@ -12,36 +12,51 @@ exports.New_Admin_Controller = async function (req, res) {
   }
 
   try {
-    //console.log(test_input("hh<htm   l>  ////0 &  "));
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    if (req.body.password != req.body.verifypassword) {
-      console.log(1);
+    if (
+      req.body._id == undefined ||
+      req.body._id == "" ||
+      req.body.email == undefined ||
+      req.body.email == "" ||
+      req.body.password == undefined ||
+      req.body.password == "" ||
+      req.body.verifypassword == undefined ||
+      req.body.verifypassword == ""
+    )
       return res.json({
         status: 401,
-        message: "Pass and Verify Pass must be the same",
+        message: "Please fill out all the fields",
       });
-    }
-    var newAdmin = {
-      _id: test_input(req.body.email),
-      email: test_input(req.body.email),
-      password: test_input(hashedPassword),
-    };
-    //const admin = new Admin(newAdmin);
-    const admin = new Schema.users(newAdmin);
-    await admin
-      .save()
-      .then((user) => {
-        console.log(user);
-      })
-      .catch((err) => console.log(err));
+    else {
+      //console.log(test_input("hh<htm   l>  ////0 &  "));
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      if (req.body.password != req.body.verifypassword) {
+        return res.json({
+          status: 401,
+          message: "Pass and Verify Pass must be the same",
+        });
+      }
+      var newAdmin = {
+        _id: test_input(req.body.email),
+        email: test_input(req.body.email),
+        password: test_input(hashedPassword),
+      };
+      //const admin = new Admin(newAdmin);
+      const admin = new Schema.users(newAdmin);
+      await admin
+        .save()
+        .then((user) => {
+          console.log(user);
+        })
+        .catch((err) => console.log(err));
 
-    Schema.users
-      .find(function (err, data) {
-        if (err) console.log("Somthing went wrong!");
-      })
-      .then((admin) => {
-        res.json({ status: 200, message: admin });
-      });
+      Schema.users
+        .find(function (err, data) {
+          if (err) console.log("Somthing went wrong!");
+        })
+        .then((admin) => {
+          res.json({ status: 200, message: admin });
+        });
+    }
   } catch (err) {
     console.log(err);
   }

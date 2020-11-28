@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 
 // Styled
 import { Side } from "./styles";
@@ -9,7 +9,6 @@ import { Side } from "./styles";
 //import { logout } from "../../../services/auth";
 
 // Logo
-import Logo from "../../../assets/img/kadoo.png";
 
 // Icons
 import { FiLogOut } from "react-icons/fi";
@@ -63,9 +62,7 @@ function Sidebar({ drag, handleChange, activeMenu, itensMenu, dispatch }) {
         <li>
           <a
             onClick={() => {
-              
-              cookies.remove('token', { path: '/' });
-
+              cookies.remove("token", { path: "/" });
             }}
             href={`/`}
           >

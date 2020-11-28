@@ -7,11 +7,20 @@ import Cardsbox from "./components/Cardsbox/Cardsbox";
 import LoginPage from "./components/LoginPage/login";
 import Footer from "./components/Footer/Footer.js";
 import Routes from "./components/dashboard/routes";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
+import Cookies from "universal-cookie";
+
 import Protection from './components/LoginPage/Protection';
 import NotFound from './components/Not_Found/NotFound'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const Dashboard = () => <Routes />;
+const cookies = new Cookies();
 
 class App extends React.Component {
   render() {
@@ -21,6 +30,7 @@ class App extends React.Component {
         <Link to="/about">about </Link>
         <Link to="/dashboard">dashboard </Link>
         <a href="/login">login </a>
+
         
           <div className="App">
             <Navbar />
@@ -35,10 +45,20 @@ class App extends React.Component {
               <Protection path="/dashboard" >
                 <Dashboard />
               </Protection>
-              <Route path="/login">
-                <LoginPage />
-                <Cardsbox />
-              </Route>
+             <Route path="/login">
+              {!cookies.get("token") ? (
+                <>
+                  <LoginPage />
+                  <Cardsbox />
+                </>
+              ) : (
+                <Redirect
+                  to={{
+                    pathname: "/dashboard",
+                  }}
+                />
+              )}
+            </Route>
               <Route> <NotFound /></Route>
             </Switch>
           </div>
