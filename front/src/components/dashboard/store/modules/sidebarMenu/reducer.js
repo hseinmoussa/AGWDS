@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   },
   itens: [
     {
-      name: "Dashboard",
+      name: "Manage Cards",
       icon: <FiHome />,
       path: "/dashboard",
     },
@@ -21,9 +21,14 @@ const INITIAL_STATE = {
       path: "/cards",
     },
     {
-      name: "Forms",
+      name: "Edit Contact",
       icon: <FiPhoneForwarded />,
       path: "/forms",
+    },
+    {
+      name: "Change Password",
+      icon: <FiPhoneForwarded />,
+      path: "/Change",
     },
   ],
 };
