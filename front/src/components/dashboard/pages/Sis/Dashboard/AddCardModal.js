@@ -158,6 +158,7 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
       fetch("http://localhost:3001/AddCard", {
         method: "post",
         body: body,
+        credentials: "include"
       })
         .then((res) => res.json())
         .then((json) => {

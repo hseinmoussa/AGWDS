@@ -8,6 +8,7 @@ import LoginPage from "./components/LoginPage/login";
 import Footer from "./components/Footer/Footer.js";
 import Routes from "./components/dashboard/routes";
 import Protection from './components/LoginPage/Protection';
+import NotFound from './components/Not_Found/NotFound'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const Dashboard = () => <Routes />;
@@ -38,6 +39,7 @@ class App extends React.Component {
                 <LoginPage />
                 <Cardsbox />
               </Route>
+              <Route> <NotFound /></Route>
             </Switch>
           </div>
        

@@ -11,7 +11,9 @@ import { Form } from "../../../components/Form";
 // This styled only show buttons in row format
 import styled from "styled-components";
 import Column from "antd/lib/table/Column";
+import Cookies from "universal-cookie";
 import { Row } from "antd";
+const cookies = new Cookies();
 const Buttons = styled.div`
   display: flex;
 
@@ -35,6 +37,7 @@ class CardsPage extends React.Component {
       disab: true,
       click: false,
       text: "Password and Verify password must be the same",
+      token : cookies.get('token'),
     };
   }
 
@@ -74,6 +77,7 @@ class CardsPage extends React.Component {
     try {
       fetch("http://localhost:3001/NewAdmin", {
         method: "post",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           _id: this.state.Email,
