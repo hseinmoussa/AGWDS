@@ -9,18 +9,32 @@ import CookieConsent from "react-cookie-consent";
 import "./login.css";
 
 const LoginPage = () => {
-  const [show, setShow] = useState(true);
-  const [form, setform] = useState({
-    email: "",
-    password: "",
-  });
-  const cookieEnabled = navigator.cookieEnabled;
-  let history = useHistory();
 
-  if (!cookieEnabled) {
-    alert("ENABLE YOUR GOD DAMN COOOKIES!");
-  }
-  useEffect(() => {});
+  
+    const [show, setShow] = useState(true);
+    const [forgotshow, setforgotshow] = useState(false);
+    const [forgotform , setforgotform] = useState({
+
+        email: "",
+
+});
+    const [form , setform] = useState({
+
+            email: "",
+            password: "",
+
+    });
+    const cookieEnabled = navigator.cookieEnabled;
+    let history = useHistory();
+
+    if (!cookieEnabled){
+      alert("ENABLE YOUR GOD DAMN COOOKIES!")
+    }
+
+    const handleForgot = (e) => {
+      e.preventDefault();
+     
+    }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,52 +79,80 @@ const LoginPage = () => {
         onHide={() => setShow(false)}
         size="xl"
         aria-labelledby="example-modal-sizes-title-lg"
-        className="signin"
-      >
-        <Modal.Header closeButton></Modal.Header>
-        <Form onSubmit={handleSubmit} className="bateekh">
-          <p>Sign In</p>
-          <Form.Group as={Row} controlId="email">
-            <Form.Label column sm={2}>
-              Email
-            </Form.Label>
-            <Col sm={8}>
-              <Form.Control
-                type="email"
-                placeholder="Email"
-                onChange={(e) => setform({ ...form, email: e.target.value })}
-              />
-            </Col>
-          </Form.Group>
 
-          <Form.Group as={Row} controlId="password">
-            <Form.Label column sm={2}>
-              Password
-            </Form.Label>
-            <Col sm={8}>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                onChange={(e) => setform({ ...form, password: e.target.value })}
-              />
-            </Col>
-          </Form.Group>
+        className="signin" >
+        <Modal.Header closeButton >
+        </Modal.Header>
+            <Form onSubmit={handleSubmit} className="bateekh">
+                 <p>Sign In</p>
+                <Form.Group as={Row} controlId="email">
+                    <Form.Label column sm={2}>
+                    Email
+                    </Form.Label>
+                    <Col sm={8}>
+                    <Form.Control type="email" placeholder="Email" onChange={(e)=> setform({...form, email: e.target.value})}/>
+                    </Col>
+                </Form.Group>
 
-          <Form.Group as={Row}>
-            <Col sm={{ span: 20, offset: 5 }}>
-              <Button type="submit">Sign in</Button>
-            </Col>
-            <Col id="forgotlink" sm={{ span: 10, offset: 4 }}>
-              <a href="/login">Forget Password</a>
-            </Col>
-          </Form.Group>
-        </Form>
-        <CookieConsent>
-          This website uses cookies to enhance the user experience.
-        </CookieConsent>
-      </Modal>
-    </div>
-  );
-};
+                <Form.Group as={Row} controlId="password">
+                    <Form.Label column sm={2}>
+                    Password
+                    </Form.Label>
+                    <Col sm={8}>
+                    <Form.Control type="password" placeholder="Password" onChange={(e)=> setform({...form, password: e.target.value})}/>
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row}>
+                    <Col sm={{ span: 20, offset: 5 }}>
+                    <Button type="submit">Sign in</Button>
+                    </Col>
+                    <Col id="forgotlink" sm={{ span: 10, offset: 4 }}>
+                        <a onClick={() => {setforgotshow(true); setShow(false)}}>Forget Password</a>
+                    </Col>
+                </Form.Group>
+            </Form>
+            <CookieConsent>This website uses cookies to enhance the user experience.</CookieConsent>
+          </Modal>
+
+          <Modal
+        show={forgotshow}
+        onHide={() => setforgotshow(false)}
+        size="xl"
+        aria-labelledby="example-modal-sizes-title-lg"
+        className="signin" >
+        <Modal.Header closeButton >
+        </Modal.Header>
+            <Form onSubmit={console.log(forgotform.email)} className="bateekh">
+                 <p>Reset Password</p>
+                <Form.Group as={Row} controlId="email">
+                    <Form.Label column sm={2}>
+                    Email
+                    </Form.Label>
+                    <Col sm={8}>
+                    <Form.Control type="email" placeholder="Email" onChange={(e)=> setforgotform({...forgotform, email: e.target.value})}/>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} controlId="email">
+                    <Form.Label column sm={2}>
+                    Verify Email
+                    </Form.Label>
+                    <Col sm={8}>
+                    <Form.Control type="email" placeholder="Email" onChange={(e)=> setforgotform({...forgotform, email: e.target.value})}/>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row}>
+                    <Col sm={{ span: 20, offset: 5 }}>
+                    <Button type="submit">Reset</Button>
+                    </Col>
+                </Form.Group>
+            </Form>
+          </Modal>
+        </div>
+    )
+
+}
+
+  
 
 export default LoginPage;

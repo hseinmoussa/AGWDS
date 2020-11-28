@@ -159,6 +159,7 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
           token: cookies.get("token"),
         },
         body: body,
+        credentials: "include"
       })
         .then((res) => res.json())
         .then((json) => {

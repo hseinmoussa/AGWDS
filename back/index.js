@@ -24,9 +24,10 @@ const Try = require("./database/controller/Try.js");
 
 var cors = require("cors");
 const corsOptions = {
-  origin: "http://localhost:3000",
-  credentials: true,
-};
+
+  origin: 'http://localhost:3000',
+  credentials: true
+}
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(
@@ -69,11 +70,8 @@ app.post("/Contact", Fetch_Contact.Fetch_Contact);
 app.post("/Cards", Fetch_Cards.Fetch_Cards);
 app.post("/CardsByViews", Fetch_Cards.Fetch_Cards_By_Views);
 
-app.post(
-  "/AddCard",
-  [upload.single("Image"), auth],
-  [auth, Add_Cards.Add_Cards]
-);
+
+app.post("/AddCard", upload.single("Image"), [ auth, Add_Cards.Add_Cards]);
 
 app.post("/DeleteCard", auth, Delete_Cards.Delete_Cards);
 app.post("/EditCard", auth, upload.single("Image"), Edit_Card.Edit_Card);
