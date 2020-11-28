@@ -1,7 +1,11 @@
 const Schema = require("../Schema/Schema.js");
+const fs = require("fs");
+const { promisify } = require("util");
 
+const unlinkAsync = promisify(fs.unlink);
 exports.Edit_Card = async function (req, res) {
   try {
+    var image;
     if (
       req.body.Title == undefined ||
       req.body.Title == "" ||
@@ -22,8 +26,19 @@ exports.Edit_Card = async function (req, res) {
         Views: req.body.Views,
         Image: req.file.filename,
       };
+      await Schema.cards
+        .find({ _id: `${req.body._id}` }, (err, docs) => {
+          if (err) {
+            console.log(err);
+          } else {
+          }
+        })
+        .then(async (data) => {
+          image = data[0].Image;
+          await unlinkAsync("public/Image/" + image);
+        });
 
-      Schema.cards.update(
+      await Schema.cards.update(
         { _id: `${req.body._id}` },
         card,
         function (err, result) {

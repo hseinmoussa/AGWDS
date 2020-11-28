@@ -22,7 +22,6 @@ exports.isPasswordAndUserMatch = (req, res, next) => {
         (await bcrypt.compare(req.body.password, user.password))
       ) {
         const token = jwt.sign({ _id: user._id }, envs.TOKEN_SECRET);
-        res.header("token", token);
         //console.log(envs.TOKEN_SECRET);
         //cookies
         res.cookie("token", token, { httpOnly: true });

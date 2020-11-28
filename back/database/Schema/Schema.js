@@ -28,19 +28,19 @@ var contact_schema = new mongoose.Schema({
 
 var social_schema = new mongoose.Schema({
   facebook: {
-    data: String,
+    type: String,
   },
   twitter: {
-    data: String,
+    type: String,
   },
   linkedin: {
-    data: String,
+    type: String,
   },
   gmail: {
-    data: String,
+    type: String,
   },
   github: {
-    data: String,
+    type: String,
   },
 });
 var about_schema = new mongoose.Schema({
