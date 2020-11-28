@@ -46,7 +46,7 @@ const multerStorage = multer.diskStorage({
     const date = Date.now();
     // filename will be: image-1345923023436343-filename.png
     const filename = `${fieldname}-${date}-${originalname}`;
-    console.log(filename);
+   
     cb(null, filename);
   },
 });
