@@ -6,6 +6,9 @@ import ReactPaginate from "react-paginate";
 import { Card } from "../../../components/Card";
 import { Table } from "../../../components/Table";
 import { Button } from "react-bootstrap";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 let ModalForm = () => <></>;
 let AddCardModal = () => <></>;
 export default function Dashboard() {
@@ -61,18 +64,23 @@ export default function Dashboard() {
 
   const del = (_id) => {
     try {
-      fetch("http://localhost:3001/DeleteCard", {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          _id: _id,
-        }),
-      })
-        .then((res) => res.json())
-        .then((json) => {
-          setArray2(arr + 1);
-          console.log(arr);
-        });
+      if (window.confirm("Delete the item?"))
+        fetch("http://localhost:3001/DeleteCard", {
+          method: "post",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            token: cookies.get("token"),
+          },
+          body: JSON.stringify({
+            _id: _id,
+          }),
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            setArray2(arr + 1);
+            console.log(arr);
+          });
     } catch (err) {
       console.log(err);
     }

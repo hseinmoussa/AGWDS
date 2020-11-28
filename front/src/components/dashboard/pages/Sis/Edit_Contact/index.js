@@ -7,9 +7,11 @@ import { FiFile } from "react-icons/fi";
 import { Card } from "../../../components/Card";
 import { Button } from "../../../components/Button";
 import { Form } from "../../../components/Form";
-
+import Cookies from "universal-cookie";
 // This styled only show buttons in row format
 import styled from "styled-components";
+const cookies = new Cookies();
+
 const Buttons = styled.div`
   display: flex;
 
@@ -73,7 +75,11 @@ class FormsPage extends React.Component {
   handleSubmit = (event) => {
     fetch("http://localhost:3001/Update_Contact", {
       method: "put",
-      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        token: cookies.get("token"),
+      },
       body: JSON.stringify({
         OldEmail: this.state.OldEmail,
         FirstName: this.state.FirstName,
@@ -219,7 +225,12 @@ class FormsPage extends React.Component {
           </Form>
         </>
       );
-    else return <div style={{ textAlign: "center" }}>updated successfully</div>;
+    else
+      return (
+        <div style={{ textAlign: "center" }}>
+          {alert("updated successfully")}
+        </div>
+      );
   }
 }
 export default FormsPage;

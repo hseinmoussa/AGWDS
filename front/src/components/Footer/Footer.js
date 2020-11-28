@@ -24,11 +24,11 @@ class Footer extends React.Component {
       .then((res) => res.json())
       .then((json) =>
         this.setState({
-          facebook: json.message.facebook.data,
-          twitter: json.message.twitter.data,
-          gmail: json.message.gmail.data,
-          linkedin: json.message.linkedin.data,
-          github: json.message.github.data,
+          facebook: json.message.facebook,
+          twitter: json.message.twitter,
+          gmail: json.message.gmail,
+          linkedin: json.message.linkedin,
+          github: json.message.github,
         })
       );
   }

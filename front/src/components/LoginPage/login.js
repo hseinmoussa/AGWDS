@@ -1,15 +1,16 @@
 import { React } from "react";
 import { useState, useEffect } from "react";
-import Form from 'react-bootstrap/Form'
-import { Button, Col, Row } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal'
-import Cookies from 'universal-cookie';
+import Form from "react-bootstrap/Form";
+import { Button, Col, Row } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
+import Cookies from "universal-cookie";
 import { useHistory } from "react-router-dom";
 import CookieConsent from "react-cookie-consent";
-import './login.css'
-
+import "./login.css";
 
 const LoginPage = () => {
+
+  
     const [show, setShow] = useState(true);
     const [forgotshow, setforgotshow] = useState(false);
     const [forgotform , setforgotform] = useState({
@@ -35,50 +36,50 @@ const LoginPage = () => {
      
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        try {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
       fetch("http://localhost:3001/login", {
         method: "post",
+
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: form.email,
-          password: form.password
+          password: form.password,
         }),
       })
         .then((res) => {
           return res.json();
         })
         .then((json) => {
-          if (json.status === 400){
-            console.log(json)
+          if (json.status === 400) {
+            console.log(json);
           }
 
-          if(json.errors){
-            alert(json.errors)
-            history.push('/login')
-          }
-          else {
-            
+          if (json.errors) {
+            alert(json.errors);
+            history.push("/login");
+          } else {
             const cookies = new Cookies();
-            cookies.set('token', json.token , { path: '/' });
-            console.log(cookies.get('token')); // Pacman
-            history.push('/dashboard')
-          } 
+            cookies.set("token", json.token, { path: "/" });
+            console.log(cookies.get("token")); // Pacman
+            history.push("/dashboard");
+          }
         })
         .catch((err) => alert("Invalid"));
       e.preventDefault();
     } catch (err) {
       alert(err);
     }
-    }
-    return (
-        <div>
-        <Modal
+  };
+  return (
+    <div>
+      <Modal
         show={show}
         onHide={() => setShow(false)}
         size="xl"
         aria-labelledby="example-modal-sizes-title-lg"
+
         className="signin" >
         <Modal.Header closeButton >
         </Modal.Header>
@@ -152,6 +153,6 @@ const LoginPage = () => {
 
 }
 
-
+  
 
 export default LoginPage;

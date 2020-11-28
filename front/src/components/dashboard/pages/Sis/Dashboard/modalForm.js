@@ -4,7 +4,9 @@ import Modal from "styled-react-modal";
 import { Form } from "../../../components/Form";
 import Alert from "../../../components/Alert";
 import { FiCheckCircle, FiX } from "react-icons/fi";
+import Cookies from "universal-cookie";
 
+const cookies = new Cookies();
 const StyledModal = Modal.styled`
 
     max-width: 600px;
@@ -141,12 +143,18 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
 
     submit();
   }
+
   useEffect(() => {
     try {
       console.log("ok");
       fetch("http://localhost:3001/SearchCard", {
         method: "post",
-        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+
+        headers: {
+          "Content-Type": "application/json",
+          token: cookies.get("token"),
+        },
         body: JSON.stringify({ _id: _id }),
       })
         .then((res) => res.json())
@@ -175,6 +183,10 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
 
       fetch("http://localhost:3001/EditCard", {
         method: "post",
+        credentials: "include",
+        headers: {
+          token: cookies.get("token"),
+        },
         body: body,
       })
         .then((res) => res.json())
