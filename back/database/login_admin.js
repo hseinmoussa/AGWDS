@@ -9,8 +9,8 @@ if (result.error) {
 const { parsed: envs } = result;
 
 exports.isPasswordAndUserMatch = (req, res, next) => {
-  Schema.users.findOne({ email: req.body.email }, async (err, user) => {
-    if (user == undefined) {
+  Schema.users.find({ email: req.body.email }, async (err, user) => {
+    if (user[0] == undefined) {
       return res.status(400).send("Cannot find user");
     }
     try {
@@ -19,9 +19,10 @@ exports.isPasswordAndUserMatch = (req, res, next) => {
         res.status(404).send({ message: "Something Wrong!" });
       } else if (
         user &&
-        (await bcrypt.compare(req.body.password, user.password))
+        (await bcrypt.compare(req.body.password, user[0].password))
       ) {
-        const token = jwt.sign({ _id: user._id }, envs.TOKEN_SECRET);
+        console.log(user)
+        const token = jwt.sign({ _id: user[0]._id }, envs.TOKEN_SECRET);
         //console.log(envs.TOKEN_SECRET);
         //cookies
         res.cookie("token", token, { httpOnly: true });

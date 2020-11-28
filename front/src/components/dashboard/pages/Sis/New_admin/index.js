@@ -96,7 +96,7 @@ class CardsPage extends React.Component {
               
             },
             body: JSON.stringify({
-              _id: this.state.Email,
+             
               email: this.state.Email,
               password: this.state.Password,
               verifypassword: this.state.VerifyPass,

@@ -20,7 +20,7 @@ exports.Update_Contact = async function (req, res) {
     }
     if (req.body.email && req.body.email != "") {
       Update_To.email = req.body.email;
-      Update_To._id = req.body.email;
+    
     }
     if (req.body.facebook && req.body.facebook != "") {
       social.facebook = req.body.facebook;

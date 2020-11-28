@@ -13,8 +13,7 @@ exports.New_Admin_Controller = async function (req, res) {
 
   try {
     if (
-      req.body._id == undefined ||
-      req.body._id == "" ||
+     
       req.body.email == undefined ||
       req.body.email == "" ||
       req.body.password == undefined ||
@@ -36,7 +35,7 @@ exports.New_Admin_Controller = async function (req, res) {
         });
       }
       var newAdmin = {
-        _id: test_input(req.body.email),
+       
         email: test_input(req.body.email),
         password: test_input(hashedPassword),
         FirstName:req.body.FirstName,

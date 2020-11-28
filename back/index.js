@@ -19,6 +19,7 @@ const Add_Cards = require("./database/controller/Add_Cards.js");
 const Delete_Cards = require("./database/controller/Delete_Card.js");
 const Edit_Card = require("./database/controller/Edit_Card.js");
 const Search_Card = require("./database/controller/Search_Card.js");
+const Try = require("./database/controller/Try.js");
 
 
 
@@ -78,6 +79,7 @@ app.post("/EditCard", auth, upload.single("Image"), Edit_Card.Edit_Card);
 app.post("/SearchCard", auth, Search_Card.Search_Card);
 
 //Try
+app.get("/Try", Try.Try);
 
 
 app.listen(port, () => {

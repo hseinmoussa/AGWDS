@@ -4,13 +4,13 @@ const mongoose = require("mongoose");
 //_id is same as email
 var users_schema = new mongoose.Schema(
   {
-    _id: { type: String, required: true },
+   
     email: { type: String, required: true },
     password: { type: String, required: true },
     FirstName: { type: String },
     LastName: { type: String },
   },
-  { versionKey: false }
+  
 );
 var cards_schema = new mongoose.Schema({
   Title: { type: String },
