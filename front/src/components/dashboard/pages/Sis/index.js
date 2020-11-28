@@ -11,6 +11,7 @@ import { Wrap, Main, NavBar } from "./styles";
 const Dashboard = lazy(() => import("./Dashboard"));
 const Cards = lazy(() => import("./New_admin"));
 const Forms = lazy(() => import("./Edit_Contact"));
+const Change = lazy(() => import("./Change_Pass"));
 
 export default function Sis() {
   const [drag, setDrag] = useState(false);
@@ -71,6 +72,7 @@ export default function Sis() {
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/cards" component={Cards} />
                 <Route path="/forms" component={Forms} />
+                <Route path="/Change" component={Change} />
               </Switch>
             </Suspense>
           </div>

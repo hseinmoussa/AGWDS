@@ -10,7 +10,7 @@ const auth = (req, res, next) => {
  //hsein
   //console.log(req.headers.token);
   //shadi
-  console.log(req.headers.cookie.slice(6,))
+ // console.log(req.headers.cookie.slice(6,))
   //With token
   //const token = req.header("token");
 
