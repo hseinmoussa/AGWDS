@@ -21,6 +21,7 @@ const Edit_Card = require("./database/controller/Edit_Card.js");
 const Search_Card = require("./database/controller/Search_Card.js");
 const Fetch_Aboutme = require("./database/controller/Fetch_Aboutme.js");
 const Edit_About = require("./database/controller/Edit_Aboutme.js");
+const Fetch_Admins = require("./database/controller/Fetch_Admins.js");
 
 
 const Try = require("./database/controller/Try.js");
@@ -90,6 +91,7 @@ app.post("/EditCard", auth, upload.single("Image"), Edit_Card.Edit_Card);
 app.post("/SearchCard", auth, Search_Card.Search_Card);
 app.post("/About", Fetch_Aboutme.Fetch_Aboutme);
 app.post("/EditAbout", Edit_About.Edit_About);
+app.post("/AllAdmins", Fetch_Admins.Fetch_Admins);
 
 
 

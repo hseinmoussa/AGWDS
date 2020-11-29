@@ -10,6 +10,9 @@ import { Form } from "../../../components/Form";
 import Cookies from "universal-cookie";
 // This styled only show buttons in row format
 import styled from "styled-components";
+import {
+  Redirect,
+} from "react-router-dom";
 const cookies = new Cookies();
 
 const Buttons = styled.div`
@@ -69,7 +72,6 @@ class FormsPage extends React.Component {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-      
       },
       body: JSON.stringify({
         OldEmail: this.state.OldEmail,
@@ -92,7 +94,11 @@ class FormsPage extends React.Component {
           Updated: true,
         })
         window.location.reload();
-      }
+        <Redirect
+        to={{
+          pathname: "/",
+        }}
+      />}
       );
     event.preventDefault();
   };
