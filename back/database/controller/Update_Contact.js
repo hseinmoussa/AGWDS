@@ -37,7 +37,18 @@ exports.Update_Contact = async function (req, res) {
     if (req.body.linkedin && req.body.linkedin != "") {
       social.linkedin = req.body.linkedin;
     }
-
+    Schema.users.findOne({
+   
+      email: req.body.email
+ 
+}).then(async user => {
+  if (user) {
+      let errors = "Email already exists";
+    
+      
+      return res.json({ status: 400, message: errors });
+  } 
+  else{
 
     Schema.users.update(
       { email: `${req.body.OldEmail}` },
@@ -47,7 +58,6 @@ exports.Update_Contact = async function (req, res) {
           console.log(err)
           res.send(err);
         } else {
-          console.log("ok");
         }
       }
     );
@@ -59,6 +69,7 @@ exports.Update_Contact = async function (req, res) {
         res.json(result);
       }
     });
+  }});
   } catch (err) {
     console.log(err);
   }

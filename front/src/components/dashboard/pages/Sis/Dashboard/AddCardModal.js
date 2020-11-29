@@ -151,7 +151,7 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
       body.append("categories", data.Categories);
       body.append("Image", data.Image);
       body.append("Views", 0);
-      console.log(data);
+  
       fetch("http://localhost:3001/AddCard", {
         method: "post",
         credentials: "include",

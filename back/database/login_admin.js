@@ -21,11 +21,13 @@ exports.isPasswordAndUserMatch = (req, res, next) => {
         user &&
         (await bcrypt.compare(req.body.password, user[0].password))
       ) {
-        console.log(user)
-        const token = jwt.sign({ _id: user[0]._id }, envs.TOKEN_SECRET);
+      
+        const token = jwt.sign({ _id: user[0]._id }, envs.TOKEN_SECRET, {
+          expiresIn: "2h",
+        },);
         //console.log(envs.TOKEN_SECRET);
         //cookies
-        res.cookie("token", token, { httpOnly: true });
+       // res.cookie("token", token, { httpOnly: true });
         res.json({ token });
 
         //res.cookie("jwt", token, { secure: true, httpOnly: true });

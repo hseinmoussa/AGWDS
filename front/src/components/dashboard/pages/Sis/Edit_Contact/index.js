@@ -86,10 +86,13 @@ class FormsPage extends React.Component {
     })
       .then((res) => res.json())
       .then((json) =>{
+        if (json.status == 401 || json.status == 400)  return alert(json.message);
+
         this.setState({
           Updated: true,
         })
-        window.location.reload();}
+        window.location.reload();
+      }
       );
     event.preventDefault();
   };

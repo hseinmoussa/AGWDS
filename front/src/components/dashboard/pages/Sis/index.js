@@ -9,8 +9,8 @@ import Sidebar from "./Sidebar";
 import { Wrap, Main, NavBar } from "./styles";
 
 const Dashboard = lazy(() => import("./Dashboard"));
-const Cards = lazy(() => import("./New_admin"));
-const Forms = lazy(() => import("./Edit_Contact"));
+const NewAdmin = lazy(() => import("./New_admin"));
+const Contact = lazy(() => import("./Edit_Contact"));
 const Change = lazy(() => import("./Change_Pass"));
 
 export default function Sis() {
@@ -18,7 +18,6 @@ export default function Sis() {
   const [admin, setAdmin] = useState("");
   useEffect(() => {
     try {
-      console.log("tryyyyyyyyyyyyy")
       fetch("http://localhost:3001/Contact", {
         method: "post",
         credentials: "include",
@@ -27,7 +26,7 @@ export default function Sis() {
       })
         .then((res) => res.json())
         .then((json) =>
-        {console.log(json,111111111111111111)
+        {
           setAdmin(json.message.FirstName + " " + json.message.LastName)
         }
         );
@@ -74,8 +73,8 @@ export default function Sis() {
               {/* Your pages */}
               <Switch>
                 <Route path="/dashboard" component={Dashboard} />
-                <Route path="/cards" component={Cards} />
-                <Route path="/forms" component={Forms} />
+                <Route path="/AddAdmin" component={NewAdmin} />
+                <Route path="/EditContact" component={Contact} />
                 <Route path="/Change" component={Change} />
               </Switch>
             </Suspense>

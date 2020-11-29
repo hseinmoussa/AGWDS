@@ -52,7 +52,14 @@ const multerStorage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: multerStorage });
+const upload = multer({ storage: multerStorage, fileFilter: (req, file, cb) => {
+  if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+    cb(null, true);
+  } else {
+    req.fileValidationError='Only .png, .jpg and .jpeg format allowed!';
+    return cb(null, false,new Error('Only .png, .jpg and .jpeg format allowed!'));
+  }
+} });
 
 const port = process.env.PORT || 3001;
 

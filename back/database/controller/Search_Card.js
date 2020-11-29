@@ -5,7 +5,6 @@ exports.Search_Card = async function (req, res) {
     Schema.cards
       .find({ _id: req.body._id }, function (err, data) {
         if (err) console.log("Somthing went wrong!");
-        else console.log("ok");
       })
       .then((data) => {
         res.json({ message: data });

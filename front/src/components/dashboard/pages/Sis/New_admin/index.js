@@ -105,12 +105,13 @@ class CardsPage extends React.Component {
             }),
           })
             .then((res) => {
-              console.log(1);
               return res.json();
             })
             .then((json) => {
-              if (json.status == 401) alert(json.message);
+              if (json.status == 401 || json.status == 400) alert(json.message);
+              
               else this.setState({ Updated: true });
+              
             })
             .catch((err) => console.log(err));
           event.preventDefault();

@@ -14,7 +14,6 @@ function parseJwt (token) {
     
 exports.Fetch_Contact = async function (req, res) {
   try{
-    console.log(parseJwt(req.cookies.token))
     const userID = parseJwt(req.cookies.token)._id
   Schema.users
   .findOne({_id:userID},function (err, data) {
