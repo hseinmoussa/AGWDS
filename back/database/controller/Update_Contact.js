@@ -1,11 +1,7 @@
 const Schema = require("../Schema/Schema.js");
 var mongoose = require("mongoose");
 
-var x = {
-  y: (function () {
-    if (true) return "somevalue";
-  })(),
-};
+
 
 exports.Update_Contact = async function (req, res) {
   try {

@@ -40,9 +40,25 @@ class CardsPage extends React.Component {
       Updated: false,
       disab: true,
       click: false,
+      admins:[],
       text: "Password and Verify password must be the same",
       token : cookies.get('token'),
     };
+  }
+  componentDidMount() {
+    fetch("http://localhost:3001/AllAdmins", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        //facebook: this.state.input,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) =>
+        this.setState({
+          admins: json.message
+        })
+      );
   }
 
   handleChange = (event) => {
@@ -132,64 +148,83 @@ class CardsPage extends React.Component {
 
           <Form onSubmit={this.handleSubmit} className="col-12 px-auto">
             <Card>
-              <div className="card-title">
-                <h3>New Admin</h3>
-              </div>
-              <div className="card-body light-text">
-                <p> Add New users</p>
+              <div style={{display:"flex",flexDirection:"row"}}>
                 <div>
-                  <div className="input-block">
-                    <Label_Input
-                      id="email"
-                      type="email"
-                      name="Your New Email Address : "
-                      onChange={this.handleChange}
-                      required={true}
-                    />
+                  <div className="card-title">
+                    <h3>New Admin</h3>
                   </div>
-                  <div className="input-block">
-                    <Label_Input
-                      id="FirstName"
-                      type="text"
-                      name="Your First Name : "
-                      onChange={this.handleChange}
-                      required={true}
-                    />
-                  </div>
-                  <div className="input-block">
-                    <Label_Input
-                      id="LastName"
-                      type="text"
-                      name="Your Last Name : "
-                      onChange={this.handleChange}
-                      required={true}
-                    />
-                  </div>
-                  <div className="input-block">
-                    <Label_Input
-                      id="pass"
-                      type="password"
-                      name="Your Password : "
-                      onChange={this.handleChange}
-                      required={true}
-                    />
-                  </div>
-                  <div className="input-block">
-                    <Label_Input
-                      id="confirm pass"
-                      type="password"
-                      name="Verify Password : "
-                      onChange={this.handleChange}
-                      required={true}
-                    />
-                  </div>
+                  <div className="card-body light-text">
+                    <p> Add New users</p>
+                    <div>
+                      <div className="input-block">
+                        <Label_Input
+                          id="email"
+                          type="email"
+                          name="Your New Email Address : "
+                          onChange={this.handleChange}
+                          required={true}
+                        />
+                      </div>
+                      <div className="input-block">
+                        <Label_Input
+                          id="FirstName"
+                          type="text"
+                          name="Your First Name : "
+                          onChange={this.handleChange}
+                          required={true}
+                        />
+                      </div>
+                      <div className="input-block">
+                        <Label_Input
+                          id="LastName"
+                          type="text"
+                          name="Your Last Name : "
+                          onChange={this.handleChange}
+                          required={true}
+                        />
+                      </div>
+                      <div className="input-block">
+                        <Label_Input
+                          id="pass"
+                          type="password"
+                          name="Your Password : "
+                          onChange={this.handleChange}
+                          required={true}
+                        />
+                      </div>
+                      <div className="input-block">
+                        <Label_Input
+                          id="confirm pass"
+                          type="password"
+                          name="Verify Password : "
+                          onChange={this.handleChange}
+                          required={true}
+                        />
+                      </div>
 
-                  <br></br>
-                  <p>
-                    <span style={{ color: "red" }}> * </span>
-                    {this.state.disab ? this.state.text : ""}
-                  </p>
+                      <br></br>
+                      <p>
+                        <span style={{ color: "red" }}> * </span>
+                        {this.state.disab ? this.state.text : ""}
+                      </p>
+                    </div>
+                  </div>
                 </div>
+                <div style={{marginLeft:"25%",marginTop:"10%"}} >
+                   <p style={{fontWeight:"bold"}}>All Admins :</p>
+              
+                   {this.state.admins.map((admin) => (
+                    <tr key={admin._id}>
+                     
+                      <td style={{ textAlign: "center",fontSize:"1.1em" }}>{admin.FirstName}</td>
+                      <td style={{ textAlign: "center" }}>
+                     <span style={{fontSize:"1.1em"}}> {admin.LastName}</span> (email: {admin.email})
+                      </td>
+                    </tr>
+                   ))}
+                  
+                </div>
+                
               </div>
               <div
                 style={{
