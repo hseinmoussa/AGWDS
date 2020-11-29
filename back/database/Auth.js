@@ -22,8 +22,11 @@ const auth = (req, res, next) => {
 
  // var token = req.cookies.token; before
   
-  //shadi
-     var token = req.headers.cookie.slice(6,);
+  //final token
+     //var token = req.headers.cookie.slice(6,);
+  //final final token
+  var token=req.cookies.token;
+    
   if (!token)
     return res.status(401).send({
       status: 401,

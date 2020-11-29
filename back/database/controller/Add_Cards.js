@@ -2,6 +2,10 @@ const Schema = require("../Schema/Schema.js");
 
 exports.Add_Cards = async function (req, res) {
   try {
+    if(req.fileValidationError) {
+      return res.json({ status: 400, message:req.fileValidationError})
+}
+console.log(req.fileValidationError)
     if (
       req.body.Title == undefined ||
       req.body.Title == "" ||

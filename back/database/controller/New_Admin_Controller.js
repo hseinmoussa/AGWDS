@@ -11,10 +11,11 @@ exports.New_Admin_Controller = async function (req, res) {
     return data;
   }
 
+
+
   try {
     if (
-      req.body._id == undefined ||
-      req.body._id == "" ||
+     
       req.body.email == undefined ||
       req.body.email == "" ||
       req.body.password == undefined ||
@@ -36,10 +37,24 @@ exports.New_Admin_Controller = async function (req, res) {
         });
       }
       var newAdmin = {
-        _id: test_input(req.body.email),
+       
         email: test_input(req.body.email),
         password: test_input(hashedPassword),
+        FirstName:req.body.FirstName,
+        LastName:req.body.LastName,
       };
+      Schema.users.findOne({
+   
+        email: req.body.email
+   
+}).then(async user => {
+    if (user) {
+        let errors = "Email already exists";
+      
+        
+        return res.json({ status: 400, message: errors });
+    } 
+    else{
       const admin = new Schema.users(newAdmin);
       await admin
         .save()
@@ -55,8 +70,10 @@ exports.New_Admin_Controller = async function (req, res) {
         .then((admin) => {
           res.json({ status: 200, message: admin });
         });
-    }
-  } catch (err) {
-    console.log(err);
+      }
+    })
   }
+} catch (err) {
+  console.log(err);
+}
 };

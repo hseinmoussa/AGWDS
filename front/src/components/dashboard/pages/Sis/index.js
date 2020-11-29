@@ -9,10 +9,10 @@ import Sidebar from "./Sidebar";
 import { Wrap, Main, NavBar } from "./styles";
 
 const Dashboard = lazy(() => import("./Dashboard"));
-const Cards = lazy(() => import("./New_admin"));
-const Forms = lazy(() => import("./Edit_Contact"));
+const NewAdmin = lazy(() => import("./New_admin"));
+const Contact = lazy(() => import("./Edit_Contact"));
 const Change = lazy(() => import("./Change_Pass"));
-
+const about= lazy(() => import("./Edit_About"));
 export default function Sis() {
   const [drag, setDrag] = useState(false);
   const [admin, setAdmin] = useState("");
@@ -20,12 +20,15 @@ export default function Sis() {
     try {
       fetch("http://localhost:3001/Contact", {
         method: "post",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({}),
       })
         .then((res) => res.json())
         .then((json) =>
+        {
           setAdmin(json.message.FirstName + " " + json.message.LastName)
+        }
         );
     } catch (err) {
       console.log(err);
@@ -70,9 +73,10 @@ export default function Sis() {
               {/* Your pages */}
               <Switch>
                 <Route path="/dashboard" component={Dashboard} />
-                <Route path="/cards" component={Cards} />
-                <Route path="/forms" component={Forms} />
+                <Route path="/AddAdmin" component={NewAdmin} />
+                <Route path="/EditContact" component={Contact} />
                 <Route path="/Change" component={Change} />
+                <Route path="/About" component={about} />
               </Switch>
             </Suspense>
           </div>

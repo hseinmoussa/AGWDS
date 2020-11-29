@@ -42,9 +42,24 @@ class App extends React.Component {
                 <Aboutus />
                 <AS1 />
               </Route>
+
               <Protection path="/dashboard" >
                 <Dashboard />
               </Protection>
+              <Protection path="/AddAdmin" >
+                <Dashboard />
+              </Protection>
+              <Protection path="/EditContact" >
+                <Dashboard />
+              </Protection>
+              <Protection path="/About" >
+                <Dashboard />
+              </Protection>
+              <Protection path="/Change" >
+                <Dashboard />
+              </Protection>
+          
+
              <Route path="/login">
               {!cookies.get("token") ? (
                 <>

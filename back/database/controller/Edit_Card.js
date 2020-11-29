@@ -5,6 +5,9 @@ const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 exports.Edit_Card = async function (req, res) {
   try {
+    if(req.fileValidationError) {
+      return res.json({ status: 400, message:req.fileValidationError})
+}
     var image;
     if (
       req.body.Title == undefined ||

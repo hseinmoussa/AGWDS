@@ -3,12 +3,12 @@ import "./Aboutus-h.css";
 
 function Aboutus() {
   return (
-    <div class="header-about">
-      <div class="header__logo-box"></div>
-      <div class="header__text-box">
-        <h1 class="heading-primary">
-          <span class="heading-primary--main">Art</span>
-          <span class="heading-primary--sub">The Meaning Of Life</span>
+    <div className="header-about">
+      <div className="header__logo-box"></div>
+      <div className="header__text-box">
+        <h1 className="heading-primary">
+          <span className="heading-primary--main">Art</span>
+          <span className="heading-primary--sub">The Meaning Of Life</span>
         </h1>
       </div>
     </div>

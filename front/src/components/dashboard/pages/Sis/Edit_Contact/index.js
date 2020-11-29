@@ -10,6 +10,9 @@ import { Form } from "../../../components/Form";
 import Cookies from "universal-cookie";
 // This styled only show buttons in row format
 import styled from "styled-components";
+import {
+  Redirect,
+} from "react-router-dom";
 const cookies = new Cookies();
 
 const Buttons = styled.div`
@@ -41,15 +44,7 @@ class FormsPage extends React.Component {
       case "LastName : ":
         this.setState({ LastName: event.target.value });
         break;
-      case "Date Of Birthday : ":
-        this.setState({ DOB: event.target.value });
-        break;
-      case "Address : ":
-        this.setState({ Address: event.target.value });
-        break;
-      case "Telephone number : ":
-        this.setState({ tel: event.target.value });
-        break;
+      
       case "Email Address : ":
         this.setState({ Email: event.target.value });
         break;
@@ -77,15 +72,12 @@ class FormsPage extends React.Component {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-      
       },
       body: JSON.stringify({
         OldEmail: this.state.OldEmail,
         FirstName: this.state.FirstName,
         LastName: this.state.LastName,
-        DOB: this.state.DOB,
-        address: this.state.Address,
-        tel: this.state.tel,
+        
         email: this.state.Email,
         facebook: this.state.Facebook,
         twitter: this.state.Twitter,
@@ -95,10 +87,18 @@ class FormsPage extends React.Component {
       }),
     })
       .then((res) => res.json())
-      .then((json) =>
+      .then((json) =>{
+        if (json.status == 401 || json.status == 400)  return alert(json.message);
+
         this.setState({
           Updated: true,
         })
+        window.location.reload();
+        <Redirect
+        to={{
+          pathname: "/",
+        }}
+      />}
       );
     event.preventDefault();
   };
@@ -139,27 +139,8 @@ class FormsPage extends React.Component {
                       onChange={this.handleChange}
                     />
                   </div>
-                  <div className="input-block">
-                    <Label_Input
-                      name="Date Of Birthday : "
-                      type={this.state.value}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div className="input-block">
-                    <Label_Input
-                      name="Address : "
-                      type={this.state.value}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div className="input-block">
-                    <Label_Input
-                      name="Telephone number : "
-                      type={this.state.value}
-                      onChange={this.handleChange}
-                    />
-                  </div>
+                 
+                
                   <div className="input-block">
                     <Label_Input
                       name="Email Address : "

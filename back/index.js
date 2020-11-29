@@ -19,8 +19,14 @@ const Add_Cards = require("./database/controller/Add_Cards.js");
 const Delete_Cards = require("./database/controller/Delete_Card.js");
 const Edit_Card = require("./database/controller/Edit_Card.js");
 const Search_Card = require("./database/controller/Search_Card.js");
+const Fetch_Aboutme = require("./database/controller/Fetch_Aboutme.js");
+const Edit_About = require("./database/controller/Edit_Aboutme.js");
+const Fetch_Admins = require("./database/controller/Fetch_Admins.js");
+
 
 const Try = require("./database/controller/Try.js");
+
+
 
 var cors = require("cors");
 const corsOptions = {
@@ -51,7 +57,14 @@ const multerStorage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: multerStorage });
+const upload = multer({ storage: multerStorage, fileFilter: (req, file, cb) => {
+  if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+    cb(null, true);
+  } else {
+    req.fileValidationError='Only .png, .jpg and .jpeg format allowed!';
+    return cb(null, false,new Error('Only .png, .jpg and .jpeg format allowed!'));
+  }
+} });
 
 const port = process.env.PORT || 3001;
 
@@ -76,9 +89,15 @@ app.post("/AddCard", upload.single("Image"), [ auth, Add_Cards.Add_Cards]);
 app.post("/DeleteCard", auth, Delete_Cards.Delete_Cards);
 app.post("/EditCard", auth, upload.single("Image"), Edit_Card.Edit_Card);
 app.post("/SearchCard", auth, Search_Card.Search_Card);
+app.post("/About", Fetch_Aboutme.Fetch_Aboutme);
+app.post("/EditAbout", Edit_About.Edit_About);
+app.post("/AllAdmins", Fetch_Admins.Fetch_Admins);
+
+
 
 //Try
 app.get("/Try", Try.Try);
+
 
 app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`);

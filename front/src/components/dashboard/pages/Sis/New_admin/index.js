@@ -35,12 +35,30 @@ class CardsPage extends React.Component {
     this.state = {
       Email: "",
       Password: "",
+      FirstName:"",
+      LastName:"",
       Updated: false,
       disab: true,
       click: false,
+      admins:[],
       text: "Password and Verify password must be the same",
       token : cookies.get('token'),
     };
+  }
+  componentDidMount() {
+    fetch("http://localhost:3001/AllAdmins", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        //facebook: this.state.input,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) =>
+        this.setState({
+          admins: json.message
+        })
+      );
   }
 
   handleChange = (event) => {
@@ -48,6 +66,12 @@ class CardsPage extends React.Component {
       case "email":
         this.setState({ Email: event.target.value });
         break;
+        case "FirstName":
+          this.setState({ FirstName: event.target.value });
+          break;
+          case "LastName":
+            this.setState({ LastName: event.target.value });
+            break;
       case "pass":
         this.setState({ Password: event.target.value }, () => {
           if (this.state.Password == this.state.VerifyPass) {
@@ -88,20 +112,22 @@ class CardsPage extends React.Component {
               
             },
             body: JSON.stringify({
-              _id: this.state.Email,
+             
               email: this.state.Email,
               password: this.state.Password,
               verifypassword: this.state.VerifyPass,
-              
+              FirstName:this.state.FirstName,
+              LastName:this.state.LastName,
             }),
           })
             .then((res) => {
-              console.log(1);
               return res.json();
             })
             .then((json) => {
-              if (json.status == 401) alert(json.message);
+              if (json.status == 401 || json.status == 400) alert(json.message);
+              
               else this.setState({ Updated: true });
+              
             })
             .catch((err) => console.log(err));
           event.preventDefault();
@@ -122,46 +148,83 @@ class CardsPage extends React.Component {
 
           <Form onSubmit={this.handleSubmit} className="col-12 px-auto">
             <Card>
-              <div className="card-title">
-                <h3>New Admin</h3>
-              </div>
-              <div className="card-body light-text">
-                <p> Add New users</p>
+              <div style={{display:"flex",flexDirection:"row"}}>
                 <div>
-                  <div className="input-block">
-                    <Label_Input
-                      id="email"
-                      type="email"
-                      name="Your New Email Address : "
-                      onChange={this.handleChange}
-                      required={true}
-                    />
+                  <div className="card-title">
+                    <h3>New Admin</h3>
                   </div>
-                  <div className="input-block">
-                    <Label_Input
-                      id="pass"
-                      type="password"
-                      name="Your Password : "
-                      onChange={this.handleChange}
-                      required={true}
-                    />
-                  </div>
-                  <div className="input-block">
-                    <Label_Input
-                      id="confirm pass"
-                      type="password"
-                      name="Verify Password : "
-                      onChange={this.handleChange}
-                      required={true}
-                    />
-                  </div>
+                  <div className="card-body light-text">
+                    <p> Add New users</p>
+                    <div>
+                      <div className="input-block">
+                        <Label_Input
+                          id="email"
+                          type="email"
+                          name="Your New Email Address : "
+                          onChange={this.handleChange}
+                          required={true}
+                        />
+                      </div>
+                      <div className="input-block">
+                        <Label_Input
+                          id="FirstName"
+                          type="text"
+                          name="Your First Name : "
+                          onChange={this.handleChange}
+                          required={true}
+                        />
+                      </div>
+                      <div className="input-block">
+                        <Label_Input
+                          id="LastName"
+                          type="text"
+                          name="Your Last Name : "
+                          onChange={this.handleChange}
+                          required={true}
+                        />
+                      </div>
+                      <div className="input-block">
+                        <Label_Input
+                          id="pass"
+                          type="password"
+                          name="Your Password : "
+                          onChange={this.handleChange}
+                          required={true}
+                        />
+                      </div>
+                      <div className="input-block">
+                        <Label_Input
+                          id="confirm pass"
+                          type="password"
+                          name="Verify Password : "
+                          onChange={this.handleChange}
+                          required={true}
+                        />
+                      </div>
 
-                  <br></br>
-                  <p>
-                    <span style={{ color: "red" }}> * </span>
-                    {this.state.disab ? this.state.text : ""}
-                  </p>
+                      <br></br>
+                      <p>
+                        <span style={{ color: "red" }}> * </span>
+                        {this.state.disab ? this.state.text : ""}
+                      </p>
+                    </div>
+                  </div>
                 </div>
+                <div style={{marginLeft:"25%",marginTop:"10%"}} >
+                   <p style={{fontWeight:"bold"}}>All Admins :</p>
+              
+                   {this.state.admins.map((admin) => (
+                    <tr key={admin._id}>
+                     
+                      <td style={{ textAlign: "center",fontSize:"1.1em" }}>{admin.FirstName}</td>
+                      <td style={{ textAlign: "center" }}>
+                     <span style={{fontSize:"1.1em"}}> {admin.LastName}</span> (email: {admin.email})
+                      </td>
+                    </tr>
+                   ))}
+                  
+                </div>
+                
               </div>
               <div
                 style={{
