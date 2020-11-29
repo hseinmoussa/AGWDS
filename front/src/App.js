@@ -26,12 +26,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Link to="/">home </Link>
-        <Link to="/about">about </Link>
-        <Link to="/dashboard">dashboard </Link>
-        <a href="/login">login </a>
-
-        
+  
           <div className="App">
             <Navbar />
             <Switch>

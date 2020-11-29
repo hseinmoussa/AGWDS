@@ -44,7 +44,7 @@
   transition: 250ms;
   box-sizing: border-box;
   position: relative;
-  left: -75rem;
+  left: -40rem;
 }
 
 .nav-links:hover {
@@ -89,6 +89,13 @@
     transition: all 0.5s ease-out;
     box-sizing: border-box;
   }
+  .nav-menu > li{
+    height: 30px;
+    margin-top: 20%;
+    margin-bottom: 50%;
+    width: 100%;
+
+  }
 
   .nav-menu.active {
     background: rgba(198, 147, 32, 0.8);
@@ -114,8 +121,9 @@
   }
   .navbar-logo {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0.5rem;
+    left: -2rem;
+    font-size: 2rem;
     transform: translate(25%, 50%);
   }
   .menu-icon {
