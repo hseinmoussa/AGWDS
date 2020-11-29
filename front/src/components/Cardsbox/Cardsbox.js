@@ -1,57 +1,21 @@
 import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import { Card, Button, Pagination } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Spinner from 'react-bootstrap/Spinner'
 import "./Cardsbox.css";
 
-const tee = [
-  {
-    img: "https://picsum.photos/id/1/150/100.webp",
-    title: "Some quick1",
-    description:
-      " 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
-    bigimg: "https://picsum.photos/id/1/400/400.webp",
-  },
-  {
-    img: "https://picsum.photos/id/2/100/60.webp",
-    title: "Some quick2",
-    description:
-      " 222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222",
-    bigimg: "https://picsum.photos/id/2/400/400.webp",
-  },
-  {
-    img: "https://picsum.photos/id/3/100/60.webp",
-    title: "Some quick3",
-    description:
-      "333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
-    bigimg: "https://picsum.photos/id/3/400/400.webp",
-  },
-  {
-    img: "https://picsum.photos/id/4/100/60.webp",
-    title: "Some quick4",
-    description:
-      "444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444",
-    bigimg: "https://picsum.photos/id/4/400/400.webp",
-  },
-  {
-    img: "https://picsum.photos/id/5/100/60.webp",
-    title: "Some quick5",
-    description:
-      "5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555",
-    bigimg: "https://picsum.photos/id/5/400/400.webp",
-  },
-];
 
-var tee2 = []
+var cards = []
 
 function Cardsbox() {
   const [Show, setShow] = useState(false);
   const [imglink, setimglink] = useState("");
   const [cardtitle, setcardtitle] = useState("");
-  const [pagination, setPagination] = useState({
-    data: tee2.map((value, index) => ({
+  const [Pagination, setPagination] = useState({
+    data: cards.map((value, index) => ({
       id: index,
       title: value.Title,
       description: value.description,
@@ -74,7 +38,7 @@ function Cardsbox() {
       body: JSON.stringify({
       }),
     }).then((res) => res.json())
-    .then((json) => 
+      .then((json) => 
     setPagination({data: json.message.map((value, index) => ({
       id: index,
       title: value.Title,
@@ -87,36 +51,42 @@ function Cardsbox() {
     pageCount: 0,
     currentData: [],
   }))
+
   }
   catch (err) {
     console.log(err)
   }
-    
   },[]);
 
 
   useEffect(() => {
-    console.log(pagination)
     setPagination((prevState) => ({
       ...prevState,
       pageCount: prevState.data.length / prevState.numberPerPage,
       currentData: prevState.data.slice(
-        pagination.offset,
-        pagination.offset + pagination.numberPerPage
+        Pagination.offset,
+        Pagination.offset + Pagination.numberPerPage
       ),
     }));
-}, [pagination.numberPerPage, pagination.offset]);
+}, [Pagination.numberPerPage, Pagination.offset]);
 
   const handlePageClick = (event) => {
     const selected = event.selected;
-    const offset = selected * pagination.numberPerPage;
-    setPagination({ ...pagination, offset });
+    const offset = selected * Pagination.numberPerPage;
+    setPagination({ ...Pagination, offset });
   };
+
+
+
+
+  if (Pagination.data.length == 0) {
+    return <Spinner animation="grow" variant="warning" />
+  }else {
   return (
     <div className="body">
       <div className="main">
-        {pagination.currentData &&
-          pagination.currentData.map((item, index) => (
+        {Pagination.currentData &&
+          Pagination.currentData.map((item, index) => (
             <div key={index} className="item">
               <Card id="Card" style={{ width: "18rem" }}>
                 <Card.Img
@@ -170,7 +140,7 @@ function Cardsbox() {
       <ReactPaginate
         previousLabel={" ← Previous"}
         nextLabel={"Next → "}
-        pageCount={pagination.pageCount}
+        pageCount={Pagination.pageCount}
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         onPageChange={handlePageClick}
@@ -179,5 +149,6 @@ function Cardsbox() {
       />
     </div>
   );
+                    }      
 }
 export default Cardsbox;
