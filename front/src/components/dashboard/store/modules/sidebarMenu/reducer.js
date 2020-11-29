@@ -30,6 +30,11 @@ const INITIAL_STATE = {
       icon: <FiPhoneForwarded />,
       path: "/Change",
     },
+    {
+      name: "About Me",
+      icon: <FiBookmark />,
+      path: "/About",
+    },
   ],
 };
 

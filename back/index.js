@@ -19,6 +19,10 @@ const Add_Cards = require("./database/controller/Add_Cards.js");
 const Delete_Cards = require("./database/controller/Delete_Card.js");
 const Edit_Card = require("./database/controller/Edit_Card.js");
 const Search_Card = require("./database/controller/Search_Card.js");
+const Fetch_Aboutme = require("./database/controller/Fetch_Aboutme.js");
+const Edit_About = require("./database/controller/Edit_Aboutme.js");
+
+
 const Try = require("./database/controller/Try.js");
 
 
@@ -84,6 +88,10 @@ app.post("/AddCard", upload.single("Image"), [ auth, Add_Cards.Add_Cards]);
 app.post("/DeleteCard", auth, Delete_Cards.Delete_Cards);
 app.post("/EditCard", auth, upload.single("Image"), Edit_Card.Edit_Card);
 app.post("/SearchCard", auth, Search_Card.Search_Card);
+app.post("/About", Fetch_Aboutme.Fetch_Aboutme);
+app.post("/EditAbout", Edit_About.Edit_About);
+
+
 
 //Try
 app.get("/Try", Try.Try);

@@ -1,7 +1,6 @@
 const connect = require("../connect.js");
 const mongoose = require("mongoose");
 
-//_id is same as email
 var users_schema = new mongoose.Schema(
   {
    
@@ -41,6 +40,7 @@ var social_schema = new mongoose.Schema({
 var about_schema = new mongoose.Schema({
   title: { type: String },
   about_img: { type: String },
+  about_description_title: { type: String },
   about_description: { type: String },
 });
 // firstName: { type: String, required: true },

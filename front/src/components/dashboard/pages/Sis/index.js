@@ -12,7 +12,7 @@ const Dashboard = lazy(() => import("./Dashboard"));
 const NewAdmin = lazy(() => import("./New_admin"));
 const Contact = lazy(() => import("./Edit_Contact"));
 const Change = lazy(() => import("./Change_Pass"));
-
+const about= lazy(() => import("./Edit_About"));
 export default function Sis() {
   const [drag, setDrag] = useState(false);
   const [admin, setAdmin] = useState("");
@@ -76,6 +76,7 @@ export default function Sis() {
                 <Route path="/AddAdmin" component={NewAdmin} />
                 <Route path="/EditContact" component={Contact} />
                 <Route path="/Change" component={Change} />
+                <Route path="/About" component={about} />
               </Switch>
             </Suspense>
           </div>

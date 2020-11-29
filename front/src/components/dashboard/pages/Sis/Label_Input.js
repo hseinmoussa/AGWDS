@@ -15,6 +15,7 @@ class Label_Input extends React.Component {
             name={this.props.name}
             id={this.props.id}
             autoComplete="off"
+            value={this.props.value}
             onChange={(e) => {
               this.props.onChange(e);
             }}
