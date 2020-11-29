@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Pagination } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -44,17 +44,19 @@ const tee = [
   },
 ];
 
+var tee2 = []
+
 function Cardsbox() {
   const [Show, setShow] = useState(false);
   const [imglink, setimglink] = useState("");
   const [cardtitle, setcardtitle] = useState("");
   const [pagination, setPagination] = useState({
-    data: tee.map((value, index) => ({
+    data: tee2.map((value, index) => ({
       id: index,
-      title: value.title,
+      title: value.Title,
       description: value.description,
-      img: value.img,
-      bigimg: value.bigimg,
+      img:value.Image,
+      bigimg: value.Image,
     })),
     offset: 0,
     numberPerPage: 3,
@@ -62,7 +64,39 @@ function Cardsbox() {
     currentData: [],
   });
 
+  
+
   useEffect(() => {
+  try {
+    fetch("http://localhost:3001/Cards", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+      }),
+    }).then((res) => res.json())
+    .then((json) => 
+    setPagination({data: json.message.map((value, index) => ({
+      id: index,
+      title: value.Title,
+      description: value.description,
+      img: "http://localhost:3001/Image/" + value.Image,
+      bigimg: "http://localhost:3001/Image/" + value.Image,
+    })),
+    offset: 0,
+    numberPerPage: 4,
+    pageCount: 0,
+    currentData: [],
+  }))
+  }
+  catch (err) {
+    console.log(err)
+  }
+    
+  },[]);
+
+
+  useEffect(() => {
+    console.log(pagination)
     setPagination((prevState) => ({
       ...prevState,
       pageCount: prevState.data.length / prevState.numberPerPage,
@@ -71,14 +105,13 @@ function Cardsbox() {
         pagination.offset + pagination.numberPerPage
       ),
     }));
-  }, [pagination.numberPerPage, pagination.offset]);
+}, [pagination.numberPerPage, pagination.offset]);
 
   const handlePageClick = (event) => {
     const selected = event.selected;
     const offset = selected * pagination.numberPerPage;
     setPagination({ ...pagination, offset });
   };
-
   return (
     <div className="body">
       <div className="main">
