@@ -130,7 +130,7 @@ export default function Dashboard() {
       >
         <span></span>
         <h1 style={{ display: "inline" }}>
-          Hello , Welcom to the dashboard page
+         Welcom to the dashboard page
         </h1>
         <Table>
           <tbody>
@@ -168,7 +168,7 @@ export default function Dashboard() {
                   setSort("");
                 }}
               >
-                Sort by date of adding
+                Sort by date
               </Button>
             </div>
           </div>

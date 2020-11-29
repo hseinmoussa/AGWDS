@@ -18,17 +18,22 @@ const INITIAL_STATE = {
     {
       name: "New Admin",
       icon: <FiBookmark />,
-      path: "/cards",
+      path: "/AddAdmin",
     },
     {
       name: "Edit Contact",
       icon: <FiPhoneForwarded />,
-      path: "/forms",
+      path: "/EditContact",
     },
     {
       name: "Change Password",
       icon: <FiPhoneForwarded />,
       path: "/Change",
+    },
+    {
+      name: "About Me",
+      icon: <FiBookmark />,
+      path: "/About",
     },
   ],
 };

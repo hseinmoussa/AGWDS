@@ -146,7 +146,6 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
 
   useEffect(() => {
     try {
-      console.log("ok");
       fetch("http://localhost:3001/SearchCard", {
         method: "post",
         credentials: "include",

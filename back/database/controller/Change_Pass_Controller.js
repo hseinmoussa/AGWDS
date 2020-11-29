@@ -27,8 +27,9 @@ exports.Change_Pass = async function (req, res) {
     data = test_function.htmlspecialchars(data);
     return data;
   }
-    const userEmail = parseJwt(req.headers.cookie.slice(6,))._id
-    // console.log(userEmail)
+    const userID = parseJwt(req.headers.cookie.slice(6,))._id
+    console.log(parseJwt(req.headers.cookie.slice(6,)))
+    // console.log(userID)
   const transporter = nodemailer.createTransport({
     host: "smtp.mailspons.com",
     port: 587,
@@ -60,7 +61,7 @@ exports.Change_Pass = async function (req, res) {
   }
 
   try {
-    Schema.users.findOne({ email: userEmail }, async function (err, user) {
+    Schema.users.findOne({ _id: userID }, async function (err, user) {
       if (user == null || user == undefined) {
         res.status(401).send({ message: "il3ab ghayra ya 7aboob" });
       }

@@ -29,54 +29,56 @@ const Buttons = styled.div`
   }
 `;
 
-class CardsPage extends React.Component {
+class EditAbout extends React.Component {
   constructor() {
     super();
     this.state = {
-      Email: "",
-      Password: "",
-      FirstName:"",
-      LastName:"",
+      title: "",
+      about_description_title: "",
+      about_description:"",
+      about_img:"",
       Updated: false,
-      disab: true,
-      click: false,
-      text: "Password and Verify password must be the same",
-      token : cookies.get('token'),
-    };
+     };
   }
 
+  componentDidMount() {
+    fetch("http://localhost:3001/About", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        //facebook: this.state.input,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) =>
+        this.setState({
+   
+          title: json.message.title,
+          about_description_title: json.message.about_description_title,
+          about_description: json.message.about_description,
+          about_img: json.message.about_img,
+        })
+      );
+  }
   handleChange = (event) => {
     switch (event.target.id) {
-      case "email":
-        this.setState({ Email: event.target.value });
+      case "title":
+        this.setState({ title: event.target.value });
         break;
-        case "FirstName":
-          this.setState({ FirstName: event.target.value });
-          break;
-          case "LastName":
-            this.setState({ LastName: event.target.value });
-            break;
-      case "pass":
-        this.setState({ Password: event.target.value }, () => {
-          if (this.state.Password == this.state.VerifyPass) {
-            this.setState({ disab: false });
-          } else {
-            this.setState({ disab: true });
-          }
-        });
-        break;
-      case "confirm pass":
-        this.setState({ VerifyPass: event.target.value }, () => {
-          if (this.state.Password == this.state.VerifyPass) {
-            this.setState({ disab: false });
-          } else {
-            this.setState({ disab: true });
-          }
-        });
-        break;
-      default:
-        this.setState({ rand: event.target.value });
-        break;
+    case "title_description":
+      this.setState({ about_description_title: event.target.value });
+      break;
+    case "description":
+      this.setState({ about_description: event.target.value });
+      break;
+    case "about_img":
+      this.setState({ about_img: event.target.value });
+
+      break;
+     
+    default:
+      this.setState({ rand: event.target.value });
+      break;
     }
   };
 
@@ -84,24 +86,19 @@ class CardsPage extends React.Component {
     this.setState({ click: true }, () => {
 
       event.preventDefault();
-      if (this.state.disab && this.state.click)
-        alert("Pass and verify pass must be the same !");
-      else {
+   
         try {
-          fetch("http://localhost:3001/NewAdmin", {
+          fetch("http://localhost:3001/EditAbout", {
             method: "post",
             credentials: "include",
             headers: {
               "Content-Type": "application/json",
-              
             },
             body: JSON.stringify({
-             
-              email: this.state.Email,
-              password: this.state.Password,
-              verifypassword: this.state.VerifyPass,
-              FirstName:this.state.FirstName,
-              LastName:this.state.LastName,
+          title: this.state.title,
+          about_description_title: this.state.about_description_title,
+          about_description: this.state.about_description,
+          about_img:this.state.about_img,
             }),
           })
             .then((res) => {
@@ -117,7 +114,7 @@ class CardsPage extends React.Component {
           event.preventDefault();
         } catch (err) {
           console.log(err);
-        }
+        
       }
     });
   };
@@ -127,68 +124,58 @@ class CardsPage extends React.Component {
       return (
         <>
           <div className="col-12 title">
-            <h1>New Admin</h1>
+            <h1>Edit About Me</h1>
           </div>
 
           <Form onSubmit={this.handleSubmit} className="col-12 px-auto">
             <Card>
               <div className="card-title">
-                <h3>New Admin</h3>
+                <h3>About Me</h3>
               </div>
               <div className="card-body light-text">
-                <p> Add New users</p>
+                <p> Edit About Me</p>
                 <div>
                   <div className="input-block">
                     <Label_Input
-                      id="email"
-                      type="email"
-                      name="Your New Email Address : "
-                      onChange={this.handleChange}
-                      required={true}
-                    />
-                  </div>
-                  <div className="input-block">
-                    <Label_Input
-                      id="FirstName"
+                      id="title"
                       type="text"
-                      name="Your First Name : "
+                      name="New title"
                       onChange={this.handleChange}
+                      value={this.state.title}
                       required={true}
                     />
                   </div>
                   <div className="input-block">
                     <Label_Input
-                      id="LastName"
+                      id="title_description"
                       type="text"
-                      name="Your Last Name : "
+                      name="Title Description :"
                       onChange={this.handleChange}
+                      value={this.state.about_description_title}
                       required={true}
                     />
                   </div>
                   <div className="input-block">
                     <Label_Input
-                      id="pass"
-                      type="password"
-                      name="Your Password : "
+                      id="description"
+                      type="text"
+                      name="Description :"
                       onChange={this.handleChange}
+                      value={this.state.about_description}
                       required={true}
                     />
                   </div>
                   <div className="input-block">
                     <Label_Input
-                      id="confirm pass"
-                      type="password"
-                      name="Verify Password : "
+                      id="about_img"
+                      type="text"
+                      name="Image "
                       onChange={this.handleChange}
+                      value={this.state.about_img}
                       required={true}
                     />
                   </div>
 
-                  <br></br>
-                  <p>
-                    <span style={{ color: "red" }}> * </span>
-                    {this.state.disab ? this.state.text : ""}
-                  </p>
                 </div>
               </div>
               <div
@@ -229,4 +216,4 @@ class CardsPage extends React.Component {
       );
   }
 }
-export default CardsPage;
+export default EditAbout;
