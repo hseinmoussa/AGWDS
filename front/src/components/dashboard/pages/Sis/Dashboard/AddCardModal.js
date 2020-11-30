@@ -162,6 +162,7 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
         .then((res) => res.json())
         .then((json) => {
           if (json.status == 400) alert(json.message);
+           
           else {
             setSub(sub + 1);
             setArray2(arr + 1);

@@ -43,6 +43,7 @@ hr {
   display: block;
   height: 10vh;
   width: 100%;
+  padding: auto;
 }
 .footer-text {
   display: flex;

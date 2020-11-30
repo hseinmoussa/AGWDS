@@ -130,7 +130,7 @@ export default function Dashboard() {
       >
         <span></span>
         <h1 style={{ display: "inline" }}>
-         Welcom to the dashboard page
+         Dashboard page
         </h1>
         <Table>
           <tbody>
@@ -138,6 +138,7 @@ export default function Dashboard() {
               <td>
                 <button
                   className="info"
+                  style={{overflowX:"hidden"}}
                   onClick={() => {
                     toggleModalForm2();
                   }}
@@ -176,7 +177,7 @@ export default function Dashboard() {
             <Table>
               <thead>
                 <tr>
-                  <th className="col-1">Views</th>
+                  <th className="col-1 views">Views</th>
                   <th className="col-3">Image</th>
                   <th className="col-3">Title</th>
                   <th className="col-3">Description</th>
@@ -190,7 +191,7 @@ export default function Dashboard() {
                       <td style={{ textAlign: "center", display: "none" }}>
                         {item._id}
                       </td>
-                      <td style={{ textAlign: "center" }}>{item.Views}</td>
+                      <td style={{ textAlign: "center" }} className="views">{item.Views}</td>
                       <td style={{ textAlign: "center" }}>
                         <img
                           height="50px"

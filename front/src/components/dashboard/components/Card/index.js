@@ -20,6 +20,8 @@ export const Card = styled.div`
 
     @media screen and (max-width: 790px) {
       padding: 1rem 0.5rem 0;
+      display:flex;
+      flex-direction:column;
     }
 
     margin-bottom: 0;

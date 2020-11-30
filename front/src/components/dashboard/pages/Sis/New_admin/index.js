@@ -210,7 +210,7 @@ class CardsPage extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div style={{marginLeft:"25%",marginTop:"10%"}} >
+                <div style={{marginLeft:"25%",marginTop:"10%"}} className="AllAdmin"  >
                    <p style={{fontWeight:"bold"}}>All Admins :</p>
               
                    {this.state.admins.map((admin) => (

@@ -85,7 +85,8 @@ export const Side = styled.div`
         grid-column-start: 1;
         grid-column-end: 0; */
     /* z-index: 9999; */
-
+   
+    display:${(props) => (props.drag ? "inline" : "none")};
     position: ${(props) => (props.drag ? "absolute" : "inherit")};
     height: ${(props) => (props.drag ? "100vh" : "inherit")};
     width: ${(props) => (props.drag ? "185px" : "0")};

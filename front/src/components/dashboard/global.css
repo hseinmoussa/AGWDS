@@ -86,6 +86,15 @@
   .dash .hidden-xs {
     display: none !important;
   }
+  .views {
+    display: none !important;
+  }
+  .dash {
+    margin: 0 -2em !important;
+  }
+  .AllAdmin {
+    display: none !important;
+  }
 }
 
 .dash .hidden-xs {
@@ -171,9 +180,6 @@ li {
 }
 .dash th {
   text-align: center;
-}
-.dash {
-  padding: -3em !important;
 }
 
 @keyframes load8 {

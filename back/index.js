@@ -31,7 +31,7 @@ const Try = require("./database/controller/Try.js");
 var cors = require("cors");
 const corsOptions = {
 
-  origin: '*',
+  origin: 'http://localhost:3000',
   credentials: true
 }
 app.use(cors(corsOptions));

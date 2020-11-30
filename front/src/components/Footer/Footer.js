@@ -70,7 +70,7 @@ class Footer extends React.Component {
             {/* <div className="footer-section">Home | AboutMe</div> */}
           </div>
           <div className="footer-section2">
-            <p style={{ color: "#fff" }}>
+            <p style={{ color: "#fff",margin:"auto" }}>
               <i>
                 Copyright {"\u00A9"} <b>2020</b>
               </i>
