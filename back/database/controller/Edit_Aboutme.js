@@ -5,9 +5,9 @@ const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 exports.Edit_About = async function (req, res) {
   try {
-//     if(req.fileValidationError) {
-//       return res.json({ status: 400, message:req.fileValidationError})
-// }
+    if(req.fileValidationError) {
+      return res.json({ status: 400, message:req.fileValidationError})
+}
     var image;
     if (
       req.body.title == undefined ||
@@ -25,7 +25,7 @@ exports.Edit_About = async function (req, res) {
       req.body.about_description2== undefined ||
       req.body.about_description2 == "" 
     ||req.body.Name==undefined||req.body.Name==""
-      // req.file == undefined
+      , req.file == undefined
     )
       res.json({ status: 400, message: "Please fill out all the fields" });
     else {
@@ -38,7 +38,7 @@ exports.Edit_About = async function (req, res) {
         about_description2: req.body.about_description2,
         Name:req.body.Name,
 
-        // Image: req.file.filename,
+        about_img: req.file.filename,
       };
       await Schema.about
         .find({}, (err, docs) => {
@@ -48,8 +48,9 @@ exports.Edit_About = async function (req, res) {
           }
         })
         .then(async (data) => {
-          // image = data[0].Image;
-          // await unlinkAsync("public/Image/" + image);
+          image = data[0].about_img;
+          if (fs.existsSync("public/About/" + image)) 
+          await unlinkAsync("public/About/" + image);
         });
 
       await Schema.about.update(

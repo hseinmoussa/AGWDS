@@ -61,7 +61,6 @@ class EditAbout extends React.Component {
           about_description: json.message.about_description,
           about_description_title2: json.message.about_description_title2,
           about_description2: json.message.about_description2,
-          about_img: json.message.about_img,
           Name:json.message.Name,
         })
       );
@@ -89,7 +88,7 @@ class EditAbout extends React.Component {
        
           
     case "about_img":
-      this.setState({ about_img: event.target.value });
+      this.setState({ about_img: event.target.files[0] });
 
       break;
      
@@ -98,28 +97,29 @@ class EditAbout extends React.Component {
       break;
     }
   };
-
+  ChangeState = () => {
+     this.setState({ Updated: !this.state.Updated });
+  }
   handleSubmit = (event) => {
     this.setState({ click: true }, () => {
 
       event.preventDefault();
    
         try {
+          const body = new FormData();
+          body.append("title", this.state.title);
+          body.append("about_description_title", this.state.about_description_title);
+          body.append("about_description", this.state.about_description);
+          body.append("about_description_title2", this.state.about_description_title2);
+          body.append("about_description2", this.state.about_description2);
+          body.append("Name", this.state.Name);
+          body.append("about_img", this.state.about_img);
+
           fetch("http://localhost:3001/EditAbout", {
             method: "post",
             credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-          title: this.state.title,
-          about_description_title: this.state.about_description_title,
-          about_description: this.state.about_description,
-          about_description_title2: this.state.about_description_title2,
-          about_description2: this.state.about_description2,
-          Name:this.state.Name,
-          about_img:this.state.about_img,
-            }),
+        
+            body: body,
           })
             .then((res) => {
               return res.json();
@@ -127,7 +127,7 @@ class EditAbout extends React.Component {
             .then((json) => {
               if (json.status == 401 || json.status == 400) alert(json.message);
               
-              else this.setState({ Updated: true });
+              else alert("updated successfully");
               
             })
             .catch((err) => console.log(err));
@@ -140,7 +140,6 @@ class EditAbout extends React.Component {
   };
 
   render() {
-    if (!this.state.Updated)
       return (
         <>
           <div className="col-12 title">
@@ -218,10 +217,9 @@ class EditAbout extends React.Component {
                   <div className="input-block">
                     <Label_Input
                       id="about_img"
-                      type="text"
+                      type="file"
                       name="Image "
                       onChange={this.handleChange}
-                      value={this.state.about_img}
                       required={true}
                     />
                   </div>
@@ -258,12 +256,8 @@ class EditAbout extends React.Component {
           </Form>
         </>
       );
-    else
-      return (
-        <div style={{ textAlign: "center" }}>
-          {alert("updated successfully")}
-        </div>
-      );
+    
+     
   }
 }
 export default EditAbout;

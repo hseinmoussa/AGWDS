@@ -66,6 +66,27 @@ const upload = multer({ storage: multerStorage, fileFilter: (req, file, cb) => {
   }
 } });
 
+const multerStorage_about = multer.diskStorage({
+  destination: "public/About",
+  filename: (req, file, cb) => {
+    const { fieldname, originalname } = file;
+    const date = Date.now();
+    // filename will be: image-1345923023436343-filename.png
+    const filename = `${fieldname}-${date}-${originalname}`;
+   
+    cb(null, filename);
+  },
+});
+
+const upload_about = multer({ storage: multerStorage_about, fileFilter: (req, file, cb) => {
+  if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+    cb(null, true);
+  } else {
+    req.fileValidationError='Only .png, .jpg and .jpeg format allowed!';
+    return cb(null, false,new Error('Only .png, .jpg and .jpeg format allowed!'));
+  }
+} });
+
 const port = process.env.PORT || 3001;
 
 app.post("/Fetch_Social", [Fetch_Social.Fetch_Social]);
@@ -90,7 +111,7 @@ app.post("/DeleteCard", auth, Delete_Cards.Delete_Cards);
 app.post("/EditCard", auth, upload.single("Image"), Edit_Card.Edit_Card);
 app.post("/SearchCard", auth, Search_Card.Search_Card);
 app.post("/About", Fetch_Aboutme.Fetch_Aboutme);
-app.post("/EditAbout", Edit_About.Edit_About);
+app.post("/EditAbout",upload_about.single("about_img"), Edit_About.Edit_About);
 app.post("/AllAdmins", Fetch_Admins.Fetch_Admins);
 
 

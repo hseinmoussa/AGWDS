@@ -8,6 +8,7 @@ function AS2() {
     const [about,setAbout]=useState({"about_description2":"",
     "about_description_title2":"",
   "Name":"",
+  "about_img":"",
   })
       useEffect(() => {
        var url = "http://localhost:3001/About";
@@ -23,6 +24,7 @@ function AS2() {
            "about_description2": json.message.about_description2,
            "about_description_title2": json.message.about_description_title2,
     "Name":json.message.Name,
+    "about_img":json.message.about_img,
     
           
           })})
@@ -46,7 +48,7 @@ function AS2() {
         <div className="kstory">
           <figure className="kstory__shape">
             <img
-              src={painter}
+              src={`http://localhost:3001/About/${about.about_img}`}
               alt="person on a tour "
               className="kstory__image"
             />
