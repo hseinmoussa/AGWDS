@@ -35,6 +35,11 @@ const INITIAL_STATE = {
       icon: <FiBookmark />,
       path: "/About",
     },
+    {
+      name: "All Admins",
+      icon: <FiHome />,
+      path: "/AllAdmins",
+    },
   ],
 };
 
