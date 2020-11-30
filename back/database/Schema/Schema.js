@@ -42,6 +42,11 @@ var about_schema = new mongoose.Schema({
   about_img: { type: String },
   about_description_title: { type: String },
   about_description: { type: String },
+  about_description_title2: { type: String },
+  about_description2: { type: String },
+
+  Name: { type: String },
+
 });
 // firstName: { type: String, required: true },
 // lastName: { type: String, required: true },

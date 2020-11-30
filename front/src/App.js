@@ -3,6 +3,8 @@ import React from "react";
 import Navbar from "./components/Navbar/nav";
 import Aboutus from "./components/About-us/Aboutus-h.js";
 import AS1 from "./components/About-us/section1.js";
+import AS2 from "./components/About-us/section2.js";
+
 import Cardsbox from "./components/Cardsbox/Cardsbox";
 import LoginPage from "./components/LoginPage/login";
 import Footer from "./components/Footer/Footer.js";
@@ -36,6 +38,7 @@ class App extends React.Component {
               <Route path="/about">
                 <Aboutus />
                 <AS1 />
+                <AS2/>
               </Route>
 
               <Protection path="/dashboard" >

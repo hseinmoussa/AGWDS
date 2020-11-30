@@ -36,6 +36,9 @@ class EditAbout extends React.Component {
       title: "",
       about_description_title: "",
       about_description:"",
+      about_description_title2: "",
+      about_description2:"",
+      Name:"",
       about_img:"",
       Updated: false,
      };
@@ -56,7 +59,10 @@ class EditAbout extends React.Component {
           title: json.message.title,
           about_description_title: json.message.about_description_title,
           about_description: json.message.about_description,
+          about_description_title2: json.message.about_description_title2,
+          about_description2: json.message.about_description2,
           about_img: json.message.about_img,
+          Name:json.message.Name,
         })
       );
   }
@@ -71,6 +77,17 @@ class EditAbout extends React.Component {
     case "description":
       this.setState({ about_description: event.target.value });
       break;
+      case "title_description2":
+        this.setState({ about_description_title2: event.target.value });
+        break;
+        case "description2":
+          this.setState({ about_description2: event.target.value });
+          break;
+          case "Name":
+            this.setState({ Name: event.target.value });
+            break;
+       
+          
     case "about_img":
       this.setState({ about_img: event.target.value });
 
@@ -98,6 +115,9 @@ class EditAbout extends React.Component {
           title: this.state.title,
           about_description_title: this.state.about_description_title,
           about_description: this.state.about_description,
+          about_description_title2: this.state.about_description_title2,
+          about_description2: this.state.about_description2,
+          Name:this.state.Name,
           about_img:this.state.about_img,
             }),
           })
@@ -162,6 +182,36 @@ class EditAbout extends React.Component {
                       name="Description :"
                       onChange={this.handleChange}
                       value={this.state.about_description}
+                      required={true}
+                    />
+                  </div>
+                  <div className="input-block">
+                    <Label_Input
+                      id="title_description2"
+                      type="text"
+                      name="Title Description 2 :"
+                      onChange={this.handleChange}
+                      value={this.state.about_description_title2}
+                      required={true}
+                    />
+                  </div>
+                  <div className="input-block">
+                    <Label_Input
+                      id="description2"
+                      type="text"
+                      name="Description 2 :"
+                      onChange={this.handleChange}
+                      value={this.state.about_description2}
+                      required={true}
+                    />
+                  </div>
+                  <div className="input-block">
+                    <Label_Input
+                      id="Name"
+                      type="text"
+                      name="My Name :"
+                      onChange={this.handleChange}
+                      value={this.state.Name}
                       required={true}
                     />
                   </div>

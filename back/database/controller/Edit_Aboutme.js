@@ -17,7 +17,14 @@ exports.Edit_About = async function (req, res) {
       req.body.about_description_title
       == "" ||
       req.body.about_description== undefined ||
-      req.body.about_description == "" 
+      req.body.about_description == "" ||
+      req.body.about_description_title2
+      == undefined ||
+      req.body.about_description_title2
+      == "" ||
+      req.body.about_description2== undefined ||
+      req.body.about_description2 == "" 
+    ||req.body.Name==undefined||req.body.Name==""
       // req.file == undefined
     )
       res.json({ status: 400, message: "Please fill out all the fields" });
@@ -26,6 +33,11 @@ exports.Edit_About = async function (req, res) {
         title: req.body.title,
         about_description_title: req.body.about_description_title,
         about_description: req.body.about_description,
+        about_description_title2: req.body.about_description_title2,
+
+        about_description2: req.body.about_description2,
+        Name:req.body.Name,
+
         // Image: req.file.filename,
       };
       await Schema.about
