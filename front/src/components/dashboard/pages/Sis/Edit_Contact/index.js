@@ -160,7 +160,7 @@ class FormsPage extends React.Component {
           <Form onSubmit={this.handleSubmit} className="col-12 px-auto">
             <Card>
               <div className="card-title">
-                <h3>Simple Form</h3>
+                <h3>Edit Contact</h3>
               </div>
               <div className="card-body">
                 <div>
@@ -198,7 +198,7 @@ class FormsPage extends React.Component {
                   <div className="input-block">
                     <Label_Input
                     id="Twitter"
-                      name="Twitter : "
+                      name="Twitter username: "
                       type={this.state.value}
                       value={this.state.Twitter}
                       onChange={this.handleChange}
@@ -207,7 +207,7 @@ class FormsPage extends React.Component {
                   <div className="input-block">
                     <Label_Input
                     id="Github"
-                      name="Github : "
+                      name="Github username: "
                       type={this.state.value}
                       value={this.state.Github}
                       onChange={this.handleChange}
@@ -216,7 +216,7 @@ class FormsPage extends React.Component {
                   <div className="input-block">
                     <Label_Input
                     id="Linkedin"
-                      name="Linkedin : "
+                      name="Linkedin username: "
                       type={this.state.value}
                       value={this.state.Linkedin}
                       onChange={this.handleChange}
@@ -225,7 +225,7 @@ class FormsPage extends React.Component {
                   <div className="input-block">
                     <Label_Input
                     id="Facebook"
-                      name="Facebook : "
+                      name="Facebook username: "
                       type={this.state.value}
                       value={this.state.Facebook}
                       onChange={this.handleChange}

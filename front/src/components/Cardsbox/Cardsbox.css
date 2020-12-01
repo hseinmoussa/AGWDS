@@ -111,6 +111,11 @@
   background-color: goldenrod;
   text-decoration: underline;
 }
+.img11 {
+  width: 85%;
+  height: 400px;
+  margin: 2% auto;
+}
 
 @media screen and (max-width: 1150px) {
   .main {

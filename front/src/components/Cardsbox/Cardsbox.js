@@ -6,6 +6,7 @@ import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Spinner from 'react-bootstrap/Spinner'
 import "./Cardsbox.css";
+import hollway from "../About-us/img/statue.jpg";
 
 
 var cards = []
@@ -84,7 +85,14 @@ function Cardsbox() {
   }else {
   return (
     <div className="body">
+      <h1>Home Page</h1>
+       <img
+              src={hollway}
+              alt="3"
+              className="img11"
+            />
       <div className="main">
+     
         {Pagination.currentData &&
           Pagination.currentData.map((item, index) => (
             <div key={index} className="item">

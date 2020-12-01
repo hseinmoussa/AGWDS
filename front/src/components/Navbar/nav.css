@@ -89,12 +89,10 @@
     transition: all 0.5s ease-out;
     box-sizing: border-box;
   }
-  .nav-menu > li{
+  .nav-menu > li {
     height: 30px;
-    margin-top: 20%;
-    margin-bottom: 50%;
+    margin-bottom: 5%;
     width: 100%;
-
   }
 
   .nav-menu.active {

@@ -23,7 +23,7 @@ exports.isPasswordAndUserMatch = (req, res, next) => {
       ) {
       
         const token = jwt.sign({ _id: user[0]._id }, envs.TOKEN_SECRET, {
-          expiresIn: "10S",
+          expiresIn: "2h",
         },);
         //console.log(envs.TOKEN_SECRET);
         //cookies

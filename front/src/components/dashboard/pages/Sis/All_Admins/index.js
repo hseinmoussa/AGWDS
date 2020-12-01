@@ -114,7 +114,7 @@ export default function All_Admins() {
             <Table>
               <thead>
                 <tr>
-                  <th className="col-1 views">FirstName</th>
+                  <th className="col-3 views">FirstName</th>
                   <th className="col-3">LastName</th>
                   <th className="col-3">Email</th>
                   <th className="col-3">Delete</th> 
