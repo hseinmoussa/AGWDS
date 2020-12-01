@@ -1,9 +1,7 @@
 import React, { useState, memo, useRef } from "react";
 import Modal from "styled-react-modal";
-
 import { Form } from "../../../components/Form";
 import { FiCheckCircle, FiX } from "react-icons/fi";
-
 const StyledModal = Modal.styled`
 
     max-width: 600px;

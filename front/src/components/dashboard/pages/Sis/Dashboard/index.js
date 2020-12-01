@@ -1,8 +1,6 @@
 import React, { useEffect, useState, Suspense, lazy } from "react";
-
 import { ModalProvider } from "styled-react-modal";
 import ReactPaginate from "react-paginate";
-
 import { Card } from "../../../components/Card";
 import { Table } from "../../../components/Table";
 import { Button } from "react-bootstrap";
