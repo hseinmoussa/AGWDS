@@ -23,6 +23,7 @@ const Fetch_Aboutme = require("./database/controller/Fetch_Aboutme.js");
 const Edit_About = require("./database/controller/Edit_Aboutme.js");
 const Fetch_Admins = require("./database/controller/Fetch_Admins.js");
 const Delete_Admin = require("./database/controller/Delete_Admin.js");
+const increment = require("./database/controller/increment_views.js");
 
 const Try = require("./database/controller/Try.js");
 
@@ -114,6 +115,8 @@ app.post("/About", Fetch_Aboutme.Fetch_Aboutme);
 app.post("/EditAbout",upload_about.single("about_img"), Edit_About.Edit_About);
 app.post("/AllAdmins", Fetch_Admins.Fetch_Admins);
 app.post("/DeleteAdmin",auth, Delete_Admin.Delete_Admin);
+app.post("/increment",auth, increment.increment);
+
 
 
 
