@@ -7,14 +7,16 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Spinner from 'react-bootstrap/Spinner'
 import "./Cardsbox.css";
 import hollway from "../About-us/img/statue.jpg";
+import { isCompositeComponent } from "react-dom/test-utils";
 
 
 var cards = []
 
-function Cardsbox() {
+function Cardsbox(props) {
   const [Show, setShow] = useState(false);
   const [imglink, setimglink] = useState("");
   const [cardtitle, setcardtitle] = useState("");
+  const [NewCurrentData,setNewCurrentData]=useState([]);
   const [Pagination, setPagination] = useState({
     data: cards.map((value, index) => ({
       id: index,
@@ -29,6 +31,8 @@ function Cardsbox() {
     pageCount: 0,
     currentData: [],
   });
+  const search = props.search.search
+  const pushed = props.search.pushed
 
   const increment=(id)=>
   {
@@ -56,6 +60,7 @@ function Cardsbox() {
   }
 
   useEffect(() => {
+    if(search == "") {
   try {
     fetch("http://localhost:3001/Cards", {
       method: "post",
@@ -64,7 +69,7 @@ function Cardsbox() {
       }),
     }).then((res) => res.json())
       .then((json) => 
-    setPagination({data: json.message.map((value, index) => ({
+   { setPagination({data: json.message.map((value, index) => ({
       id: index,
       title: value.Title,
       _id: value._id,
@@ -76,16 +81,54 @@ function Cardsbox() {
     numberPerPage: 4,
     pageCount: 0,
     currentData: [],
-  }))
+  })
 
+
+})
   }
+
   catch (err) {
     console.log(err)
   }
-  },[]);
-
+  }},[]);
 
   useEffect(() => {
+    if(search != ""){
+    try {
+      console.log(search)
+      fetch("http://localhost:3001/Cards", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+        }),
+      }).then((res) => res.json())
+        .then((json) => 
+       {  console.log(json.message.filter(item => item.Title == search));
+      setPagination({data: json.message.filter((item => item.Title == search)).map((value, index) => ({
+        id: index,
+        title: value.Title,
+        _id: value._id,
+        description: value.description,
+        img: "http://localhost:3001/Image/" + value.Image,
+        bigimg: "http://localhost:3001/Image/" + value.Image,
+      })),
+      offset: 0,
+      numberPerPage: 4,
+      pageCount: 0,
+      currentData: [Pagination.data],
+     
+    })}
+      )
+    
+    }
+    catch (err) {
+      console.log(err)
+    }
+    }},[search]);
+
+  useEffect(() => {
+    console.log(Pagination.data,Pagination.currentData,NewCurrentData)
+
     setPagination((prevState) => ({
       ...prevState,
       pageCount: prevState.data.length / prevState.numberPerPage,
@@ -94,7 +137,7 @@ function Cardsbox() {
         Pagination.offset + Pagination.numberPerPage
       ),
     }));
-}, [Pagination.numberPerPage, Pagination.offset]);
+}, [,Pagination.numberPerPage, Pagination.offset,Pagination.data]);
 
   const handlePageClick = (event) => {
     const selected = event.selected;
@@ -103,11 +146,10 @@ function Cardsbox() {
   };
 
 
-
-
   if (Pagination.data.length == 0) {
     return <Spinner animation="grow" variant="warning" />
   }else {
+    console.log(Pagination.data,Pagination.currentData,NewCurrentData)
   return (
     <div className="body">
       <h1>Home Page</h1>
