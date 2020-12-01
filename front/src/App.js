@@ -19,15 +19,24 @@ import NotFound from './components/Not_Found/NotFound'
 const Dashboard = () => <Routes />;
 
 class App extends React.Component {
+  state = { search: "", pushed: false };
+
+
+  handleSearch = (props) => {
+    this.setState({ search: props.search , pushed : true })
+  }
+
+  
   render() {
+  
     return (
       <Router>
   
           <div className="App">
-            <Navbar />
+            <Navbar handleSearch={this.handleSearch} />
             <Switch>
               <Route exact path="/">
-                <Cardsbox />
+                <Cardsbox search={this.state} />
               </Route>
               <Route path="/about">
                 <Aboutus />
