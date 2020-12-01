@@ -37,9 +37,11 @@ const auth = (req, res, next) => {
     req.Admin = verified;
     next();
   } catch (error) {
+    res.clearCookie('token')
     return res.send({
       status: 400,
-      message: "Invalid tokenn",
+      redirect: true, location: '/',
+      message: "Expired cookies",
     });
   }
 };

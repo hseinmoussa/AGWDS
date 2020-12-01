@@ -43,7 +43,6 @@ hr {
   display: block;
   height: 10vh;
   width: 100%;
-  padding: auto;
 }
 .footer-text {
   display: flex;
@@ -58,4 +57,14 @@ hr {
 }
 .click:hover {
   opacity: 0.3;
+}
+
+@media screen and (max-width: 960px) {
+  .App-footer {
+    height: 165px;
+  }
+  .click {
+    width: 45px !important;
+    height: 45px !important;
+  }
 }

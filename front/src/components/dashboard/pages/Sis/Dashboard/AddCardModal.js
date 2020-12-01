@@ -161,7 +161,11 @@ function ModalExperience2({ isOpen, toggleModal, submit, arr, setArray2 }) {
       })
         .then((res) => res.json())
         .then((json) => {
-          if (json.status == 400) alert(json.message);
+          if (json.status == 400) {alert(json.message);
+            if(json.redirect == true){
+              window.location.replace(json.location)
+            }
+          }
            
           else {
             setSub(sub + 1);

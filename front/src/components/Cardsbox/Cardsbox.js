@@ -6,6 +6,7 @@ import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Spinner from 'react-bootstrap/Spinner'
 import "./Cardsbox.css";
+import hollway from "../About-us/img/statue.jpg";
 
 
 var cards = []
@@ -17,6 +18,7 @@ function Cardsbox() {
   const [Pagination, setPagination] = useState({
     data: cards.map((value, index) => ({
       id: index,
+      _id: value._id,
       title: value.Title,
       description: value.description,
       img:value.Image,
@@ -28,7 +30,30 @@ function Cardsbox() {
     currentData: [],
   });
 
+  const increment=(id)=>
+  {
+    try {
+      fetch("http://localhost:3001/increment", {
+        method: "post",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          _id:id
+        }),
+      }).then((res) => res.json())
+        .then((json) => {
+          if(json.status==400 || json.status==401)
+          alert(json.message);
+          else
+          console.log(json.message);
+        }
+    )
   
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
 
   useEffect(() => {
   try {
@@ -42,6 +67,7 @@ function Cardsbox() {
     setPagination({data: json.message.map((value, index) => ({
       id: index,
       title: value.Title,
+      _id: value._id,
       description: value.description,
       img: "http://localhost:3001/Image/" + value.Image,
       bigimg: "http://localhost:3001/Image/" + value.Image,
@@ -84,7 +110,14 @@ function Cardsbox() {
   }else {
   return (
     <div className="body">
+      <h1>Home Page</h1>
+       <img
+              src={hollway}
+              alt="3"
+              className="img11"
+            />
       <div className="main">
+     
         {Pagination.currentData &&
           Pagination.currentData.map((item, index) => (
             <div key={index} className="item">
@@ -97,6 +130,7 @@ function Cardsbox() {
                   src={item.img}
                   alr=""
                   onClick={() => {
+                    increment(item._id);
                     setShow(true);
                     setimglink(item.bigimg);
                     setcardtitle(item.title);

@@ -162,6 +162,7 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
             Title: json.message[0].Title,
             Description: json.message[0].description,
             Categories: json.message[0].categories,
+            Views: json.message[0].Views,
             Image: json.message[0].Image,
           })
         );
@@ -178,7 +179,7 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
       body.append("description", data.Description);
       body.append("categories", data.Categories);
       body.append("Image", data.Image);
-      body.append("Views", 0);
+      body.append("Views", data.Views);
 
       fetch("http://localhost:3001/EditCard", {
         method: "post",

@@ -30,37 +30,85 @@ const Buttons = styled.div`
 class FormsPage extends React.Component {
   constructor() {
     super();
-    this.state = { FirstName: "", LastName: "", Updated: false };
+    this.state = { FirstName: "", LastName: "",
+    Facebook:"",
+    oldEmail:"",
+    Twitter:"",
+    Gmail:"",
+    Linkedin:"",
+    Github:"",
+    FirstName:"",
+    LastName:"",
+    Email:"",
+    Updated: false };
+  }
+  
+  componentDidMount() {
+    fetch("http://localhost:3001/Fetch_Social", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        //facebook: this.state.input,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) =>
+        this.setState({
+          Facebook: json.message.facebook,
+          Twitter: json.message.twitter,
+          Gmail: json.message.gmail,
+          Linkedin: json.message.linkedin,
+          Github: json.message.github,
+        })
+      );
+      try {
+        fetch("http://localhost:3001/Contact", {
+          method: "post",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({}),
+        })
+          .then((res) => res.json())
+          .then((json) =>
+          {
+            this.setState({FirstName:json.message.FirstName ,
+              LastName: json.message.LastName,
+              Email:json.message.email,
+              oldEmail:json.message.email})
+          }
+          );
+      } catch (err) {
+        console.log(err);
+      }
   }
 
+ 
   handleChange = (event) => {
-    switch (event.target.name) {
-      case "Your old Email : ":
-        this.setState({ OldEmail: event.target.value });
-        break;
-      case "FirstName : ":
+    switch (event.target.id) {
+   
+      case "FirstName":
         this.setState({ FirstName: event.target.value });
         break;
-      case "LastName : ":
+      case "LastName":
         this.setState({ LastName: event.target.value });
         break;
       
-      case "Email Address : ":
+      case "newmail":
         this.setState({ Email: event.target.value });
         break;
-      case "Facebook : ":
+      case "Facebook":
         this.setState({ Facebook: event.target.value });
         break;
-      case "Twitter : ":
+      case "Twitter":
         this.setState({ Twitter: event.target.value });
         break;
-      case "Github : ":
+      case "Github":
         this.setState({ Github: event.target.value });
         break;
-      case "Linkedin : ":
+      case "Linkedin":
         this.setState({ Linkedin: event.target.value });
         break;
-      case "Gmail : ":
+      case "Gmail":
         this.setState({ Gmail: event.target.value });
         break;
     }
@@ -74,10 +122,9 @@ class FormsPage extends React.Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        OldEmail: this.state.OldEmail,
+        oldEmail:this.state.oldEmail,
         FirstName: this.state.FirstName,
         LastName: this.state.LastName,
-        
         email: this.state.Email,
         facebook: this.state.Facebook,
         twitter: this.state.Twitter,
@@ -113,29 +160,26 @@ class FormsPage extends React.Component {
           <Form onSubmit={this.handleSubmit} className="col-12 px-auto">
             <Card>
               <div className="card-title">
-                <h3>Simple Form</h3>
+                <h3>Edit Contact</h3>
               </div>
               <div className="card-body">
                 <div>
+              
                   <div className="input-block">
                     <Label_Input
-                      name="Your old Email : "
-                      type={this.state.value}
-                      onChange={this.handleChange}
-                      required={true}
-                    />
-                  </div>
-                  <div className="input-block">
-                    <Label_Input
+                    id="FirstName"
                       name="FirstName : "
                       type={this.state.value}
+                      value={this.state.FirstName}
                       onChange={this.handleChange}
                     />
                   </div>
                   <div className="input-block">
                     <Label_Input
+                    id="LastName"
                       name="LastName : "
                       type={this.state.value}
+                      value={this.state.LastName}
                       onChange={this.handleChange}
                     />
                   </div>
@@ -143,43 +187,56 @@ class FormsPage extends React.Component {
                 
                   <div className="input-block">
                     <Label_Input
+                    id="newmail"
                       name="Email Address : "
                       type={this.state.value}
+                      value={this.state.Email}
                       onChange={this.handleChange}
                     />
                   </div>
+                  
                   <div className="input-block">
                     <Label_Input
-                      name="Twitter : "
+                    id="Twitter"
+                      name="Twitter username: "
                       type={this.state.value}
+                      value={this.state.Twitter}
                       onChange={this.handleChange}
                     />
                   </div>
                   <div className="input-block">
                     <Label_Input
-                      name="Github : "
+                    id="Github"
+                      name="Github username: "
                       type={this.state.value}
+                      value={this.state.Github}
                       onChange={this.handleChange}
                     />
                   </div>
                   <div className="input-block">
                     <Label_Input
-                      name="Linkedin : "
+                    id="Linkedin"
+                      name="Linkedin username: "
                       type={this.state.value}
+                      value={this.state.Linkedin}
                       onChange={this.handleChange}
                     />
                   </div>
                   <div className="input-block">
                     <Label_Input
-                      name="Facebook : "
+                    id="Facebook"
+                      name="Facebook username: "
                       type={this.state.value}
+                      value={this.state.Facebook}
                       onChange={this.handleChange}
                     />
                   </div>
                   <div className="input-block">
                     <Label_Input
+                    id="Gmail"
                       name="Gmail : "
                       type={this.state.value}
+                      value={this.state.Gmail}
                       onChange={this.handleChange}
                     />
                   </div>

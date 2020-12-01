@@ -38,6 +38,7 @@ exports.Edit_Card = async function (req, res) {
         })
         .then(async (data) => {
           image = data[0].Image;
+          if (fs.existsSync("public/Image/" + image)) 
           await unlinkAsync("public/Image/" + image);
         });
 
