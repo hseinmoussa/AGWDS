@@ -1,6 +1,6 @@
 import React from "react";
 import "./section2.css";
-import painter from "./img/painter.jpg";
+// import painter from "./img/painter.jpg";
 // import golden from "./img/golden.mp4";
 // import golden1 from "./img/golden1.webm";
 import  { useEffect, useState, } from "react";

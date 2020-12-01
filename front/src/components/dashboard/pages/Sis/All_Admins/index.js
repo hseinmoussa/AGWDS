@@ -1,7 +1,5 @@
-import React, { useEffect, useState, Suspense, lazy } from "react";
-
+import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-
 import { Card } from "../../../components/Card";
 import { Table } from "../../../components/Table";
 
@@ -47,6 +45,11 @@ export default function All_Admins() {
         })
           .then((res) => res.json())
           .then((json) => {
+            if (json.status == 400) {alert(json.message);
+              if(json.redirect == true){
+                window.location.replace(json.location)
+              }
+            }
             setArray2(arr + 1);
            
           });

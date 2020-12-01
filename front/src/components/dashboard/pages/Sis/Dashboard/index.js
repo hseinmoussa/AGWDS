@@ -6,9 +6,9 @@ import ReactPaginate from "react-paginate";
 import { Card } from "../../../components/Card";
 import { Table } from "../../../components/Table";
 import { Button } from "react-bootstrap";
-import Cookies from "universal-cookie";
 
-const cookies = new Cookies();
+
+
 let ModalForm = () => <></>;
 let AddCardModal = () => <></>;
 export default function Dashboard() {
@@ -78,6 +78,11 @@ export default function Dashboard() {
         })
           .then((res) => res.json())
           .then((json) => {
+            if (json.status == 400) {alert(json.message);
+              if(json.redirect == true){
+                window.location.replace(json.location)
+              }
+            }
             setArray2(arr + 1);
            
           });

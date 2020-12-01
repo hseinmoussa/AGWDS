@@ -4,9 +4,7 @@ import { Button } from "../../../components/Button";
 import Label_Input from "../Label_Input.js";
 import { Form } from "../../../components/Form";
 import styled from "styled-components";
-import Cookies from "universal-cookie";
-import { Redirect } from "react-router-dom";
-const cookies = new Cookies();
+
 
 
 const Buttons = styled.div`
@@ -91,6 +89,10 @@ class ChangePass extends React.Component {
             })
             .then((json) => {
               if (json.error){ alert(json.error);}
+              if (json.status == 400) {alert(json.message);
+                if(json.redirect == true){
+                  window.location.replace(json.location)
+                }}
               else this.setState({ Updated: true });
             })
             .catch((err) => console.log(err));

@@ -40,8 +40,8 @@ const auth = (req, res, next) => {
     res.clearCookie('token')
     return res.send({
       status: 400,
-      redirect: true, location: '/',
-      message: "Expired cookies",
+      redirect: true, location: '/login',
+      message: "Expired Session Please Sign In Again",
     });
   }
 };

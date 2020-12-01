@@ -4,7 +4,8 @@ export const Side = styled.div`
   transition: all 0.5s;
   background-image: linear-gradient(
     180deg,
-    rgba(252, 0, 0, 0.6) 0%,
+    ${'' /* rgba(252, 0, 0, 0.6) 0%, */}
+    rgb(173, 147, 88) 1%,
     rgba(198, 147, 32, 0.8) 50%,
     rgba(198, 147, 32, 0.8) 100%
   );
@@ -29,12 +30,13 @@ export const Side = styled.div`
   ul {
     list-style: none;
     margin-top: 20px;
+    
 
     /* padding: 15px 0; */
 
     li {
       cursor: pointer;
-
+      
       display: flex;
 
       a {

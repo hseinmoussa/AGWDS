@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Label_Input from "../Label_Input.js";
-
-// Icons
-import { FiFile } from "react-icons/fi";
-
 import { Card } from "../../../components/Card";
 import { Button } from "../../../components/Button";
 import { Form } from "../../../components/Form";
-import Cookies from "universal-cookie";
 // This styled only show buttons in row format
 import styled from "styled-components";
-import {
-  Redirect,
-} from "react-router-dom";
-const cookies = new Cookies();
+
 
 const Buttons = styled.div`
   display: flex;
@@ -136,16 +128,14 @@ class FormsPage extends React.Component {
       .then((res) => res.json())
       .then((json) =>{
         if (json.status == 401 || json.status == 400)  return alert(json.message);
-
+        if(json.redirect == true){
+          window.location.replace(json.location)
+        }
         this.setState({
           Updated: true,
         })
-        window.location.reload();
-        <Redirect
-        to={{
-          pathname: "/",
-        }}
-      />}
+        window.location.replace("/dashboard")
+      }
       );
     event.preventDefault();
   };

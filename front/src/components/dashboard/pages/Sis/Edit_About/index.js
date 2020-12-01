@@ -12,10 +12,6 @@ import { Form } from "../../../components/Form";
 
 // This styled only show buttons in row format
 import styled from "styled-components";
-import Column from "antd/lib/table/Column";
-import Cookies from "universal-cookie";
-import { Row } from "antd";
-const cookies = new Cookies();
 const Buttons = styled.div`
   display: flex;
 
@@ -53,7 +49,12 @@ class EditAbout extends React.Component {
       }),
     })
       .then((res) => res.json())
-      .then((json) =>
+      .then((json) => {
+        if (json.status == 400) {alert(json.message);
+          if(json.redirect == true){
+            window.location.replace(json.location)
+          }
+        }
         this.setState({
    
           title: json.message.title,
@@ -63,7 +64,7 @@ class EditAbout extends React.Component {
           about_description2: json.message.about_description2,
           Name:json.message.Name,
         })
-      );
+      });
   }
   handleChange = (event) => {
     switch (event.target.id) {
@@ -126,6 +127,11 @@ class EditAbout extends React.Component {
             })
             .then((json) => {
               if (json.status == 401 || json.status == 400) alert(json.message);
+              if (json.status == 400) {alert(json.message);
+                if(json.redirect == true){
+                  window.location.replace(json.location)
+                }
+              }
               
               else alert("updated successfully");
               

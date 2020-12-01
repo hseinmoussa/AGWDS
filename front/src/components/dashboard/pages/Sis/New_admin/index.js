@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 // Icons
 // import { FiCalendar, FiMessageCircle, FiLogOut, FiUsers } from 'react-icons/fi';
@@ -8,15 +8,9 @@ import { Button } from "../../../components/Button";
 import Label_Input from "../Label_Input.js";
 import { Form } from "../../../components/Form";
 
-import {
-  Redirect,
-} from "react-router-dom";
-
 // This styled only show buttons in row format
 import styled from "styled-components";
-import Column from "antd/lib/table/Column";
 import Cookies from "universal-cookie";
-import { Row } from "antd";
 const cookies = new Cookies();
 const Buttons = styled.div`
   display: flex;
@@ -111,21 +105,20 @@ class CardsPage extends React.Component {
             })
             .then((json) => {
               if (json.status == 401 || json.status == 400) alert(json.message);
-              
+              if(json.redirect == true){
+                window.location.replace(json.location)
+              }
               else {alert("New Admin Added");
-              window.location.reload();
-              <Redirect
-              to={{
-                pathname: "/",
-              }}
-            />}
+              window.location.replace("/dashboard")
+        
+            }
               
             })
             .catch((err) => console.log(err));
-          event.preventDefault();
         } catch (err) {
           console.log(err);
         }
+      
       }
     });
   };

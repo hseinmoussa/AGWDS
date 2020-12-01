@@ -112,11 +112,11 @@ app.post("/DeleteCard", auth, Delete_Cards.Delete_Cards);
 app.post("/EditCard", auth, upload.single("Image"), Edit_Card.Edit_Card);
 app.post("/SearchCard", auth, Search_Card.Search_Card);
 app.post("/About", Fetch_Aboutme.Fetch_Aboutme);
-app.post("/EditAbout",upload_about.single("about_img"), Edit_About.Edit_About);
+app.post("/EditAbout",auth,  upload_about.single("about_img"), Edit_About.Edit_About);
 app.post("/AllAdmins", Fetch_Admins.Fetch_Admins);
-app.post("/DeleteAdmin",auth, Delete_Admin.Delete_Admin);
-app.post("/increment",auth, increment.increment);
-
+app.post("/DeleteAdmin", auth , Delete_Admin.Delete_Admin);
+app.post("/increment", increment.increment);
+app.post("/auth", auth);
 
 
 

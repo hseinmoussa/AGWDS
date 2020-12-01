@@ -1,11 +1,9 @@
-import React, { useState, memo, useRef, useEffect } from "react";
+import React, { useState, memo, useRef } from "react";
 import Modal from "styled-react-modal";
 
 import { Form } from "../../../components/Form";
 import { FiCheckCircle, FiX } from "react-icons/fi";
-import Cookies from "universal-cookie";
 
-const cookies = new Cookies();
 const StyledModal = Modal.styled`
 
     max-width: 600px;

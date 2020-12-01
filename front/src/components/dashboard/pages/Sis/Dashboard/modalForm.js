@@ -1,12 +1,7 @@
 import React, { useState, memo, useRef, useEffect } from "react";
 import Modal from "styled-react-modal";
-
 import { Form } from "../../../components/Form";
-import Alert from "../../../components/Alert";
 import { FiCheckCircle, FiX } from "react-icons/fi";
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
 const StyledModal = Modal.styled`
 
     max-width: 600px;
@@ -157,7 +152,12 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
         body: JSON.stringify({ _id: _id }),
       })
         .then((res) => res.json())
-        .then((json) =>
+        .then((json) => {
+          if (json.status == 401 || json.status == 400 ) {alert(json.message);
+            if(json.redirect == true){
+              window.location.replace(json.location)
+            }
+          }
           setData({
             Title: json.message[0].Title,
             Description: json.message[0].description,
@@ -165,6 +165,7 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
             Views: json.message[0].Views,
             Image: json.message[0].Image,
           })
+        }
         );
     } catch (err) {
       console.log(err);
@@ -189,9 +190,13 @@ function ModalExperience({ isOpen, toggleModal, submit, _id, arr, setArray2 }) {
       })
         .then((res) => res.json())
         .then((json) => {
-          if (json.status == 400) {
-            alert(json.message);
-          } else {
+          if (json.status == 400) {alert(json.message);
+            if(json.redirect == true){
+              window.location.replace(json.location)
+            }
+          }
+          
+          else {
             setSub(sub + 1);
             setArray2(arr + 1);
           }
