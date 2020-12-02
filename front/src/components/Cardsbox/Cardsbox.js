@@ -17,6 +17,8 @@ function Cardsbox(props) {
   const [imglink, setimglink] = useState("");
   const [cardtitle, setcardtitle] = useState("");
   const [NewCurrentData,setNewCurrentData]=useState([]);
+  const [empty, setEmpty] = useState(false);
+
   const [Pagination, setPagination] = useState({
     data: cards.map((value, index) => ({
       id: index,
@@ -31,6 +33,7 @@ function Cardsbox(props) {
     pageCount: 0,
     currentData: [],
   });
+  
   const search = props.search.search
   const pushed = props.search.pushed
 
@@ -95,7 +98,6 @@ function Cardsbox(props) {
   useEffect(() => {
     if(search != ""){
     try {
-      console.log(search)
       fetch("http://localhost:3001/Cards", {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -103,8 +105,10 @@ function Cardsbox(props) {
         }),
       }).then((res) => res.json())
         .then((json) => 
-       {  console.log(json.message.filter(item => item.Title == search));
-      setPagination({data: json.message.filter((item => item.Title == search)).map((value, index) => ({
+       
+       {  
+        if(json.message.filter(item => {return (String(item.Title).includes(String(search)) || String(item.description).includes(String(search)) )}).length>0)
+      {setPagination({data: json.message.filter((item => {return (String(item.Title).includes(String(search)) || String(item.description).includes(String(search)) )})).map((value, index) => ({
         id: index,
         title: value.Title,
         _id: value._id,
@@ -117,7 +121,12 @@ function Cardsbox(props) {
       pageCount: 0,
       currentData: [Pagination.data],
      
-    })}
+    })
+    setEmpty(false);
+  }
+  else
+  setEmpty(true);
+  }
       )
     
     }
@@ -127,7 +136,6 @@ function Cardsbox(props) {
     }},[search]);
 
   useEffect(() => {
-    console.log(Pagination.data,Pagination.currentData,NewCurrentData)
 
     setPagination((prevState) => ({
       ...prevState,
@@ -149,7 +157,6 @@ function Cardsbox(props) {
   if (Pagination.data.length == 0) {
     return <Spinner animation="grow" variant="warning" />
   }else {
-    console.log(Pagination.data,Pagination.currentData,NewCurrentData)
   return (
     <div className="body">
       <h1>Home Page</h1>
@@ -158,8 +165,9 @@ function Cardsbox(props) {
               alt="3"
               className="img11"
             />
+             {empty ?<div style={{color:"red",fontSize:"2em"}}>Couldn't find any card</div>:""}
       <div className="main">
-     
+    
         {Pagination.currentData &&
           Pagination.currentData.map((item, index) => (
             <div key={index} className="item">

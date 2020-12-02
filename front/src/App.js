@@ -12,10 +12,14 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
 } from "react-router-dom";
 import Protection from './components/LoginPage/Protection';
 import NotFound from './components/Not_Found/NotFound'
 
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 const Dashboard = () => <Routes />;
 
 class App extends React.Component {
@@ -48,9 +52,19 @@ class App extends React.Component {
               </Protection>
               
               <Route path="/login">
-                <Cardsbox/>
-                <LoginPage />
-              </Route>
+              {!cookies.get("token") ? (
+                <>
+                  <LoginPage />
+                  <Cardsbox search={this.state}/>
+                </>
+              ) : (
+                <Redirect
+                  to={{
+                    pathname: "/dashboard",
+                  }}
+                />
+              )}
+            </Route>
               <Route> <NotFound /></Route>
             </Switch>
           </div>
@@ -62,3 +76,4 @@ class App extends React.Component {
 }
 
 export default App;
+
