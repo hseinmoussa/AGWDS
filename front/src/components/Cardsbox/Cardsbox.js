@@ -18,7 +18,7 @@ function Cardsbox(props) {
   const [Show, setShow] = useState(false);
   const [imglink, setimglink] = useState("");
   const [cardtitle, setcardtitle] = useState("");
-  const [NewCurrentData,setNewCurrentData]=useState([]);
+  const [NewCurrentData, setNewCurrentData] = useState([]);
   const [empty, setEmpty] = useState(false);
 
   const [Pagination, setPagination] = useState({
@@ -35,112 +35,111 @@ function Cardsbox(props) {
     pageCount: 0,
     currentData: [],
   });
-  
-  const search = props.search.search
-  const pushed = props.search.pushed
 
+  const search = props.search.search;
+  const pushed = props.search.pushed;
 
-  const increment=(id)=>
-  {
+  const increment = (id) => {
     try {
       fetch("http://localhost:3001/increment", {
         method: "post",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          _id:id
+          _id: id,
         }),
-      }).then((res) => res.json())
+      })
+        .then((res) => res.json())
         .then((json) => {
-          if(json.status==400 || json.status==401)
-          alert(json.message);
-          else
-          console.log(json.message);
-        }
-    )
-  
+          if (json.status == 400 || json.status == 401) alert(json.message);
+          else console.log(json.message);
+        });
+    } catch (err) {
+      console.log(err);
     }
-    catch (err) {
-      console.log(err)
-    }
-  }
+  };
 
   useEffect(() => {
-    if(search == "") {
-  try {
-    fetch("http://localhost:3001/Cards", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-      }),
-    }).then((res) => res.json())
-      .then((json) => 
-   { setPagination({data: json.message.map((value, index) => ({
-      id: index,
-      title: value.Title,
-      _id: value._id,
-      description: value.description,
-      img: "http://localhost:3001/Image/" + value.Image,
-      bigimg: "http://localhost:3001/Image/" + value.Image,
-    })),
-    offset: 0,
-    numberPerPage: 4,
-    pageCount: 0,
-    currentData: [],
-  })
-
-
-})
-  }
-
-  catch (err) {
-    console.log(err)
-  }
-  }},[]);
+    if (search == "") {
+      try {
+        fetch("http://localhost:3001/Cards", {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({}),
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            setPagination({
+              data: json.message.map((value, index) => ({
+                id: index,
+                title: value.Title,
+                _id: value._id,
+                description: value.description,
+                img: "http://localhost:3001/Image/" + value.Image,
+                bigimg: "http://localhost:3001/Image/" + value.Image,
+              })),
+              offset: 0,
+              numberPerPage: 4,
+              pageCount: 0,
+              currentData: [],
+            });
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, []);
 
   useEffect(() => {
-    if(search != ""){
-    try {
-      fetch("http://localhost:3001/Cards", {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
+    if (search != "") {
+      try {
+        fetch("http://localhost:3001/Cards", {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
 
-        body: JSON.stringify({
-        }),
-      }).then((res) => res.json())
-        .then((json) => 
-       
-       {  
-        if(json.message.filter(item => {return (String(item.Title).includes(String(search)) || String(item.description).includes(String(search)) )}).length>0)
-      {setPagination({data: json.message.filter((item => {return (String(item.Title).includes(String(search)) || String(item.description).includes(String(search)) )})).map((value, index) => ({
-        id: index,
-        title: value.Title,
-        _id: value._id,
-        description: value.description,
-        img: "http://localhost:3001/Image/" + value.Image,
-        bigimg: "http://localhost:3001/Image/" + value.Image,
-      })),
-      offset: 0,
-      numberPerPage: 4,
-      pageCount: 0,
-      currentData: [Pagination.data],
-     
-    })
-    setEmpty(false);
-  }
-  else
-  setEmpty(true);
-  }
-      )
-    
+          body: JSON.stringify({}),
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            if (
+              json.message.filter((item) => {
+                return (
+                  String(item.Title).includes(String(search)) ||
+                  String(item.description).includes(String(search))
+                );
+              }).length > 0
+            ) {
+              setPagination({
+                data: json.message
+                  .filter((item) => {
+                    return (
+                      String(item.Title).includes(String(search)) ||
+                      String(item.description).includes(String(search))
+                    );
+                  })
+                  .map((value, index) => ({
+                    id: index,
+                    title: value.Title,
+                    _id: value._id,
+                    description: value.description,
+                    img: "http://localhost:3001/Image/" + value.Image,
+                    bigimg: "http://localhost:3001/Image/" + value.Image,
+                  })),
+                offset: 0,
+                numberPerPage: 4,
+                pageCount: 0,
+                currentData: [Pagination.data],
+              });
+              setEmpty(false);
+            } else setEmpty(true);
+          });
+      } catch (err) {
+        console.log(err);
+      }
     }
-    catch (err) {
-      console.log(err)
-    }
-    }},[search]);
+  }, [search]);
 
   useEffect(() => {
-
     setPagination((prevState) => ({
       ...prevState,
       pageCount: prevState.data.length / prevState.numberPerPage,
@@ -149,8 +148,7 @@ function Cardsbox(props) {
         Pagination.offset + Pagination.numberPerPage
       ),
     }));
-
-}, [,Pagination.numberPerPage, Pagination.offset,Pagination.data]);
+  }, [, Pagination.numberPerPage, Pagination.offset, Pagination.data]);
 
   const handlePageClick = (event) => {
     const selected = event.selected;
@@ -158,14 +156,12 @@ function Cardsbox(props) {
     setPagination({ ...Pagination, offset });
   };
 
-
-
   if (Pagination.data.length == 0) {
-    return <Spinner animation="grow" variant="warning" />
-  }else {
-  return (
-    <div className="body">
-          <div id="boxes">
+    return <Spinner animation="grow" variant="warning" />;
+  } else {
+    return (
+      <div className="body">
+        <div id="boxes">
           <div className="div__boxes">
             <span className="heading-home">Art</span>
             <img src={Castle} className="header-home" />
@@ -179,74 +175,81 @@ function Cardsbox(props) {
             <img src={Castle3} className="header-home-3" />
           </div>
         </div>
-             {empty ?<div style={{color:"red",fontSize:"2em"}}>Couldn't find any card</div>:""}
-             <div className="main">
-    
-    {Pagination.currentData &&
-      Pagination.currentData.map((item, index) => (
-        <div key={index} className="item">
-          <Card id="Card" style={{ width: "18rem" }}>
-            <Card.Img
-              id="img"
-              width="100"
-              height="150"
-              variant="top"
-              src={item.img}
-              alr=""
-              onClick={() => {
-                increment(item._id);
-                setShow(true);
-                setimglink(item.bigimg);
-                setcardtitle(item.title);
-              }}
-            />
-            <Card.Body>
-              <Card.Title>{item.title}</Card.Title>
-              <Card.Text>{item.description}</Card.Text>
+        {empty ? (
+          <div style={{ color: "red", fontSize: "2em" }}>
+            Couldn't find any card
+          </div>
+        ) : (
+          ""
+        )}
+        <div className="main">
+          {Pagination.currentData &&
+            Pagination.currentData.map((item, index) => (
+              <div key={index} className="item">
+                <Card id="Card">
+                  <Card.Img
+                    id="img"
+                    variant="top"
+                    src={item.img}
+                    alr=""
+                    onClick={() => {
+                      increment(item._id);
+                      setShow(true);
+                      setimglink(item.bigimg);
+                      setcardtitle(item.title);
+                    }}
+                  />
+                  <Card.Body className="home-card-body">
+                    <Card.Title className="home-card-title">
+                      {item.title}
+                    </Card.Title>
+                    <Card.Text>{item.description}</Card.Text>
 
-              <OverlayTrigger
-                trigger="click"
-                placement="bottom"
-                rootClose={true}
-                overlay={
-                  <Popover
-                    className="popover"
-                    id="popover-positioned-bottom">
-                    <Popover.Title as="h3">Description</Popover.Title>
-                    <Popover.Content>{item.description}</Popover.Content>
-                  </Popover> }>
-
-                <Button id="card--btn" variant="warning">
-                  Read more
-                </Button>
-              </OverlayTrigger>
-            </Card.Body>
-          </Card>
+                    <OverlayTrigger
+                      trigger="click"
+                      placement="bottom"
+                      rootClose={true}
+                      overlay={
+                        <Popover
+                          className="popover"
+                          id="popover-positioned-bottom"
+                        >
+                          <Popover.Title as="h3">Description</Popover.Title>
+                          <Popover.Content>{item.description}</Popover.Content>
+                        </Popover>
+                      }
+                    >
+                      <Button id="card--btn" variant="warning">
+                        Read more
+                      </Button>
+                    </OverlayTrigger>
+                  </Card.Body>
+                </Card>
+              </div>
+            ))}
         </div>
-      ))}
-  </div>
-  <Modal
-    show={Show}
-    onHide={() => setShow(false)}
-    size="l"
-    aria-labelledby="example-modal-sizes-title-lg"
-  >
-    <Modal.Header closeButton></Modal.Header>
-    <p id="titlee">{cardtitle}</p>
-    <img alt="" src={imglink} className="img-fluid" />
-  </Modal>
-  <ReactPaginate
-    previousLabel={" ← Previous"}
-    nextLabel={"Next → "}
-    pageCount={Pagination.pageCount}
-    marginPagesDisplayed={2}
-    pageRangeDisplayed={5}
-    onPageChange={handlePageClick}
-    containerClassName={"pagination"}
-    activeClassName={"active"}
-  />
-</div>
-);
-                }      
+        <Modal
+          show={Show}
+          onHide={() => setShow(false)}
+          size="l"
+          aria-labelledby="example-modal-sizes-title-lg"
+        >
+          <Modal.Header closeButton></Modal.Header>
+          <p id="titlee">{cardtitle}</p>
+          <img alt="" src={imglink} className="img-fluid" />
+        </Modal>
+        <ReactPaginate
+          previousLabel={" ← Previous"}
+          nextLabel={"Next → "}
+          pageCount={Pagination.pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          activeClassName={"active"}
+        />
+      </div>
+    );
+  }
 }
 export default Cardsbox;
