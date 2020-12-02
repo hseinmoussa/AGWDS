@@ -1,10 +1,19 @@
 .modal-header {
+  display: block;
   padding: 0px;
-
-  background-color: goldenrod;
-  border-bottom: goldenrod;
+  position: absolute;
+  overflow: hidden;
 }
-
+.modal-header:hover {
+  background-color: blanchedalmond;
+}
+.modal-content {
+  background-image: linear-gradient(
+    to right,
+    rgba(252, 194, 1, 0.8) 0%,
+    rgba(58, 57, 56, 0.8) 100%
+  );
+}
 .modal-header .close {
   padding: 0;
   width: 30px;
@@ -17,21 +26,126 @@
   margin-bottom: 0;
   padding-bottom: 0;
 }
+#titlee {
+  position: relative;
+  font-weight: lighter;
+  font-size: 3rem;
+  text-transform: uppercase;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(
+    to right,
+    rgba(58, 57, 56, 0.8) 0%,
+    rgba(252, 194, 1, 0.8) 100%
+  );
+  display: inline-block;
+  color: transparent;
+  margin: auto;
+}
+.main__card {
+  width: 36rem;
+  height: 36rem;
+}
 
+.Card__img {
+  width: 100%;
+  height: auto;
+}
+#boxes {
+  content: "";
+  display: table;
+  clear: both;
+  margin: auto;
+}
+.div__boxes {
+  float: left;
+  margin: 0;
+}
+.heading-home {
+  display: block;
+  font-size: 9rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
+  animation-name: moveInbottom;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(
+    to right,
+    rgba(58, 57, 56, 0.8) 0%,
+    rgba(252, 194, 1, 0.8) 100%
+  );
+
+  color: transparent;
+}
+.heading-home-2 {
+  display: block;
+  font-size: 9rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
+  animation-name: moveInbottom;
+  animation-duration: 1s;
+  animation-delay: 0.2s;
+  animation-timing-function: ease-out;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(
+    to right,
+    rgba(58, 57, 56, 0.8) 0%,
+    rgba(252, 194, 1, 0.8) 100%
+  );
+
+  color: transparent;
+}
+.heading-home-3 {
+  display: block;
+  font-size: 9rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
+  animation-name: moveInbottom;
+  animation-duration: 1s;
+  animation-delay: 0.4s;
+  animation-timing-function: ease-out;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(
+    to right,
+    rgba(58, 57, 56, 0.8) 0%,
+    rgba(252, 194, 1, 0.8) 100%
+  );
+
+  color: transparent;
+}
+.header-home {
+  height: 95vh;
+
+  background-size: cover;
+  background-position: top;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  position: relative;
+}
+.header-home-2 {
+  height: 95vh;
+
+  background-size: cover;
+  background-position: top;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 75vh);
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 75vh);
+  position: relative;
+}
+.header-home-3 {
+  height: 95vh;
+
+  background-size: cover;
+  background-position: top;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 75vh);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 75vh);
+  position: relative;
+}
 .sr-only {
   background-color: goldenrod;
-}
-
-.modal-content {
-  background-color: goldenrod;
-
-  border: 1px goldenrod solid;
-}
-
-#titlee {
-  position: absolute;
-  background-color: goldenrod;
-  padding-left: 1%;
 }
 
 .popover > h3 {
@@ -90,7 +204,6 @@
   height: auto;
   padding-bottom: 1%;
   padding-top: 1%;
-  border: goldenrod solid 1px;
 }
 
 .pagination {
@@ -141,6 +254,81 @@
     padding-bottom: 0;
     display: block;
   }
+  .header-home {
+    height: 45vh;
+
+    background-size: cover;
+    background-position: top;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    position: relative;
+  }
+  .header-home-2 {
+    height: 45vh;
+
+    background-size: cover;
+    background-position: top;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 75vh);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 75vh);
+    position: relative;
+  }
+  .header-home-3 {
+    height: 45vh;
+
+    background-size: cover;
+    background-position: top;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 75vh);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 75vh);
+    position: relative;
+  }
+  .heading-home {
+    display: block;
+    font-size: 4rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: moveInbottom;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(
+      to right,
+      rgba(58, 57, 56, 0.8) 0%,
+      rgba(252, 194, 1, 0.8) 100%
+    );
+  }
+  .heading-home-2 {
+    display: block;
+    font-size: 4rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: moveInbottom;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(
+      to right,
+      rgba(58, 57, 56, 0.8) 0%,
+      rgba(252, 194, 1, 0.8) 100%
+    );
+  }
+  .heading-home-3 {
+    display: block;
+    font-size: 4rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: moveInbottom;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(
+      to right,
+      rgba(58, 57, 56, 0.8) 0%,
+      rgba(252, 194, 1, 0.8) 100%
+    );
+  }
 }
 
 @media screen and (max-width: 700px) {
@@ -150,6 +338,16 @@
     grid-template-columns: auto;
     width: 90%;
     margin-bottom: 10%;
+  }
+  #boxes {
+    content: "";
+    display: table;
+    clear: both;
+    margin: 0;
+  }
+  .div__boxes {
+    float: left;
+    margin: 0;
   }
   .modal-header .close {
     padding: 0;
@@ -164,8 +362,63 @@
     padding-bottom: 0;
     display: block;
   }
+  .header-home {
+    height: 35vh;
+
+    background-size: cover;
+    background-position: top;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    position: relative;
+  }
+  .header-home-2 {
+    height: 35vh;
+
+    background-size: cover;
+    background-position: top;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 75vh);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 75vh);
+    position: relative;
+  }
+  .header-home-3 {
+    height: 35vh;
+    margin: 0;
+    background-size: cover;
+    background-position: top;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 75vh);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 75vh);
+    position: relative;
+  }
 }
 
 .card {
   height: 100% !important;
+}
+.card-text {
+  font-weight: 500;
+  font-family: sans-serif;
+  font-size: 1.3rem;
+  max-height: 10rem;
+  overflow: hidden;
+}
+.card-title {
+  font-weight: lighter;
+  font-size: 3rem;
+  text-transform: uppercase;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(
+    to right,
+    rgba(58, 57, 56, 0.8) 0%,
+    rgba(252, 194, 1, 0.8) 100%
+  );
+  display: inline-block;
+  color: transparent;
+  letter-spacing: 0.2rem;
+  transition: all 0.2s;
+}
+
+.card-title:hover {
+  transform: skewX(15deg) scale(1.1);
+  text-shadow: 0.5rem 1rem 2rem rgba(#000, 0.2);
 }

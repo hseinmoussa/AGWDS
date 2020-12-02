@@ -115,7 +115,7 @@
   top: 10rem;
 }
 .section-about .composition__photo:hover {
-  outline: 1rem solid #d4af37;
+  outline: 8px solid #d4af37;
   transform: scale(1.05) translateY(-0.5rem);
   box-shadow: 0 2.5rem 4rem rgba(#000, 0.5);
   z-index: 20;
