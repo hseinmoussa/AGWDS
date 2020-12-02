@@ -24,6 +24,7 @@ const Edit_About = require("./database/controller/Edit_Aboutme.js");
 const Fetch_Admins = require("./database/controller/Fetch_Admins.js");
 const Delete_Admin = require("./database/controller/Delete_Admin.js");
 const increment = require("./database/controller/increment_views.js");
+const auth_auth = require("./database/auth_auth.js");
 
 const Try = require("./database/controller/Try.js");
 
@@ -116,7 +117,7 @@ app.post("/EditAbout",auth,  upload_about.single("about_img"), Edit_About.Edit_A
 app.post("/AllAdmins", Fetch_Admins.Fetch_Admins);
 app.post("/DeleteAdmin", auth , Delete_Admin.Delete_Admin);
 app.post("/increment", increment.increment);
-app.post("/auth", auth);
+app.post("/auth", auth_auth);
 
 
 

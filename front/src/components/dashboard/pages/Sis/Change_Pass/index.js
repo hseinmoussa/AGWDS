@@ -88,12 +88,14 @@ class ChangePass extends React.Component {
               return res.json();
             })
             .then((json) => {
+
               if (json.error){ alert(json.error);}
-              if (json.status == 400) {alert(json.message);
+              else if (json.status == 400 ||json.status == 401) {alert(json.message);
                 if(json.redirect == true){
                   window.location.replace(json.location)
                 }}
-              else this.setState({ Updated: true });
+              
+              else alert("updated successfully");
             })
             .catch((err) => console.log(err));
         } catch (err) {
@@ -106,7 +108,6 @@ class ChangePass extends React.Component {
   }
 
     render() {
-      if (!this.state.Updated)
         return (
         <>
           <div className="col-12 title">
@@ -122,7 +123,7 @@ class ChangePass extends React.Component {
                 <div className="input-block">
                     <Label_Input
                       id="OldPassword"
-                      type="text"
+                      type="password"
                       name="Old Password : "
                       onChange={this.handleChange}
                       required={true}
@@ -183,11 +184,7 @@ class ChangePass extends React.Component {
           </Form>
             </>
         )
-        return (
-          <div style={{ textAlign: "center" }}>
-            {alert("updated successfully")}
-          </div>
-        );
+   
     }
 
 }

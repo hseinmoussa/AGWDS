@@ -104,10 +104,11 @@ class CardsPage extends React.Component {
               return res.json();
             })
             .then((json) => {
-              if (json.status == 401 || json.status == 400) alert(json.message);
+              if (json.status == 401 || json.status == 400){ alert(json.message);
               if(json.redirect == true){
                 window.location.replace(json.location)
               }
+            }
               else {alert("New Admin Added");
               window.location.replace("/dashboard")
         

@@ -1,8 +1,8 @@
 import React from "react";
 import "./section2.css";
 // import painter from "./img/painter.jpg";
-// import golden from "./img/golden.mp4";
-// import golden1 from "./img/golden1.webm";
+import golden from "./img/golden.mp4";
+import golden1 from "./img/golden1.webm";
 import  { useEffect, useState, } from "react";
 function AS2() {
     const [about,setAbout]=useState({"about_description2":"",
@@ -36,8 +36,9 @@ function AS2() {
     <section className="section-stories">
       <div className="bg-video">
         <video className="bg-video__content" autoPlay muted loop>
-          {/* <source src={golden} type="video/mp4" /> */}
-          {/* <source src={golden1} type="video/webm" /> */}
+          <source src={golden} type="video/mp4" />
+          <source src={golden1} type="video/webm" />
+          
           your browser is not supported!!
         </video>
       </div>

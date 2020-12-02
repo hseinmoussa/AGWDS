@@ -55,6 +55,7 @@ class EditAbout extends React.Component {
             window.location.replace(json.location)
           }
         }
+        else
         this.setState({
    
           title: json.message.title,
@@ -126,12 +127,12 @@ class EditAbout extends React.Component {
               return res.json();
             })
             .then((json) => {
-              if (json.status == 401 || json.status == 400) alert(json.message);
-              if (json.status == 400) {alert(json.message);
+              if (json.status == 401 || json.status == 400) {alert(json.message);
                 if(json.redirect == true){
                   window.location.replace(json.location)
                 }
-              }
+              
+            }
               
               else alert("updated successfully");
               
