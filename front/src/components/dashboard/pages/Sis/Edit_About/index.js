@@ -12,10 +12,6 @@ import { Form } from "../../../components/Form";
 
 // This styled only show buttons in row format
 import styled from "styled-components";
-import Column from "antd/lib/table/Column";
-import Cookies from "universal-cookie";
-import { Row } from "antd";
-const cookies = new Cookies();
 const Buttons = styled.div`
   display: flex;
 
@@ -36,6 +32,9 @@ class EditAbout extends React.Component {
       title: "",
       about_description_title: "",
       about_description:"",
+      about_description_title2: "",
+      about_description2:"",
+      Name:"",
       about_img:"",
       Updated: false,
      };
@@ -50,15 +49,23 @@ class EditAbout extends React.Component {
       }),
     })
       .then((res) => res.json())
-      .then((json) =>
+      .then((json) => {
+        if (json.status == 400) {alert(json.message);
+          if(json.redirect == true){
+            window.location.replace(json.location)
+          }
+        }
+        else
         this.setState({
    
           title: json.message.title,
           about_description_title: json.message.about_description_title,
           about_description: json.message.about_description,
-          about_img: json.message.about_img,
+          about_description_title2: json.message.about_description_title2,
+          about_description2: json.message.about_description2,
+          Name:json.message.Name,
         })
-      );
+      });
   }
   handleChange = (event) => {
     switch (event.target.id) {
@@ -71,8 +78,19 @@ class EditAbout extends React.Component {
     case "description":
       this.setState({ about_description: event.target.value });
       break;
+      case "title_description2":
+        this.setState({ about_description_title2: event.target.value });
+        break;
+        case "description2":
+          this.setState({ about_description2: event.target.value });
+          break;
+          case "Name":
+            this.setState({ Name: event.target.value });
+            break;
+       
+          
     case "about_img":
-      this.setState({ about_img: event.target.value });
+      this.setState({ about_img: event.target.files[0] });
 
       break;
      
@@ -81,33 +99,42 @@ class EditAbout extends React.Component {
       break;
     }
   };
-
+  ChangeState = () => {
+     this.setState({ Updated: !this.state.Updated });
+  }
   handleSubmit = (event) => {
     this.setState({ click: true }, () => {
 
       event.preventDefault();
    
         try {
+          const body = new FormData();
+          body.append("title", this.state.title);
+          body.append("about_description_title", this.state.about_description_title);
+          body.append("about_description", this.state.about_description);
+          body.append("about_description_title2", this.state.about_description_title2);
+          body.append("about_description2", this.state.about_description2);
+          body.append("Name", this.state.Name);
+          body.append("about_img", this.state.about_img);
+
           fetch("http://localhost:3001/EditAbout", {
             method: "post",
             credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-          title: this.state.title,
-          about_description_title: this.state.about_description_title,
-          about_description: this.state.about_description,
-          about_img:this.state.about_img,
-            }),
+        
+            body: body,
           })
             .then((res) => {
               return res.json();
             })
             .then((json) => {
-              if (json.status == 401 || json.status == 400) alert(json.message);
+              if (json.status == 401 || json.status == 400) {alert(json.message);
+                if(json.redirect == true){
+                  window.location.replace(json.location)
+                }
               
-              else this.setState({ Updated: true });
+            }
+              
+              else alert("updated successfully");
               
             })
             .catch((err) => console.log(err));
@@ -120,7 +147,6 @@ class EditAbout extends React.Component {
   };
 
   render() {
-    if (!this.state.Updated)
       return (
         <>
           <div className="col-12 title">
@@ -167,11 +193,40 @@ class EditAbout extends React.Component {
                   </div>
                   <div className="input-block">
                     <Label_Input
-                      id="about_img"
+                      id="title_description2"
                       type="text"
+                      name="Title Description 2 :"
+                      onChange={this.handleChange}
+                      value={this.state.about_description_title2}
+                      required={true}
+                    />
+                  </div>
+                  <div className="input-block">
+                    <Label_Input
+                      id="description2"
+                      type="text"
+                      name="Description 2 :"
+                      onChange={this.handleChange}
+                      value={this.state.about_description2}
+                      required={true}
+                    />
+                  </div>
+                  <div className="input-block">
+                    <Label_Input
+                      id="Name"
+                      type="text"
+                      name="My Name :"
+                      onChange={this.handleChange}
+                      value={this.state.Name}
+                      required={true}
+                    />
+                  </div>
+                  <div className="input-block">
+                    <Label_Input
+                      id="about_img"
+                      type="file"
                       name="Image "
                       onChange={this.handleChange}
-                      value={this.state.about_img}
                       required={true}
                     />
                   </div>
@@ -208,12 +263,8 @@ class EditAbout extends React.Component {
           </Form>
         </>
       );
-    else
-      return (
-        <div style={{ textAlign: "center" }}>
-          {alert("updated successfully")}
-        </div>
-      );
+    
+     
   }
 }
 export default EditAbout;

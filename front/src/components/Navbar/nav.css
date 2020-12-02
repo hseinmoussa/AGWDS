@@ -90,6 +90,14 @@
     box-sizing: border-box;
   }
 
+  /* conflict
+  .nav-menu > li {
+    height: 30px;
+    margin-bottom: 5%;
+    width: 100%;
+  }
+  */
+
   .nav-menu.active {
     background: rgba(198, 147, 32, 0.8);
     left: 0;

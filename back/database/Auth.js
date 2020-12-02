@@ -26,7 +26,6 @@ const auth = (req, res, next) => {
      //var token = req.headers.cookie.slice(6,);
   //final final token
   var token=req.cookies.token;
-    
   if (!token)
     return res.status(401).send({
       status: 401,
@@ -37,9 +36,11 @@ const auth = (req, res, next) => {
     req.Admin = verified;
     next();
   } catch (error) {
+    res.clearCookie('token')
     return res.send({
       status: 400,
-      message: "Invalid tokenn",
+      redirect: true, location: '/login',
+      message: "Expired Session Please Sign In Again",
     });
   }
 };

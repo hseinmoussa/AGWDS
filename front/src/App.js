@@ -3,6 +3,7 @@ import React from "react";
 import Navbar from "./components/Navbar/nav";
 import Aboutus from "./components/About-us/Aboutus-h.js";
 import AS1 from "./components/About-us/section1.js";
+import AS2 from "./components/About-us/section2.js";
 import Cardsbox from "./components/Cardsbox/Cardsbox";
 import LoginPage from "./components/LoginPage/login";
 import Footer from "./components/Footer/Footer.js";
@@ -11,55 +12,50 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect,
 } from "react-router-dom";
-import Cookies from "universal-cookie";
-
 import Protection from './components/LoginPage/Protection';
 import NotFound from './components/Not_Found/NotFound'
 
-const Dashboard = () => <Routes />;
+import Cookies from "universal-cookie";
+
 const cookies = new Cookies();
+const Dashboard = () => <Routes />;
 
 class App extends React.Component {
+  state = { search: "", pushed: false };
+
+
+  handleSearch = (props) => {
+    this.setState({ search: props.search , pushed : true })
+  }
+
+  
   render() {
+  
     return (
       <Router>
   
           <div className="App">
-            <Navbar />
+            <Navbar handleSearch={this.handleSearch} />
             <Switch>
               <Route exact path="/">
-                <Cardsbox />
+                <Cardsbox search={this.state} />
               </Route>
               <Route path="/about">
                 <Aboutus />
                 <AS1 />
+                <AS2 />
               </Route>
-
               <Protection path="/dashboard" >
                 <Dashboard />
               </Protection>
-              <Protection path="/AddAdmin" >
-                <Dashboard />
-              </Protection>
-              <Protection path="/EditContact" >
-                <Dashboard />
-              </Protection>
-              <Protection path="/About" >
-                <Dashboard />
-              </Protection>
-              <Protection path="/Change" >
-                <Dashboard />
-              </Protection>
-          
-
-             <Route path="/login">
+              
+              <Route path="/login">
               {!cookies.get("token") ? (
                 <>
                   <LoginPage />
-                  <Cardsbox />
+                  <Cardsbox search={this.state}/>
                 </>
               ) : (
                 <Redirect
@@ -80,3 +76,4 @@ class App extends React.Component {
 }
 
 export default App;
+

@@ -1,14 +1,12 @@
 import React, { useEffect, useState, Suspense, lazy } from "react";
-
 import { ModalProvider } from "styled-react-modal";
 import ReactPaginate from "react-paginate";
-
 import { Card } from "../../../components/Card";
 import { Table } from "../../../components/Table";
 import { Button } from "react-bootstrap";
-import Cookies from "universal-cookie";
 
-const cookies = new Cookies();
+
+
 let ModalForm = () => <></>;
 let AddCardModal = () => <></>;
 export default function Dashboard() {
@@ -20,7 +18,10 @@ export default function Dashboard() {
   const [OpenForm, setOpenForm] = useState(false);
   const [OpenForm2, setOpenForm2] = useState(false);
   const [sort, setSort] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
 
+  
+  
   const [_id, setId] = useState(0);
 
   async function toggleModalForm(e, _id) {
@@ -78,6 +79,11 @@ export default function Dashboard() {
         })
           .then((res) => res.json())
           .then((json) => {
+            if (json.status == 400) {alert(json.message);
+              if(json.redirect == true){
+                window.location.replace(json.location)
+              }
+            }
             setArray2(arr + 1);
            
           });
@@ -88,6 +94,7 @@ export default function Dashboard() {
 
   /* Start pagination*/
   useEffect(() => {
+    console.log(111)
     setPagination({
       data: array.map((value, index) => ({
         _id: value._id,
@@ -115,8 +122,11 @@ export default function Dashboard() {
   }, [pagination.numberPerPage, pagination.offset, array]);
 
   const handlePageClick = (event) => {
+    console.log(event)
+ 
     const selected = event.selected;
     const offset = selected * pagination.numberPerPage;
+    setCurrentPage(selected);
     setPagination({ ...pagination, offset });
   };
 
@@ -159,13 +169,16 @@ export default function Dashboard() {
               <Button
                 style={{ marginRight: "10px" }}
                 onClick={() => {
+                  setCurrentPage(0)
                   setSort("Views");
+              
                 }}
               >
                 Sort by views
               </Button>
               <Button
                 onClick={() => {
+                  setCurrentPage(0);
                   setSort("");
                 }}
               >
@@ -237,6 +250,8 @@ export default function Dashboard() {
             onPageChange={handlePageClick}
             containerClassName={"pagination"}
             activeClassName={"active"}
+            forcePage={currentPage}
+            
           />
         </div>
       </div>

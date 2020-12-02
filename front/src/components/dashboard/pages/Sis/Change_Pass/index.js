@@ -4,9 +4,7 @@ import { Button } from "../../../components/Button";
 import Label_Input from "../Label_Input.js";
 import { Form } from "../../../components/Form";
 import styled from "styled-components";
-import Cookies from "universal-cookie";
-import { Redirect } from "react-router-dom";
-const cookies = new Cookies();
+
 
 
 const Buttons = styled.div`
@@ -90,8 +88,14 @@ class ChangePass extends React.Component {
               return res.json();
             })
             .then((json) => {
+
               if (json.error){ alert(json.error);}
-              else this.setState({ Updated: true });
+              else if (json.status == 400 ||json.status == 401) {alert(json.message);
+                if(json.redirect == true){
+                  window.location.replace(json.location)
+                }}
+              
+              else alert("updated successfully");
             })
             .catch((err) => console.log(err));
         } catch (err) {
@@ -104,7 +108,6 @@ class ChangePass extends React.Component {
   }
 
     render() {
-      if (!this.state.Updated)
         return (
         <>
           <div className="col-12 title">
@@ -120,7 +123,7 @@ class ChangePass extends React.Component {
                 <div className="input-block">
                     <Label_Input
                       id="OldPassword"
-                      type="text"
+                      type="password"
                       name="Old Password : "
                       onChange={this.handleChange}
                       required={true}
@@ -181,11 +184,7 @@ class ChangePass extends React.Component {
           </Form>
             </>
         )
-        return (
-          <div style={{ textAlign: "center" }}>
-            {alert("updated successfully")}
-          </div>
-        );
+   
     }
 
 }

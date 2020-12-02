@@ -40,16 +40,14 @@ const [about,setAbout]=useState({"title":"","about_description":"","about_descri
       <div className="row">
         <div className="col-1-of-2">
           <h3 className="heading-tertiary u-margin-bottom-small">
-            {about. about_description_title}
+            {about.about_description_title}
           </h3>
           <p className="paragraph">
             {about.about_description}
         
           </p>
        
-          {/* <a href="#" className="btn-text">
-            Learn more &rarr;
-          </a> */}
+     
         </div>
         <div className="col-1-of-2">
           <div className="composition">

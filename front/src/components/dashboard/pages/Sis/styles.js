@@ -35,19 +35,17 @@ export const NavBar = styled.div`
   padding: 0 30px;
   height: 70px;
   background: #fff;
-
   display: flex;
   justify-content: flex-end;
   align-items: center;
 
   ul {
     list-style: none;
-
+    
     li {
       padding: 0 10px;
       border-left: 1px solid #999;
       cursor: pointer;
-
       font-weight: 400;
       color: #b5b5c3;
     }

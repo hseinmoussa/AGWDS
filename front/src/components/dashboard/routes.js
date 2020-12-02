@@ -1,12 +1,12 @@
 import React, { Suspense, lazy } from "react";
 import { Provider } from "react-redux";
 import store from "./store";
+import Protection from '../LoginPage/Protection';
 
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
 } from "react-router-dom";
 
 import "./global.css";
@@ -40,9 +40,11 @@ export default function Routes() {
         }
       >
         <Switch>
+        <Protection>
           <Provider store={store}>
-            <PrivateRoute path="/" component={Sis} />
+            <PrivateRoute path="/" component={Sis}/>
           </Provider>
+          </Protection>
         </Switch>
       </Suspense>
     </Router>

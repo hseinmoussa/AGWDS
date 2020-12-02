@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 // Icons
 // import { FiCalendar, FiMessageCircle, FiLogOut, FiUsers } from 'react-icons/fi';
@@ -8,13 +8,9 @@ import { Button } from "../../../components/Button";
 import Label_Input from "../Label_Input.js";
 import { Form } from "../../../components/Form";
 
-
-
 // This styled only show buttons in row format
 import styled from "styled-components";
-import Column from "antd/lib/table/Column";
 import Cookies from "universal-cookie";
-import { Row } from "antd";
 const cookies = new Cookies();
 const Buttons = styled.div`
   display: flex;
@@ -37,29 +33,13 @@ class CardsPage extends React.Component {
       Password: "",
       FirstName:"",
       LastName:"",
-      Updated: false,
       disab: true,
       click: false,
-      admins:[],
       text: "Password and Verify password must be the same",
       token : cookies.get('token'),
     };
   }
-  componentDidMount() {
-    fetch("http://localhost:3001/AllAdmins", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        //facebook: this.state.input,
-      }),
-    })
-      .then((res) => res.json())
-      .then((json) =>
-        this.setState({
-          admins: json.message
-        })
-      );
-  }
+
 
   handleChange = (event) => {
     switch (event.target.id) {
@@ -124,22 +104,27 @@ class CardsPage extends React.Component {
               return res.json();
             })
             .then((json) => {
-              if (json.status == 401 || json.status == 400) alert(json.message);
-              
-              else this.setState({ Updated: true });
+              if (json.status == 401 || json.status == 400){ alert(json.message);
+              if(json.redirect == true){
+                window.location.replace(json.location)
+              }
+            }
+              else {alert("New Admin Added");
+              window.location.replace("/dashboard")
+        
+            }
               
             })
             .catch((err) => console.log(err));
-          event.preventDefault();
         } catch (err) {
           console.log(err);
         }
+      
       }
     });
   };
 
   render() {
-    if (!this.state.Updated)
       return (
         <>
           <div className="col-12 title">
@@ -210,20 +195,7 @@ class CardsPage extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div style={{marginLeft:"25%",marginTop:"10%"}} className="AllAdmin"  >
-                   <p style={{fontWeight:"bold"}}>All Admins :</p>
-              
-                   {this.state.admins.map((admin) => (
-                    <tr key={admin._id}>
-                     
-                      <td style={{ textAlign: "center",fontSize:"1.1em" }}>{admin.FirstName}</td>
-                      <td style={{ textAlign: "center" }}>
-                     <span style={{fontSize:"1.1em"}}> {admin.LastName}</span> (email: {admin.email})
-                      </td>
-                    </tr>
-                   ))}
-                  
-                </div>
+         
                 
               </div>
               <div
@@ -256,12 +228,7 @@ class CardsPage extends React.Component {
           </Form>
         </>
       );
-    else
-      return (
-        <div style={{ textAlign: "center" }}>
-          {alert("updated successfully")}
-        </div>
-      );
+  
   }
 }
 export default CardsPage;

@@ -24,8 +24,11 @@ exports.Delete_Cards = async function (req, res) {
               if (err) console.log(err);
             })
             .then(async (data) => {
-              await unlinkAsync("public/Image/" + image);
+              
+            if (fs.existsSync("public/Image/" + image)) 
+             await unlinkAsync("public/Image/" + image)
               res.json({ message: data });
+           
             });
         });
     }

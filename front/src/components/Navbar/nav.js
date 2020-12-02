@@ -1,4 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
+
+import { Link } from 'react-router-dom'
 import "./nav.css";
 import { MenuItems } from "./MenuItems";
 import { Button } from "./button";
@@ -6,10 +8,25 @@ import SearchBarM from "./searchbar-mobile.js";
 import SearchBar from "./searchbar";
 import { BM } from "./button-mobile";
 class Navbar extends Component {
-  state = { clicked: false, searchfiled: "" };
+
+  state = { clicked: false, search: "" };
+
+
+
   handleClick = () => {
     this.setState({ clicked: !this.state.clicked });
-  };
+ 
+  }
+
+  handleInput = (e) => {
+      this.setState({...this.state, search: e.target.value })
+  
+  }
+
+
+  handleSubmit = (props) => {
+    this.props.handleSearch({search : this.state.search })
+  }
 
   render() {
     return (
@@ -31,21 +48,20 @@ class Navbar extends Component {
               </li>
             );
           })}
-          <form class="SF-mobile" method="GET">
-            <BM>
-              <i className="fas fa-search"></i>
-            </BM>
 
-            <SearchBarM />
-          </form>
-        </div>
-        <form class="SF" method="GET">
+        </ul>
+        <form className="SF" onSubmit={(e) => {e.preventDefault(); this.handleSubmit() }} >
           <Button>
             <i className="fas fa-search"></i>
           </Button>
 
-          <SearchBar
-            handleChange={(e) => this.setState({ searchfield: e.target.value })}
+          <input
+            className="SB"
+            onChange={this.handleInput}
+            label="Search Gallery"
+            type="text"
+            placeholder="Search Art..."
+            required
           />
         </form>
       </nav>
