@@ -15,9 +15,20 @@ export const Card = styled.div`
   background-color: #fff;
   background-clip: border-box;
 
+  .card-title:hover {
+    transform: none !important;
+    text-shadow: none !important;
+  }
   .card-title {
     padding: 1rem 1.25rem 0rem;
+    text-transform: none !important;
 
+    @media screen and (max-width: 960px)
+    {
+.btn {
+    display: inline !important; 
+}
+}
     @media screen and (max-width: 790px) {
       padding: 1rem 0.5rem 0;
       display:flex;

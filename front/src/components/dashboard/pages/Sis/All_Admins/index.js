@@ -117,7 +117,7 @@ export default function All_Admins() {
             <Table>
               <thead>
                 <tr>
-                  <th className="col-3 views">FirstName</th>
+                  <th className="col-3 ">FirstName</th>
                   <th className="col-3">LastName</th>
                   <th className="col-3">Email</th>
                   <th className="col-3">Delete</th> 
@@ -130,7 +130,7 @@ export default function All_Admins() {
                       <td style={{ textAlign: "center", display: "none" }}>
                         {item._id}
                       </td>
-                      <td style={{ textAlign: "center" }} className="views">{item.FirstName}</td>
+                      <td style={{ textAlign: "center" }} >{item.FirstName}</td>
                    
                       <td style={{ textAlign: "center" }}>{item.LastName}</td>
                       <td style={{ textAlign: "center" }}>
