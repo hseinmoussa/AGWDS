@@ -180,95 +180,73 @@ function Cardsbox(props) {
           </div>
         </div>
              {empty ?<div style={{color:"red",fontSize:"2em"}}>Couldn't find any card</div>:""}
-      <div className="main">
+             <div className="main">
     
-        {Pagination.currentData &&
-          Pagination.currentData.map((item, index) => (
-            <div key={index} className="item">
-              <Card id="Card" style={{ width: "18rem" }}>
-                <Card.Img
-                  id="img"
-                  width="100"
-                  height="150"
-                  variant="top"
-                  src={item.img}
-                  alr=""
-                  onClick={() => {
-                    increment(item._id);
-                    setShow(true);
-                    setimglink(item.bigimg);
-                    setcardtitle(item.title);
-                  }}
-                />
-                <Card.Body>
-                  <Card.Title>{item.title}</Card.Title>
-                  <Card.Text>{item.description}</Card.Text>
+    {Pagination.currentData &&
+      Pagination.currentData.map((item, index) => (
+        <div key={index} className="item">
+          <Card id="Card" style={{ width: "18rem" }}>
+            <Card.Img
+              id="img"
+              width="100"
+              height="150"
+              variant="top"
+              src={item.img}
+              alr=""
+              onClick={() => {
+                increment(item._id);
+                setShow(true);
+                setimglink(item.bigimg);
+                setcardtitle(item.title);
+              }}
+            />
+            <Card.Body>
+              <Card.Title>{item.title}</Card.Title>
+              <Card.Text>{item.description}</Card.Text>
 
-        <div className="main">
-          {Pagination.currentData &&
-            Pagination.currentData.map((item, index) => (
-              <div key={index} className="item">
-                <Card id="Card" className="main__card">
-                  <Card.Img
-                    className="Card__img"
-                    id="img"
-                    src={item.img}
-                    alr=""
-                    onClick={() => {
-                      setShow(true);
-                      setimglink(item.bigimg);
-                      setcardtitle(item.title);
-                    }}
-                  />
-                  <Card.Body className="Card__box">
-                    <Card.Title>{item.title}</Card.Title>
-                    <Card.Text>{item.description}</Card.Text>
+              <OverlayTrigger
+                trigger="click"
+                placement="bottom"
+                rootClose={true}
+                overlay={
+                  <Popover
+                    className="popover"
+                    id="popover-positioned-bottom">
+                    <Popover.Title as="h3">Description</Popover.Title>
+                    <Popover.Content>{item.description}</Popover.Content>
+                  </Popover> }>
 
-                    <OverlayTrigger
-                      trigger="click"
-                      placement="bottom"
-                      rootClose={true}
-                      overlay={
-                        <Popover
-                          className="popover"
-                          id="popover-positioned-bottom"
-                        >
-                          <Popover.Title as="h3">Description</Popover.Title>
-                          <Popover.Content>{item.description}</Popover.Content>
-                        </Popover>
-                      }
-                    >
-                      <Button id="card--btn" variant="warning">
-                        Read more
-                      </Button>
-                    </OverlayTrigger>
-                  </Card.Body>
-                </Card>
-              </div>
-            ))}
+                <Button id="card--btn" variant="warning">
+                  Read more
+                </Button>
+              </OverlayTrigger>
+            </Card.Body>
+          </Card>
         </div>
-        <Modal
-          show={Show}
-          onHide={() => setShow(false)}
-          size="l"
-          aria-labelledby="example-modal-sizes-title-lg"
-        >
-          <Modal.Header closeButton></Modal.Header>
-          <p id="titlee">{cardtitle}</p>
-          <img alt="" src={imglink} className="img-fluid" />
-        </Modal>
-        <ReactPaginate
-          previousLabel={" ← Previous"}
-          nextLabel={"Next → "}
-          pageCount={Pagination.pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={handlePageClick}
-          containerClassName={"pagination"}
-          activeClassName={"active"}
-        />
-      </div>
-    );
-  }
+      ))}
+  </div>
+  <Modal
+    show={Show}
+    onHide={() => setShow(false)}
+    size="l"
+    aria-labelledby="example-modal-sizes-title-lg"
+  >
+    <Modal.Header closeButton></Modal.Header>
+    <p id="titlee">{cardtitle}</p>
+    <img alt="" src={imglink} className="img-fluid" />
+  </Modal>
+  <ReactPaginate
+    previousLabel={" ← Previous"}
+    nextLabel={"Next → "}
+    pageCount={Pagination.pageCount}
+    marginPagesDisplayed={2}
+    pageRangeDisplayed={5}
+    onPageChange={handlePageClick}
+    containerClassName={"pagination"}
+    activeClassName={"active"}
+  />
+</div>
+);
+                }      
 }
 export default Cardsbox;
