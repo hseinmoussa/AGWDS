@@ -40,7 +40,7 @@ export default function Sis() {
     setDrag(newValue);
   }
   return (
-    <Wrap className="dash">
+    <Wrap className="dash" style={{margin:"5px"}}>
       <Main>
         <NavBar>
           {/* <FiMenu className="toggle" style={{ marginLeft: drag ? 145 : 0}} onClick={(e) => drag ? setDrag(false) : setDrag(true)} /> */}

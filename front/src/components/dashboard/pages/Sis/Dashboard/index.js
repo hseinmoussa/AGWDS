@@ -142,13 +142,13 @@ export default function Dashboard() {
         <h1 style={{ display: "inline" }}>
          Dashboard page
         </h1>
-        <Table>
+        <Table  style={{overflowX:"hidden"}}>
           <tbody>
             <tr>
               <td>
                 <button
                   className="info"
-                  style={{overflowX:"hidden"}}
+                 
                   onClick={() => {
                     toggleModalForm2();
                   }}
